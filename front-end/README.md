@@ -1,10 +1,10 @@
-## CHANGE PORT, API IN .ENV
-
-# DEV
-
+## How to start
+1. init <br/>
+`npm install`
+1. dev <br/>
 `npm start`
-
-# DEPLOY
-
-=> using `pm2` <br>
-`pm2 start server --name {name app}`
+1. prod <br/>
+*require : pm2, node <br/>
+`npm run build && pm2 start server --name <name>`
+## Usage
+1.
