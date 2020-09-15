@@ -7,6 +7,7 @@
     justify-content: center;
     align-items: center;
     background-color: rgb(233, 201, 201);
+    z-index: 999;
 }
 
 .login-form{

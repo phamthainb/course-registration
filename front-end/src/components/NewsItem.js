@@ -7,7 +7,7 @@ function NewsItem(props){
             <a href="#" className="news-title mb-3">{newsItem.title}</a>
             <p>{newsItem.content}</p>
             <a href="#" className="read-more">
-                READ MORE <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                READ MORE <i className="fa fa-arrow-right" aria-hidden="true"></i>
             </a>
         </div>
     )

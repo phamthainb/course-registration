@@ -1,6 +1,4 @@
 import React from 'react'
-import Footer from '../../components/Footer';
-import Menu from '../../components/Menu'
 import NewsItem from '../../components/NewsItem';
 import './style.css';
 
@@ -9,7 +7,7 @@ function Home() {
     const news = [
         {
             title: "Ngày 14/09/2020:  THÔNG BÁO: v/v ĐỀ NGHỊ  SINH VIÊN RÀ SOÁT CÁC HỌC PHẦN CỦA HỌC KỲ 1 (2020-2021)",
-            content: "Theo kế hoạch đã thông báo, Phòng giáo vụ đã hoàn thành việc tổ chức cho sinh viên các khóa đăng ký học kỳ 1 năm học 2020-2021, đã tiếp nhận, xem xét và xử lý Đơn xin bổ sung, rút bớt học phần của tất cả sinh viên có Đơn. Phòng giáo vụ đề nghị tất cả các sinh viên truy nhập hệ thống qldt và rà soát lại các học phần đã đăng ký tham gia học tập trong kỳ học của cá nhân, có vấn đề gì thắc mắc, sinh viên liên hệ Phòng giáo vụ - tấng 1 nhà A1 (Thầy Minh) trong 2 ngày 15 và 16/09/2020 (thứ 3 và thứ 4) để phối hợp giải quyết."
+            content: "Theo kế hoạch đã thông báo, Phòng giáo vụ đã hoàn thành việc tổ chức cho sinh viên các khóa đăng ký học kỳ 1 năm học 2020-2021, đã tiếp nhận, xem xét và xử lý Đơn xin bổ sung, rút bớt học phần của tất cả sinh viên có Đơn."
         },
         {
             title: "Ngày 28/08/2020: THÔNG BÁO: v/v ĐĂNG KÝ HỌC GHÉP và ĐIỀU CHỈNH ĐĂNG KÝ HỌC KỲ 1 (2020-2021)",
@@ -37,12 +35,10 @@ function Home() {
 
     return(
         <div>
-            <Menu></Menu>
             <div className="news-section p-4">
-                <h2 className="mb-3">News</h2>
+                <h5 className="mb-3">PTIT news : </h5>
                 {mapNewsItem}
             </div>
-            <Footer></Footer>
         </div>
     )
 }
