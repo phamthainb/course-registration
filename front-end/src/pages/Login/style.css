@@ -1,0 +1,26 @@
+*{padding: 0; margin: 0; box-sizing: border-box;}
+
+.login-page{
+    width: 100wh;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(233, 201, 201);
+}
+
+.login-form{
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.form-group, .login-button{
+    margin-top: 20px;
+}
