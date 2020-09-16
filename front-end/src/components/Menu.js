@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from '../assets/images/ptit-icon.png';
-import { BrowserRouter as Link, NavLink, Route } from 'react-router-dom';
+import { BrowserRouter as Link, NavLink } from 'react-router-dom';
 
 function Menu() {
     return(
@@ -38,7 +38,7 @@ function Menu() {
                         style={{left: -100}}
                         >
                             <NavLink className="dropdown-item" to="/edit-info">Edit info</NavLink>
-                            <NavLink className="dropdown-item" to="/log-in">Log out</NavLink>
+                            <NavLink className="dropdown-item" to="/login">Log out</NavLink>
                         </div>
                     </li>
                 </ul>

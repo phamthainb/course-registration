@@ -5,4 +5,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+}
+
+iframe{
+    max-width: 90%;
+    max-height: 300px;
 }
