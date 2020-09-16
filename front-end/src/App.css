@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-*{padding: 0; margin: 0; box-sizing: border-box;}
+*{padding: 0; margin: 0;box-sizing: border-box; user-select: none;}
 
 body{
     font-family: 'Nunito', sans-serif;
     letter-spacing: 1px;
     font-weight: 400;
+    color: rgb(110, 109, 109);
 }
-input, button{
+input, button, select{
     border: none;
     outline: none;
 }
-input{
+input, select{
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     padding: 10px;
 }
