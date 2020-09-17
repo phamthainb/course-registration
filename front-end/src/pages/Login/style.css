@@ -25,3 +25,7 @@
 .form-group, .login-button{
     margin-top: 20px;
 }
+
+.logo{
+    max-width: 150px;
+}

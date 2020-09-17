@@ -1,0 +1,25 @@
+.course-regis{}
+
+.regis-control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.regis-table{
+    font-size: 14px;
+    width: 100%;
+}
+
+.regis-note span{
+    margin: 0 10px;
+}
+
+@media (max-width: 768px){
+    .regis-control{
+        flex-direction: column;
+    }
+    select, input{
+        font-size: 14px;
+    }
+}

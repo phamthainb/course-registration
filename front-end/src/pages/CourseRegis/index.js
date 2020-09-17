@@ -1,7 +1,16 @@
 import React from 'react';
+import RegisControl from '../../components/RegisControl';
+import RegisNote from '../../components/RegisNote';
+import RegisTable from '../../components/RegisTable';
+import './style.css'
+
 function CourseRegis() {
     return(
-        <h2>This is a CourseRegis</h2>
+        <div className="course-regis">
+            <RegisControl></RegisControl>
+            <RegisTable></RegisTable>
+            <RegisNote></RegisNote>
+        </div>
     )
 }
 export default CourseRegis;
