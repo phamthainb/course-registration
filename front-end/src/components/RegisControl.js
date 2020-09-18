@@ -35,9 +35,6 @@ function RegisControl(){
 
     return(
         <div className="regis-control">
-            {/* <div className="form-group mr-5">
-                <input type="text" placeholder="Search ..."/>
-            </div> */}
             <select>
                 {mapSubjects}
             </select>
