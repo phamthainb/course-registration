@@ -37,7 +37,10 @@ function RegisTable() {
                         <td>Mon</td>
                         <td>1</td>
                         <td>2</td>
-                        <td>801B2-A2</td>
+                        <td>
+                            <p>801B2-A2</p>
+                            <p>801B2-A2</p>
+                        </td>
                         <td>N.T.Thiet</td>
                         <td>1234567890</td>
                     </tr>
