@@ -17,7 +17,7 @@ function CourseRegis() {
         <div className="course-regis">
             <RegisControl onShowSubjectList={onShowSubjectList}></RegisControl>
             <RegisTable chosenSubject={chosenSubject}></RegisTable>
-            <h4>Chosen subjects</h4>
+            <h6>Chosen subjects</h6>
             <RegisCartTable></RegisCartTable>
             <RegisNote></RegisNote>
         </div>
