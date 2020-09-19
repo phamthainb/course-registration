@@ -1,201 +1,376 @@
 {
     "subjects": [
         {
-            "BAS1146":{
-                "code": "BAS1146",
-                "name": "tieng anh b12",
-                "crt": 4,
-                "qtt": 36,
-                "list": [
-                    {
-                        "pg": [],
-                        "slot" : 6,
-                        "time": [
-                            {
-                                "day": "Mon",
-                                "start": 1,
-                                "less" : 2,
-                                "room": "801B-A2",
-                                "professor": "N.T.Thiet",
-                                "week": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                            },
-                            {
-                                "day": "Wed",
-                                "start": 7,
-                                "less": 2,
-                                "room": "801A-A2",
-                                "week": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                            }
-                        ]
-                    },
-                    {
-                        "pg": [],
-                        "slot" : 1,
-                        "time": [
-                            {
-                                "day": "Mon",
-                                "start": 3,
-                                "less" : 2,
-                                "room": "801B-A2",
-                                "professor": "N.T.Thiet",
-                                "week": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                            },
-                            {
-                                "day": "Thur",
-                                "start": 7,
-                                "less": 2,
-                                "room": "704-A2",
-                                "week": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                            }
-                        ]
-                    },
-                    {
-                        "pg": [],
-                        "slot" : 0,
-                        "time": [
-                            {
-                                "day": "Wed",
-                                "start": 9,
-                                "less" : 2,
-                                "room": "801B-A2",
-                                "professor": "N.T.Thiet",
-                                "week": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                            },
-                            {
-                                "day": "Mon",
-                                "start": 7,
-                                "less": 2,
-                                "room": "801B-A2",
-                                "week": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "INT1313":{
-                "code": "INT1313",
-                "name": "co so du lieu",
-                "crt": 3,
-                "qtt": 41,
-                "list": [
-                    {
-                        "pg": [],
-                        "slot" : 6,
-                        "time": [
-                            {
-                                "day": "Thur",
-                                "start": 11,
-                                "less" : 2,
-                                "room": "101-A2",
-                                "professor": "N.X.Anh",
-                                "week": [1, 2, 3, 4, 5]
-                            },
-                            {
-                                "day": "Thur",
-                                "start": 7,
-                                "less": 2,
-                                "room": "101-A2",
-                                "professor": "N.X.Anh",
-                                "week": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-                            }
-                        ]
-                    },
-                    {
-                        "pg": [],
-                        "slot" : 6,
-                        "time": [
-                            {
-                                "day": "Thur",
-                                "start": 11,
-                                "less" : 2,
-                                "room": "101-A2",
-                                "professor": "N.X.Anh",
-                                "week": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-                            },
-                            {
-                                "day": "Thur",
-                                "start": 9,
-                                "less": 2,
-                                "room": "101-A2",
-                                "professor": "N.X.Anh",
-                                "week": [1, 2, 3, 4, 5]
-                            }
-                        ]
-                    },
-                    {
-                        "pg": [],
-                        "slot" : 0,
-                        "time": [
-                            {
-                                "day": "Tue",
-                                "start": 11,
-                                "less" : 2,
-                                "room": "601-A2",
-                                "professor": "N.D.Hoa",
-                                "week": [1, 2, 3, 4, 5]
-                            },
-                            {
-                                "day": "Tue",
-                                "start": 7,
-                                "less": 2,
-                                "room": "601-A2",
-                                "professor": "N.D.Hoa",
-                                "week": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-                            }
-                        ]
-                    }
-                ]
-            },
-            "SKD1101":{
-                "code": "SKD1101",
-                "name": "Ki nang thuyet trinh",
-                "crt": 1,
-                "qtt": 72,
-                "list": [
-                    {
-                        "pg": [],
-                        "slot" : 0,
-                        "time": [
-                            {
-                                "day": "Mon",
-                                "start": 1,
-                                "less" : 2,
-                                "room": "802-A2",
-                                "professor": "T.T.Mai",
-                                "week": [1, 2, 3, 4, 5, 6, 7]
-                            }
-                        ]
-                    },
-                    {
-                        "pg": [],
-                        "slot" : 6,
-                        "time": [
-                            {
-                                "day": "Mon",
-                                "start": 3,
-                                "less" : 2,
-                                "room": "802-A2",
-                                "professor": "T.T.Mai",
-                                "week": [1, 2, 3, 4, 5, 6, 7]
-                            }
-                        ]
-                    },
-                    {
-                        "pg": [],
-                        "slot" : 0,
-                        "time": [
-                            {
-                                "day": "Mon",
-                                "start": 7,
-                                "less" : 2,
-                                "room": "802-A2",
-                                "professor": "T.T.Mai",
-                                "week": [1, 2, 3, 4, 5, 6, 7]
-                            }
-                        ]
-                    }
-                ]
-            }
+            "code": "BAS1146",
+            "name": "tieng anh b12",
+            "crt": 4,
+            "qtt": 36,
+            "list": [
+                {
+                    "pg": [],
+                    "slot": 6,
+                    "time": [
+                        {
+                            "day": "Mon",
+                            "start": 1,
+                            "less": 2,
+                            "room": "801B-A2",
+                            "professor": "N.T.Thiet",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13
+                            ]
+                        },
+                        {
+                            "day": "Wed",
+                            "start": 7,
+                            "less": 2,
+                            "room": "801A-A2",
+                            "professor": "N.T.Thiet",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "pg": [],
+                    "slot": 1,
+                    "time": [
+                        {
+                            "day": "Mon",
+                            "start": 3,
+                            "less": 2,
+                            "room": "801B-A2",
+                            "professor": "N.T.Thiet",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13
+                            ]
+                        },
+                        {
+                            "day": "Thur",
+                            "start": 7,
+                            "less": 2,
+                            "room": "704-A2",
+                            "professor": "N.T.Thiet",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "pg": [],
+                    "slot": 0,
+                    "time": [
+                        {
+                            "day": "Wed",
+                            "start": 9,
+                            "less": 2,
+                            "room": "801B-A2",
+                            "professor": "N.T.Thiet",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13
+                            ]
+                        },
+                        {
+                            "day": "Mon",
+                            "start": 7,
+                            "less": 2,
+                            "room": "801B-A2",
+                            "professor": "N.T.Thiet",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "INT1313",
+            "name": "co so du lieu",
+            "crt": 3,
+            "qtt": 41,
+            "list": [
+                {
+                    "pg": [],
+                    "slot": 6,
+                    "time": [
+                        {
+                            "day": "Thur",
+                            "start": 11,
+                            "less": 2,
+                            "room": "101-A2",
+                            "professor": "N.X.Anh",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ]
+                        },
+                        {
+                            "day": "Thur",
+                            "start": 7,
+                            "less": 2,
+                            "room": "101-A2",
+                            "professor": "N.X.Anh",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14,
+                                15
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "pg": [],
+                    "slot": 6,
+                    "time": [
+                        {
+                            "day": "Thur",
+                            "start": 11,
+                            "less": 2,
+                            "room": "101-A2",
+                            "professor": "N.X.Anh",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14,
+                                15
+                            ]
+                        },
+                        {
+                            "day": "Thur",
+                            "start": 9,
+                            "less": 2,
+                            "room": "101-A2",
+                            "professor": "N.X.Anh",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "pg": [],
+                    "slot": 0,
+                    "time": [
+                        {
+                            "day": "Tue",
+                            "start": 11,
+                            "less": 2,
+                            "room": "601-A2",
+                            "professor": "N.D.Hoa",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5
+                            ]
+                        },
+                        {
+                            "day": "Tue",
+                            "start": 7,
+                            "less": 2,
+                            "room": "601-A2",
+                            "professor": "N.D.Hoa",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7,
+                                8,
+                                9,
+                                10,
+                                11,
+                                12,
+                                13,
+                                14,
+                                15
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "code": "SKD1101",
+            "name": "Ki nang thuyet trinh",
+            "crt": 1,
+            "qtt": 72,
+            "list": [
+                {
+                    "pg": [],
+                    "slot": 0,
+                    "time": [
+                        {
+                            "day": "Mon",
+                            "start": 1,
+                            "less": 2,
+                            "room": "802-A2",
+                            "professor": "T.T.Mai",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "pg": [],
+                    "slot": 6,
+                    "time": [
+                        {
+                            "day": "Mon",
+                            "start": 3,
+                            "less": 2,
+                            "room": "802-A2",
+                            "professor": "T.T.Mai",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "pg": [],
+                    "slot": 0,
+                    "time": [
+                        {
+                            "day": "Mon",
+                            "start": 7,
+                            "less": 2,
+                            "room": "802-A2",
+                            "professor": "T.T.Mai",
+                            "week": [
+                                1,
+                                2,
+                                3,
+                                4,
+                                5,
+                                6,
+                                7
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }

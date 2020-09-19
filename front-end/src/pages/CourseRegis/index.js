@@ -1,14 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
+import RegisCartTable from '../../components/RegisCartTable';
 import RegisControl from '../../components/RegisControl';
 import RegisNote from '../../components/RegisNote';
 import RegisTable from '../../components/RegisTable';
 import './style.css'
 
 function CourseRegis() {
+
+    const [chosenSubject, setChosenSubject] = useState({});
+
+    const onShowSubjectList = (option)=>{
+        setChosenSubject(option);
+    }
+
     return(
         <div className="course-regis">
-            <RegisControl></RegisControl>
-            <RegisTable></RegisTable>
+            <RegisControl onShowSubjectList={onShowSubjectList}></RegisControl>
+            <RegisTable chosenSubject={chosenSubject}></RegisTable>
+            <h4>Chosen subjects</h4>
+            <RegisCartTable></RegisCartTable>
             <RegisNote></RegisNote>
         </div>
     )
