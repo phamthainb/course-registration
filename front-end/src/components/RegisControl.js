@@ -1,45 +1,52 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react';
+import { connect } from 'react-redux'
+import * as subActions from '../actions/subjects';
 
-function RegisControl(){
+function RegisControl(props){
 
-    const subjects = [
-        {
-            code: "BAS1146",
-            name: "Tiếng Anh B12",
-            credits: 4
-        },
-        {
-            code: "INT1313",
-            name: "Cơ sở dữ liệu",
-            credits: 3
-        },
-        {
-            code: "INT1319",
-            name: "Hệ điều hành",
-            credits: 3
-        },
-        {
-            code: "INT1330",
-            name: "Ky thuat vy xu li",
-            credits: 3
-        }
-    ]
-    
-    const mapSubjects = subjects.map((sub, index)=>{
+    useEffect(() => {
+        props.onGetSubjects();
+    }, [])
+
+    const onChooseSubject = (e)=>{
+        props.onGetSubjects();
+        let value = e.target.value;
+        let option = props.subjects.filter(sub => {
+            return sub.code === value;
+        })
+        props.onShowSubjectList(option);
+    }
+
+    let mapSubjects = props.subjects.map((sub, index)=>{
         return(
             <option key={index} value={sub.code}>
-                {`${sub.code} - ${sub.name} (${sub.credits} TC)`}
+                {`${sub.code} - ${sub.name} (${sub.crt} TC)`}
             </option>
         )
     })
 
     return(
-        <div className="regis-control">
-            <select>
+        <div className="regis-control mb-3">
+            <select onChange={onChooseSubject} defaultValue="subject">
+                <option disabled={true} value="subject">Subject</option>
                 {mapSubjects}
             </select>
         </div>
     )
 }
 
-export default RegisControl;
+const mapState = state => {
+    return{
+        subjects: state.subjects
+    }
+}
+
+const mapDispatch = dispatch => {
+    return{
+        onGetSubjects: ()=>{
+            return dispatch(subActions.getSubjectRequest());
+        }
+    }
+}
+
+export default connect(mapState, mapDispatch)(RegisControl);

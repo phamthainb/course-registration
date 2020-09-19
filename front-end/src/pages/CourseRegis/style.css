@@ -16,7 +16,4 @@
     .regis-control{
         flex-direction: column;
     }
-    select, input{
-        font-size: 14px;
-    }
 }
