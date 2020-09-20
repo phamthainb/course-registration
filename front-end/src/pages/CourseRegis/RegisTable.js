@@ -25,8 +25,8 @@ function RegisTable(props) {
                                 </td>
                                 <td>{sub.code}</td>
                                 <td>{sub.name}</td>
-                                <td>{i}</td>
-                                <td>null</td>
+                                <td>{i + 1}</td>
+                                <td>{sub.pg ? sub.pg.id : "null"}</td>
                                 <td>{sub.crt}</td>
                                 <td>{sub.qtt}</td>
                                 <td>{sub.list[`${i}`].slot}</td>

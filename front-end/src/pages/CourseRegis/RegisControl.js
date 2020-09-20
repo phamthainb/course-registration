@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import * as subActions from '../../actions/subjects';
+import * as actions from '../categories/actions';
 
 function RegisControl(props) {
 
@@ -20,13 +20,13 @@ function RegisControl(props) {
   const mapSubjects = props.subjects.map((sub, index) => {
     return (
       <option key={index} value={sub.code}>
-        {`${sub.code} - ${sub.name} (${sub.credits} TC)`}
+        {`${sub.code} - ${sub.name} ( ${sub.crt}TC )`}
       </option>
     );
   });
 
   return (
-    <div className="regis-control">
+    <div className="regis-control mb-3 mt-3">
       <select onChange={onShowSubjectList} defaultValue="subject">
         <option value="subject" disabled>Subject</option>
         {mapSubjects}
@@ -44,7 +44,7 @@ const mapState = state => {
 const mapDispatch = dispatch => {
   return{
     onGetSubjects: ()=>{
-      dispatch(subActions.getSubjectRequest())
+      dispatch(actions.getSubjectRequest())
     }
   }
 }

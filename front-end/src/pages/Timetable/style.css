@@ -1,0 +1,15 @@
+.timetable-show td{
+    min-width: 90px;
+    max-width: 90px;
+    min-height: 40px;
+}
+
+.timetable-show th.les, td.les{
+    width: 30px;
+}
+
+@media(max-width: 768px){
+    .timetable-control{
+        flex-direction: column;
+    }
+}

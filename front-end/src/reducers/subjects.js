@@ -1,14 +1,14 @@
-import * as subConstants from '../constants/subjects';
+import * as constants from '../pages/categories/constants';
 
 var initState = [];
 
 var subjectReducer = (state = initState, action)=>{
     switch(action.type){
 
-        case subConstants.FETCH_SUBJECTS_SUCCESS:
+        case constants.FETCH_SUBJECTS_SUCCESS:
             return action.data.data;
         
-        case subConstants.FETCH_SUJBECTS_FAILED:
+        case constants.FETCH_SUJBECTS_FAILED:
             return [...state];
 
         default:
