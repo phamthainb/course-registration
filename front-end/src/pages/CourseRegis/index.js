@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import RegisCartTable from '../../components/RegisCartTable';
-import RegisControl from '../../components/RegisControl';
-import RegisNote from '../../components/RegisNote';
-import RegisTable from '../../components/RegisTable';
+import RegisCartTable from './RegisCartTable';
+import RegisControl from './RegisControl';
+import RegisNote from './RegisNote';
+import RegisTable from './RegisTable';
 import './style.css'
 
 function CourseRegis() {
@@ -17,7 +17,7 @@ function CourseRegis() {
         <div className="course-regis">
             <RegisControl onShowSubjectList={onShowSubjectList}></RegisControl>
             <RegisTable chosenSubject={chosenSubject}></RegisTable>
-            <h6>Chosen subjects</h6>
+            <h5>Chosen subjects</h5>
             <RegisCartTable></RegisCartTable>
             <RegisNote></RegisNote>
         </div>

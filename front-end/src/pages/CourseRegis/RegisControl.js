@@ -1,29 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import * as subActions from '../../actions/subjects';
 
-const subjects = [
-  {
-    code: "BAS1146",
-    name: "Tiếng Anh B12",
-    credits: 4,
-  },
-  {
-    code: "INT1313",
-    name: "Cơ sở dữ liệu",
-    credits: 3,
-  },
-  {
-    code: "INT1319",
-    name: "Hệ điều hành",
-    credits: 3,
-  },
-  {
-    code: "INT1330",
-    name: "Ky thuat vy xu li",
-    credits: 3,
-  },
-];
-function RegisControl() {
-  const mapSubjects = subjects.map((sub, index) => {
+function RegisControl(props) {
+
+  useEffect(()=>{
+    props.onGetSubjects();
+  }, [])
+
+  const onShowSubjectList = (e)=>{
+    props.onGetSubjects();
+    var value = e.target.value;
+    var option = props.subjects.filter(sub=>{
+      return sub.code === value;
+    })
+    props.onShowSubjectList(option)
+  }
+
+  const mapSubjects = props.subjects.map((sub, index) => {
     return (
       <option key={index} value={sub.code}>
         {`${sub.code} - ${sub.name} (${sub.credits} TC)`}
@@ -33,12 +27,26 @@ function RegisControl() {
 
   return (
     <div className="regis-control">
-      {/* <div className="form-group mr-5">
-                <input type="text" placeholder="Search ..."/>
-            </div> */}
-      <select>{mapSubjects}</select>
+      <select onChange={onShowSubjectList} defaultValue="subject">
+        <option value="subject" disabled>Subject</option>
+        {mapSubjects}
+      </select>
     </div>
   );
 }
 
-export default RegisControl;
+const mapState = state => {
+  return{
+    subjects: state.subjects
+  }
+}
+
+const mapDispatch = dispatch => {
+  return{
+    onGetSubjects: ()=>{
+      dispatch(subActions.getSubjectRequest())
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(RegisControl);
