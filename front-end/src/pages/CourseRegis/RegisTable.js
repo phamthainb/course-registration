@@ -21,6 +21,7 @@ function RegisTable(props) {
                                     <input
                                     type="checkbox"
                                     onChange={onAddToCart}
+                                    data-id={sub.code}
                                     />
                                 </td>
                                 <td>{sub.code}</td>
