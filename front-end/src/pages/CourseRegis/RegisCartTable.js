@@ -82,8 +82,12 @@ function RegisCartTable(props){
                         <td>12</td>
                         <td>1 billion</td>
                         <td>
-                            <button className="btn btn-success">Save</button>
-                            <button className="btn btn-danger float-right">Delete all</button>
+                            <button className="btn btn-info">
+                                <i className="fa fa-check" aria-hidden="true"></i> Save
+                            </button>
+                            <button className="btn btn-dark float-right">
+                                <i className="fa fa-trash-o" aria-hidden="true"></i> Delete All
+                            </button>
                         </td>
                         <td></td>
                     </tr>
