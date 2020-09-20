@@ -53,7 +53,7 @@ function RegisCartTable(props){
                 <td>{480000 * item.crt}</td>
                 <td>Saved to database</td>
                 <td>
-                    <input type="checkbox"/>
+                    <button className="btn btn-outline-dark">Delete</button>
                 </td>
             </tr>
         )
@@ -81,10 +81,11 @@ function RegisCartTable(props){
                         <td colSpan={5} className="text-center">Total</td>
                         <td>12</td>
                         <td>1 billion</td>
-                        <td colSpan={2}>
-                            <button className="btn btn-info">Save</button>
-                            <button className="btn btn-dark float-right">Delete</button>
+                        <td>
+                            <button className="btn btn-success">Save</button>
+                            <button className="btn btn-danger float-right">Delete all</button>
                         </td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>

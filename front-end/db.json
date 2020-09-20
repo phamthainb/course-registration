@@ -165,7 +165,16 @@
             "qtt": 41,
             "list": [
                 {
-                    "pg": [],
+                    "pg": [
+                        {
+                            "day": "Wed",
+                            "start": 1,
+                            "less": 4,
+                            "room": "609-A3",
+                            "professor": "N.X.Anh",
+                            "week": [9, 10]
+                        }
+                    ],
                     "slot": 6,
                     "time": [
                         {
@@ -209,7 +218,16 @@
                     ]
                 },
                 {
-                    "pg": [],
+                    "pg": [
+                        {
+                            "day": "Wed",
+                            "start": 9,
+                            "less": 4,
+                            "room": "609-A3",
+                            "professor": "N.X.Anh",
+                            "week": [9, 10]
+                        }
+                    ],
                     "slot": 6,
                     "time": [
                         {
@@ -253,7 +271,16 @@
                     ]
                 },
                 {
-                    "pg": [],
+                    "pg": [
+                        {
+                            "day": "Fri",
+                            "start": 1,
+                            "less": 4,
+                            "room": "609-A3",
+                            "professor": "N.D.Hoa",
+                            "week": [12, 13]
+                        }
+                    ],
                     "slot": 0,
                     "time": [
                         {
