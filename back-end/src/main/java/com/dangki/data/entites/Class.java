@@ -87,7 +87,7 @@ public class Class extends BaseEntity {
         return users;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUsers(List<User> userEntities) {
+        this.users = userEntities;
     }
 }
