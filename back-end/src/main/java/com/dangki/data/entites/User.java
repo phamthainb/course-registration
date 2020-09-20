@@ -21,6 +21,8 @@ public class User extends BaseEntity {
     private String password;
     @Column(name = "phone")
     private String phone;
+    @Column(name = "active")
+    private Boolean active;
     @Column(name = "major")
     private String major;
     @Column(name = "birthday")
@@ -28,12 +30,20 @@ public class User extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "professor_id")
     private Professor professor;
-    @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.EAGER)
     @JoinTable(name = "user_role" , joinColumns = @JoinColumn(name = "user_id")
                 , inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
     @ManyToMany(mappedBy = "users")
     private List<Class> classes;
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
 
     public List<Class> getClasses() {
         return classes;
