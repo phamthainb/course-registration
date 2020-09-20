@@ -6,7 +6,7 @@ body{
     font-family: 'Nunito', sans-serif;
     letter-spacing: 1px;
     font-weight: 400;
-    color: rgb(110, 109, 109);
+    color: rgb(82, 82, 82);
 }
 input, button, select{
     border: none;
@@ -15,6 +15,8 @@ input, button, select{
 input, select{
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     padding: 10px;
+    background-color: inherit;
+    color: inherit;
 }
 img{
     width: 100%;

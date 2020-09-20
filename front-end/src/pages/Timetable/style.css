@@ -4,8 +4,8 @@
     min-height: 40px;
 }
 
-.timetable-show th.les, td.les{
-    width: 30px;
+.timetable-show td.lession{
+    width: 30px!important;
 }
 
 @media(max-width: 768px){

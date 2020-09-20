@@ -1,4 +1,3 @@
-import { logDOM } from '@testing-library/react';
 import React from 'react';
 import subjects from './subjects.js';
 
@@ -16,15 +15,11 @@ function TimetableShow(){
                     subElements.push(subElement[0]);
                 }
             })
-            console.log(subElements);
-            var tr;
             subElements.forEach((item, index)=>{
                 tr = (
                     <tr>
-                        <td className="table-dark">{i}</td>
-                        <td>
-                            {item.day === "Mon" && <p>{item.room}</p>}
-                        </td>
+                        <td className="table-dark lession">{i}</td>
+                        <td>{item.day === "Mon" && <p>{item.room}</p>}</td>
                         <td>{item.day === "Tue" && <p>{item.room}</p>}</td>
                         <td>{item.day === "Wed" && <p>{item.room}</p>}</td>
                         <td>{item.day === "Thu" && <p>{item.room}</p>}</td>
@@ -46,7 +41,7 @@ function TimetableShow(){
     }
 
     return(
-        <div className="table-responsive">
+        <div className="table-responsive text-center">
             <table className="table table-striped timetable-show table-bordered">
                 <thead className="thead-dark">
                     <tr>
