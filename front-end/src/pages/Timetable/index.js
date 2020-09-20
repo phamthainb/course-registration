@@ -1,8 +1,14 @@
 import React from 'react';
+import './style.css';
+import TimetableControl from './TimetableControl';
+import TimetableShow from './TimetableShow';
 
 function Timetable() {
     return(
-        <h2>This is a timetable</h2>
+        <div>   
+            <TimetableControl></TimetableControl>
+            <TimetableShow></TimetableShow>
+        </div>
     )
 }
 export default Timetable;
