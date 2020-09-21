@@ -16,7 +16,7 @@ function WeeklyTimetable(){
                     subElements.push(subElement[0]);
                 }
             })
-            subElements.forEach((item, index)=>{
+            subElements.forEach((item)=>{
                 tr = (
                     <tr>
                         <td className="table-dark lession">{i}</td>
