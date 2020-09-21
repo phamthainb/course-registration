@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
       <Menu></Menu>
-      {/* <Redirect to="/login"></Redirect> */}
+      <Redirect to="/login"></Redirect>
       <Switch>
         {mapRoutes}
       </Switch>

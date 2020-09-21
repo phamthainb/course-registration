@@ -1,4 +1,5 @@
 import React from 'react';
+import ChangePassForm from './ChangePassForm';
 import './style.css';
 
 function EditInfoForm() {
@@ -64,7 +65,7 @@ function EditInfoForm() {
                     </tr>
                 </tbody>
             </table>
-            <div className="button-group mt-4">
+            <div className="button-group mt-4 mb-4">
                 <button className="btn btn-info" onClick={onUpdate}>
                     <i className="fa fa-check" aria-hidden="true"></i> Update
                 </button>
@@ -72,6 +73,7 @@ function EditInfoForm() {
                     <i className="fa fa-ban" aria-hidden="true"></i> Cancel
                 </button>
             </div>
+            <ChangePassForm/>
         </div>
     )
 }
