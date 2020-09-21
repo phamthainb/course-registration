@@ -2,21 +2,29 @@ import React, { useState } from 'react';
 
 function TimetableControl(props){
 
+    const weeks = 20;
+
     const [timetable, setTimetable] = useState('weekly');
 
-    const weeks = 20;
+    const startDay = new Date(2020, 8, 7).getTime();
 
     const mapWeeks = (weeks)=>{
         var xhtml = [];
-        for(let i=1; i<=weeks; i++){
+        for(let i=0; i<weeks; i++){
+            let date1 = new Date(convertDayToMilliseconds(i));
+            let date2 = new Date(convertDayToMilliseconds(i) + 518400000);
             let option = (
                 <option key={i}>
-                    {`Week ${i} [14/09/2020 -- 20/09/2020]`}
-                </option>
+                    Week {i+1} [{date1.getDate()}/{date1.getMonth()+1} -- {date2.getDate()}/{date2.getMonth()+1}]
+                </option>   
             )
             xhtml.push(option);
         }
         return xhtml;
+    }
+
+    const convertDayToMilliseconds = (i)=>{
+        return startDay + (i * 604800000);
     }
 
     const onChangeTimetable = (e)=>{
