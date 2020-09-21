@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function TimetableControl(){
+function TimetableControl(props){
+
+    const [timetable, setTimetable] = useState('weekly');
 
     const weeks = 20;
 
@@ -17,13 +19,19 @@ function TimetableControl(){
         return xhtml;
     }
 
+    const onChangeTimetable = (e)=>{
+        const value = e.target.value;
+        props.onChangeTimetable(value);
+        setTimetable(value);
+    }
+
     return(
         <div className="d-flex justify-content-around mb-3 mt-3 timetable-control">
-            <select>
-                <option value="weekly">Weekly timetable</option>
-                <option value="private">Private timetable</option>
+            <select onChange={onChangeTimetable}>
+                <option value="weekly">Weekly Timetable</option>
+                <option value="personal">Personal Timetable</option>
             </select>
-            <select>
+            <select disabled={timetable === "weekly" ? false : true}>
                 {mapWeeks(weeks)}
             </select>
         </div>

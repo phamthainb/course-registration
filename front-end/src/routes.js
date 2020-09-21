@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import CourseRegis from './pages/CourseRegis';
 import Timetable from './pages/Timetable';
 import EditInfoForm from './pages/EditInfoForm';
+import PersonalTimetable from 'pages/Timetable/PersonalTimetable';
 
 const routes = [
     {

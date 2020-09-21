@@ -8,12 +8,14 @@ const subjects = [
             {
                 day: "Fri",
                 start: 7,
+                less: 2,
                 room: "801B-A2",
                 week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14]
             },
             {
                 day: "Fri",
                 start: 9,
+                less: 2,
                 room: "801B-A2",
                 week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14]
             }
@@ -28,12 +30,14 @@ const subjects = [
             {
                 day: "Wed",
                 start: 5,
+                less: 2,
                 room: "101-A2",
                 week: [10, 12, 13, 14]
             },
             {
                 day: "Wed",
                 start: 3,
+                less: 2,
                 room: "801B-A2",
                 week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
             }
@@ -48,12 +52,14 @@ const subjects = [
             {
                 day: "Mon",
                 start: 1,
+                less: 2,
                 room: "701-A2",
                 week: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
             },
             {
                 day: "Mon",
                 start: 5,
+                less: 2,
                 room: "701-A2",
                 week: [1, 2, 3, 4, 5, 6]
             }

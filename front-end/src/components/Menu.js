@@ -18,7 +18,7 @@ function Menu() {
             <div className="collapse navbar-collapse" id="collapsibleNavId">
                 <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
                     <li className="nav-item ml-2">
-                        <NavLink to="/home" className="nav-link">Home</NavLink>
+                        <NavLink className="nav-link" to="/home">Home</NavLink>
                     </li>
                     <li className="nav-item ml-2">
                         <NavLink className="nav-link" to="/course-regis">Course-regis</NavLink>

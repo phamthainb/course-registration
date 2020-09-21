@@ -1,7 +1,8 @@
 import React from 'react';
+import BottomButton from './BottomButton.js';
 import subjects from './subjects.js';
 
-function TimetableShow(){
+function WeeklyTimetable(){
 
     const mapToTimetable = ()=>{
         var xhtml = [];
@@ -61,8 +62,9 @@ function TimetableShow(){
                     {mapToTimetable()}
                 </tbody>
             </table>
+            <BottomButton></BottomButton>
         </div>
     )
 }
 
-export default TimetableShow;
+export default WeeklyTimetable;

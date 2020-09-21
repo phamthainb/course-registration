@@ -8,6 +8,10 @@
     width: 30px!important;
 }
 
+.bottom-button .btn{
+    margin: 20px;
+}
+
 @media(max-width: 768px){
     .timetable-control{
         flex-direction: column;

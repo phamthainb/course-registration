@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 import TimetableControl from './TimetableControl';
-import TimetableShow from './TimetableShow';
+import WeeklyTimetable from './WeeklyTimetable';
+import PersonalTimetable from './PersonalTimetable';
 
 function Timetable() {
+
+    const [timetable, setTimetable] = useState('weekly')
+
+    const onChangeTimetable = (value)=>{
+        setTimetable(value);
+    }
+
     return(
-        <div>   
-            <TimetableControl></TimetableControl>
-            <TimetableShow></TimetableShow>
+        <div>
+            <TimetableControl onChangeTimetable={onChangeTimetable}></TimetableControl>
+            {timetable === "weekly" && <WeeklyTimetable></WeeklyTimetable>}
+            {timetable === "personal" && <PersonalTimetable></PersonalTimetable>}
         </div>
     )
 }
