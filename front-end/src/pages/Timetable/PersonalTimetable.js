@@ -1,3 +1,4 @@
+import RegisNote from 'pages/CourseRegis/RegisNote';
 import React from 'react';
 import subjects from './subjects';
 
@@ -105,6 +106,7 @@ function PersonalTimetable() {
                     {mapListToTable()}
                 </tbody>
             </table>
+            <RegisNote></RegisNote>
         </div>
     )
 }
