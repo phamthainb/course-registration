@@ -1,7 +1,9 @@
-package com.dangki.prerentation.controller;
+package com.dangki.prerentation.controller.web;
 
 import com.dangki.common.utils.SecurityConstants;
+import com.dangki.common.utils.SecurityUtil;
 import com.dangki.data.MyUserDetails;
+import com.dangki.data.dto.AuthenticationResponse;
 import com.dangki.data.dto.UserDto;
 import com.dangki.service.JwtUtil;
 import com.dangki.service.MyUserDetailsService;
@@ -16,20 +18,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-//@RequestMapping("/api/user")
+@RequestMapping("/api/user")
 public class UserController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
     private MyUserDetailsService myUserDetailsService;
     @Autowired
+    private SecurityUtil securityUtil;
+    @Autowired
     private JwtUtil util;
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<?> hello()
     {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
-        return ResponseEntity.ok(userDetails.getUser());
+        return ResponseEntity.ok(securityUtil.getUserDetails().getUser());
     }
     @PostMapping("/authenticate")
     public ResponseEntity<?> authentication(@RequestBody UserDto userDto) throws Exception {
@@ -42,6 +44,6 @@ public class UserController {
         }
         UserDetails userDetails = myUserDetailsService.loadUserByUsername(userDto.getUsername());
         String jwt = util.generateToken(userDetails);
-        return ResponseEntity.ok(SecurityConstants.JWT_TOKEN_PREFIX+jwt);
+        return ResponseEntity.ok(new AuthenticationResponse(SecurityConstants.JWT_TOKEN_PREFIX+jwt));
     }
 }

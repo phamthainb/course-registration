@@ -26,6 +26,18 @@ public class Class extends BaseEntity {
     @JoinTable(name = "class_user" , joinColumns = @JoinColumn(name = "class_id")
                 , inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
+    @ManyToMany(cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    @JoinTable(name = "time_class" , joinColumns = @JoinColumn(name = "class_id"),
+                inverseJoinColumns = @JoinColumn(name = "time_id"))
+    private List<Time> times;
+
+    public List<Time> getTimes() {
+        return times;
+    }
+
+    public void setTimes(List<Time> times) {
+        this.times = times;
+    }
 
     public Subject getSubject() {
         return subject;
