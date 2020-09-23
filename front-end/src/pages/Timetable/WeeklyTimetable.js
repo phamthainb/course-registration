@@ -1,35 +1,35 @@
 import React from 'react';
-import BottomButton from './BottomButton.js';
+// import BottomButton from './BottomButton.js';
 import subjects from './subjects.js';
 
-function WeeklyTimetable(){
+function WeeklyTimetable(props){
 
     const mapToTimetable = ()=>{
         var xhtml = [];
         for(let i=1; i<12; i+=2){
-            var subElement;
-            var subElements = [];
-            var tr;
+            var subElement = null;
+            var subElementArr = [];
             subjects.forEach((sub)=>{
                 subElement = findSubjectElement(sub.time, i);
                 if(subElement[0]){
-                    subElements.push(subElement[0]);
+                    subElementArr.push({
+                        name: sub.name,
+                        detail: subElement[0]
+                    });
                 }
             })
-            subElements.forEach((item)=>{
-                tr = (
-                    <tr>
-                        <td className="table-dark lession">{i}</td>
-                        <td>{item.day === "Mon" && <p>{item.room}</p>}</td>
-                        <td>{item.day === "Tue" && <p>{item.room}</p>}</td>
-                        <td>{item.day === "Wed" && <p>{item.room}</p>}</td>
-                        <td>{item.day === "Thu" && <p>{item.room}</p>}</td>
-                        <td>{item.day === "Fri" && <p>{item.room}</p>}</td>
-                        <td>{item.day === "Sat" && <p>{item.room}</p>}</td>
-                        <td>{item.day === "Sun" && <p>{item.room}</p>}</td>
-                    </tr>
-                )
-            })
+            let tr = (
+                <tr>
+                    <td className="table-dark" width="5%" height={100}>{i}</td>
+                    <td>{mapToTr(subElementArr, "mon")}</td>
+                    <td>{mapToTr(subElementArr, "tue")}</td>
+                    <td>{mapToTr(subElementArr, "wed")}</td>
+                    <td>{mapToTr(subElementArr, "thu")}</td>
+                    <td>{mapToTr(subElementArr, "fri")}</td>
+                    <td>{mapToTr(subElementArr, "sat")}</td>
+                    <td>{mapToTr(subElementArr, "sun")}</td>
+                </tr>
+            );
             xhtml.push(tr);
         }
         return xhtml;
@@ -39,6 +39,20 @@ function WeeklyTimetable(){
         return list.filter(item => {
             return item.start === id;
         })
+    }
+
+    const mapToTr = (subElementArr, value)=>{
+        var xhtml = [];
+        var {currentWeek} = props;
+        subElementArr.forEach(sub => {
+            if(sub.detail.week.includes(parseInt(currentWeek))){
+                if(sub.detail.day.toLowerCase() === value.toLowerCase()){
+                    xhtml.push(<h6>{sub.name}</h6>)
+                    xhtml.push(<p>{sub.detail.room}</p>)
+                }
+            }
+        })
+        return xhtml;
     }
 
     return(
@@ -57,12 +71,10 @@ function WeeklyTimetable(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    </tr>
                     {mapToTimetable()}
                 </tbody>
             </table>
-            <BottomButton></BottomButton>
+            {/* <BottomButton></BottomButton> */}
         </div>
     )
 }

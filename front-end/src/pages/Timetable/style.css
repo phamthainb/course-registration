@@ -1,11 +1,11 @@
 .timetable-show td{
     min-width: 90px;
     max-width: 90px;
-    min-height: 40px;
 }
 
-.timetable-show td.lession{
-    width: 30px!important;
+.timetable-show tbody tr td h6{
+    font-weight: 800;
+    color: #1976d2;
 }
 
 .bottom-button .btn{

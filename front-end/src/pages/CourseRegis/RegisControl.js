@@ -14,13 +14,13 @@ function RegisControl(props) {
     var option = props.subjects.filter(sub=>{
       return sub.code === value;
     })
-    props.onShowSubjectList(option)
+    props.onShowSubjectList(option);
   }
 
   const mapSubjects = props.subjects.map((sub, index) => {
     return (
       <option key={index} value={sub.code}>
-        {`${sub.code} - ${sub.name} ( ${sub.crt}TC )`}
+        {`${sub.code} - ${sub.name} ( ${sub.crt} TC )`}
       </option>
     );
   });

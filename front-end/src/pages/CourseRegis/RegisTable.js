@@ -15,6 +15,7 @@ function RegisTable(props) {
         var code = e.target.getAttribute('data-code');
         var id = e.target.getAttribute('data-id');
         props.onUpdateCart(code, id);
+        console.log(e.target.checked);
     }
 
     const mapListToTable = ()=>{
@@ -26,7 +27,7 @@ function RegisTable(props) {
                 let tr;
                 for(let i=0; i<list.length; i++){
                     tr = (
-                        <tr key={i}>
+                        <tr key={Date.now().toString() + i}>
                             <td>
                                 <input
                                 type="checkbox"
@@ -57,48 +58,48 @@ function RegisTable(props) {
         return table;
     }
 
-    const mapStartDay = (time)=>{
-        return time.map(item => {
+    const mapStartDay = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.day}</p>
             )
         })
     }
 
-    const mapLessionQuantity = (time)=>{
-        return time.map(item => {
+    const mapLessionQuantity = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.less}</p>
             )
         })
     }
 
-    const mapStartLession = (time)=>{
-        return time.map(item => {
+    const mapStartLession = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.start}</p>
             )
         })
     }
 
-    const mapRoom = (time)=>{
-        return time.map(item => {
+    const mapRoom = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.room}</p>
             )
         })
     }
 
-    const mapProfessor = (time)=>{
-        return time.map(item => {
+    const mapProfessor = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.professor}</p>
             )
         })
     }
 
-    const mapWeek = (time)=>{
-        return time.map(item => {
+    const mapWeek = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.week.toString()}</p>
             )
