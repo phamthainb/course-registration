@@ -1,9 +1,5 @@
 package com.dangki.data.dto;
 
-import com.dangki.data.entites.Class;
-import com.dangki.data.entites.Professor;
-import com.dangki.data.entites.Role;
-
 import java.util.List;
 
 public class UserDto extends BaseDto {
@@ -17,9 +13,9 @@ public class UserDto extends BaseDto {
     private Boolean active;
     private String birthday;
     private String major;
-    private Professor professor;
-    private List<Role> roles;
-    private List<Class> classes;
+    private ProfessorDto professor;
+    private List<RoleDto> roles;
+    private List<ClassDto> classes;
 
     public String getName() {
         return name;
@@ -85,27 +81,27 @@ public class UserDto extends BaseDto {
         this.major = major;
     }
 
-    public Professor getProfessor() {
+    public ProfessorDto getProfessor() {
         return professor;
     }
 
-    public void setProfessor(Professor professor) {
+    public void setProfessor(ProfessorDto professor) {
         this.professor = professor;
     }
 
-    public List<Role> getRoles() {
+    public List<RoleDto> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<RoleDto> roles) {
         this.roles = roles;
     }
 
-    public List<Class> getClasses() {
+    public List<ClassDto> getClasses() {
         return classes;
     }
 
-    public void setClasses(List<Class> classes) {
+    public void setClasses(List<ClassDto> classes) {
         this.classes = classes;
     }
 

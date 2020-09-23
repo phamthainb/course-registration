@@ -1,19 +1,12 @@
-package com.dangki.data.entites;
+package com.dangki.data.dto;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "time_of_class")
-public class Time extends BaseEntity {
-    @Column(name = "lesson")
+public class TimeDto extends BaseDto {
     private Integer lesson;
-    @Column(name = "room")
     private String room;
-    @Column(name = "day")
     private String day;
-    @OneToMany(mappedBy = "time")
-    private List<Week> weeks;
+    private List<WeekDto> weeks;
 
     public Integer getLesson() {
         return lesson;
@@ -39,11 +32,11 @@ public class Time extends BaseEntity {
         this.day = day;
     }
 
-    public List<Week> getWeeks() {
+    public List<WeekDto> getWeeks() {
         return weeks;
     }
 
-    public void setWeeks(List<Week> weeks) {
+    public void setWeeks(List<WeekDto> weeks) {
         this.weeks = weeks;
     }
 }
