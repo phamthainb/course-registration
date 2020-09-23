@@ -85,7 +85,7 @@ function PersonalTimetable() {
     }
 
     return(
-        <div className="table-responsive mb-4 mt-4">
+        <div className="table-responsive mt-4">
             <table className="table table-striped table-bordered">
                 <thead className="thead-dark">
                     <tr>
