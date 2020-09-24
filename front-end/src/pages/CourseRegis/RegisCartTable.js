@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import * as constants from '../categories/constants';
 
 function RegisCartTable(props){
@@ -10,6 +9,22 @@ function RegisCartTable(props){
 
     const onDeleteAllFromCart = ()=>{
         props.onDeleteAllFromCart();
+    }
+
+    const totalCredits = ()=>{
+        var total = 0;
+        props.cart.forEach(item=>{
+            total += parseInt(item.crt);
+        })
+        return total;
+    }
+
+    const totalFee = ()=>{
+        var total = 0;
+        props.cart.forEach(item=>{
+            total += parseInt(item.crt) * 480000;
+        })
+        return total;
     }
 
     const mapToCart = props.cart.map((item, index)=>{
@@ -34,6 +49,10 @@ function RegisCartTable(props){
         )
     })
 
+    const onSaveSubjects = (e)=>{
+        
+    }
+    
     return(
         <div className="table-responsive mt-5">
             <table className="table table-striped regis-submit-table table-bordered">
@@ -55,12 +74,12 @@ function RegisCartTable(props){
                 </thead>
                 <tbody>
                     {mapToCart}
-                    <tr>
+                    <tr className="table-active" style={{fontWeight: 800}}>
                         <td colSpan={5} className="text-center">Total</td>
-                        <td>12</td>
-                        <td>1 billion</td>
+                        <td>{totalCredits()}</td>
+                        <td>{totalFee()}</td>
                         <td>
-                            <button className="btn btn-info">
+                            <button className="btn btn-info" onClick={onSaveSubjects}>
                                 <i className="fa fa-check" aria-hidden="true"></i> Save
                             </button>
                             <button
@@ -77,13 +96,4 @@ function RegisCartTable(props){
     )
 }
 
-const mapState = state=>{
-    return{
-    }
-}
-
-const mapDispatch = dispatch =>{
-    return{}
-}
-
-export default connect(mapState, mapDispatch)(RegisCartTable);
+export default RegisCartTable;
