@@ -12,6 +12,10 @@
     margin: 20px;
 }
 
+table{
+    font-size: 14px;
+}
+
 @media(max-width: 768px){
     .timetable-control{
         flex-direction: column;

@@ -1,17 +1,10 @@
-import React, { useState } from 'react'
-import { connect } from 'react-redux';
-import * as actions from '../../pages/categories/actions';
-import RegisControl from './RegisControl';
+import React from 'react';
 
 function RegisTable(props) {
-
-    const [chosenSubject, setChosenSubject] = useState();
     
-    const onShowSubjectList = (option)=>{
-        setChosenSubject(option[0]);
-    }
+    const {chosenSubject} = props;
 
-    const onAddToCart = (e)=>{
+    const onUpdateCart = (e)=>{
         var code = e.target.getAttribute('data-code');
         var id = e.target.getAttribute('data-id');
         props.onUpdateCart(code, id);
@@ -28,12 +21,13 @@ function RegisTable(props) {
                     tr = (
                         <tr key={Date.now().toString() + i}>
                             <td>
-                                <input
-                                type="checkbox"
-                                onChange={onAddToCart}
+                                <button
+                                className="btn btn-outline-dark"
+                                onClick={onUpdateCart}
                                 data-code={sub.code}
-                                data-id={sub.list[`${i}`].id}
-                                />
+                                data-id={sub.list[`${i}`].id}>
+                                    Add
+                                </button>
                             </td>
                             <td>{sub.code}</td>
                             <td>{sub.name}</td>
@@ -107,17 +101,13 @@ function RegisTable(props) {
 
     return(
         <div>
-            <RegisControl
-            onShowSubjectList={onShowSubjectList}
-            >
-            </RegisControl>
             {
                 chosenSubject && 
                 <div className="table-responsive">
                     <table className="table table-striped regis-table table-bordered">
                         <thead className="thead-dark">
                             <tr>
-                                <th>Check</th>
+                                <th>Act</th>
                                 <th>Code</th>
                                 <th>Name</th>
                                 <th>ID</th>
@@ -143,16 +133,4 @@ function RegisTable(props) {
     )
 }
 
-const mapState = state=>{
-    return{}
-}
-
-const mapDispatch = dispatch=>{
-    return{
-        onUpdateCart: (code, id) => {
-            dispatch(actions.updateCart(code, id));
-        }
-    }
-}
-
-export default connect(mapState, mapDispatch)(RegisTable);
+export default RegisTable;

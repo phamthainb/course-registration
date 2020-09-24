@@ -1,20 +1,10 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import * as actions from '../categories/actions';
+import React from "react";
 
 function RegisControl(props) {
 
-  useEffect(()=>{
-    props.onGetSubjects();
-  }, [])
-
   const onShowSubjectList = (e)=>{
-    props.onGetSubjects();
     var value = e.target.value;
-    var option = props.subjects.filter(sub=>{
-      return sub.code === value;
-    })
-    props.onShowSubjectList(option);
+    props.onShowSubjectList(value);
   }
 
   const mapSubjects = props.subjects.map((sub, index) => {
@@ -35,18 +25,4 @@ function RegisControl(props) {
   );
 }
 
-const mapState = state => {
-  return{
-    subjects: state.subjects
-  }
-}
-
-const mapDispatch = dispatch => {
-  return{
-    onGetSubjects: ()=>{
-      dispatch(actions.getSubjectRequest())
-    }
-  }
-}
-
-export default connect(mapState, mapDispatch)(RegisControl);
+export default RegisControl;

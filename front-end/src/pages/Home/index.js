@@ -1,6 +1,6 @@
 import React from "react";
 import NewsItem from "./NewsItem";
-import {news} from './news';
+import news from './news';
 import "./style.css";
 
 function Home() {

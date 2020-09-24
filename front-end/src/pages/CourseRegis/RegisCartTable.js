@@ -2,46 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 function RegisCartTable(props){
-    // const cart = [
-    //     {
-    //         code: "BAS1146",
-    //         name: "tieng anh b12",
-    //         crt: 4,
-    //         id: 19,
-    //         pg: {
-    //             id: ''
-    //         }
-    //     },
-    //     {
-    //         code: "INT1313",
-    //         name: "co so du lieu",
-    //         crt: 3,
-    //         id: 6,
-    //         pg: {
-    //             id: 2,
-    //         }
-    //     },
-    //     {
-    //         code: "INT1319",
-    //         name: "he dieu hanh",
-    //         crt: 3,
-    //         id: 9,
-    //         pg: {
-    //             id: 1
-    //         }
-    //     },
-    //     {
-    //         code: "INT1330",
-    //         name: "ki thuat vi xu li",
-    //         crt: 3,
-    //         id: 5,
-    //         pg: {
-    //             id: ''
-    //         }
-    //     },
-    // ]
 
-    // const mapToCart = cart.map((item, index)=>{
+    // const mapToCart = props.cart.map((item, index)=>{
     //     return(
     //         <tr key={index}>
     //             <td>{index+1}</td>
@@ -75,7 +37,7 @@ function RegisCartTable(props){
                         <th>Crt</th>
                         <th>Fee</th>
                         <th>Status</th>
-                        <th>Check</th>
+                        <th>Act</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -102,7 +64,6 @@ function RegisCartTable(props){
 
 const mapState = state=>{
     return{
-        cart: state.cart
     }
 }
 
