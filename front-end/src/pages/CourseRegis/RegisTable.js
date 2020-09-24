@@ -7,7 +7,9 @@ function RegisTable(props) {
     const onUpdateCart = (e)=>{
         var code = e.target.getAttribute('data-code');
         var id = e.target.getAttribute('data-id');
-        props.onUpdateCart(code, id);
+        var name = e.target.getAttribute('data-name');
+        var crt = e.target.getAttribute('data-crt');
+        props.onUpdateCart(code, id, name, crt);
     }
 
     const mapListToTable = ()=>{
@@ -25,7 +27,9 @@ function RegisTable(props) {
                                 className="btn btn-outline-dark"
                                 onClick={onUpdateCart}
                                 data-code={sub.code}
-                                data-id={sub.list[`${i}`].id}>
+                                data-id={sub.list[`${i}`].id}
+                                data-name={sub.name}
+                                data-crt={sub.crt}>
                                     Add
                                 </button>
                             </td>

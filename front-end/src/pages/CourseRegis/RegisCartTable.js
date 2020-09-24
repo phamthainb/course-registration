@@ -1,25 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import * as constants from '../categories/constants';
 
 function RegisCartTable(props){
 
-    // const mapToCart = props.cart.map((item, index)=>{
-    //     return(
-    //         <tr key={index}>
-    //             <td>{index+1}</td>
-    //             <td>{item.code}</td>
-    //             <td>{item.name}</td>
-    //             <td>{item.id}</td>
-    //             <td>{item.pg.id}</td>
-    //             <td>{item.crt}</td>
-    //             <td>{480000 * item.crt}</td>
-    //             <td>Saved to database</td>
-    //             <td>
-    //                 <button className="btn btn-outline-dark">Delete</button>
-    //             </td>
-    //         </tr>
-    //     )
-    // })
+    const onUpdateCart = (code, id)=>{
+        props.onUpdateCart(code, id);
+    }
+
+    const onDeleteAllFromCart = ()=>{
+        props.onDeleteAllFromCart();
+    }
+
+    const mapToCart = props.cart.map((item, index)=>{
+        return(
+            <tr key={index}>
+                <td>{index+1}</td>
+                <td>{item.code}</td>
+                <td>{item.name}</td>
+                <td>{item.id}</td>
+                <td>null</td>
+                <td>{item.crt}</td>
+                <td>{480000 * item.crt}</td>
+                <td>{constants.ADD_TO_CART_SUCCESSFUL}</td>
+                <td>
+                    <button
+                    className="btn btn-outline-dark"
+                    onClick={() => onUpdateCart(item.code, item.id)}>
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        )
+    })
 
     return(
         <div className="table-responsive mt-5">
@@ -41,7 +54,7 @@ function RegisCartTable(props){
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {mapToCart} */}
+                    {mapToCart}
                     <tr>
                         <td colSpan={5} className="text-center">Total</td>
                         <td>12</td>
@@ -50,7 +63,9 @@ function RegisCartTable(props){
                             <button className="btn btn-info">
                                 <i className="fa fa-check" aria-hidden="true"></i> Save
                             </button>
-                            <button className="btn btn-dark float-right">
+                            <button
+                            className="btn btn-dark float-right"
+                            onClick={onDeleteAllFromCart}>
                                 Delete All
                             </button>
                         </td>

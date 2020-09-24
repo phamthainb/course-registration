@@ -11,7 +11,6 @@ function CourseRegis(props) {
 
     const [chosenSubject, setChosenSubject] = useState();
     const [cart, setCart] = useState([]);
-    console.log('render');
 
     useEffect(()=>{
         props.onGetSubjects();
@@ -25,7 +24,7 @@ function CourseRegis(props) {
         setChosenSubject(option[0]);
     }
 
-    const onUpdateCart = (code, id)=>{
+    const onUpdateCart = (code, id, name, crt)=>{
         var tempCart = [...cart];
         var check = false;
         if(tempCart.length){
@@ -42,9 +41,13 @@ function CourseRegis(props) {
             })
         }
         if(check === false){
-            tempCart.push({code, id});
+            tempCart.push({code, id, name, crt});
         }
         setCart([...tempCart]);
+    }
+
+    const onDeleteAllFromCart = ()=>{
+        setCart([]);
     }
 
     return(
@@ -63,9 +66,14 @@ function CourseRegis(props) {
                     chosenSubject={chosenSubject}>
                     </RegisTable>
 
-                    <RegisCartTable
-                    cart={cart}>
-                    </RegisCartTable>
+                    {
+                        cart.length > 0 &&
+                        <RegisCartTable
+                        cart={cart}
+                        onUpdateCart={onUpdateCart}
+                        onDeleteAllFromCart={onDeleteAllFromCart}>
+                        </RegisCartTable>
+                    }
                     
                     <RegisNote></RegisNote>
                 </div>
