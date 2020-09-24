@@ -16,4 +16,7 @@
     .timetable-control{
         flex-direction: column;
     }
+    button{
+        font-size: 14px!important;
+    }
 }

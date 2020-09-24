@@ -20,7 +20,7 @@ function WeeklyTimetable(props){
             })
             let tr = (
                 <tr>
-                    <td className="table-dark" width="5%" height={100}>{i}</td>
+                    <td className="table-dark" width="5%" height={100}>{i} + {i+1}</td>
                     <td>{mapToTr(subElementArr, "mon")}</td>
                     <td>{mapToTr(subElementArr, "tue")}</td>
                     <td>{mapToTr(subElementArr, "wed")}</td>
@@ -48,7 +48,7 @@ function WeeklyTimetable(props){
             if(sub.detail.week.includes(parseInt(currentWeek))){
                 if(sub.detail.day.toLowerCase() === value.toLowerCase()){
                     xhtml.push(<h6>{sub.name}</h6>)
-                    xhtml.push(<p>{sub.detail.room}</p>)
+                    xhtml.push(<span>{sub.detail.room}</span>)
                 }
             }
         })
@@ -56,7 +56,7 @@ function WeeklyTimetable(props){
     }
 
     return(
-        <div className="table-responsive text-center">
+        <div className="table-responsive text-center mb-4">
             <table className="table table-striped timetable-show table-bordered">
                 <thead className="thead-dark">
                     <tr>

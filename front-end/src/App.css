@@ -7,6 +7,7 @@ body{
     letter-spacing: 1px;
     font-weight: 400;
     color: rgb(82, 82, 82);
+    min-height: 100wh;
 }
 input, button, select{
     border: none;
@@ -33,5 +34,11 @@ a:hover{
 @media(max-width: 768px){
     body{
         font-size: 14px;
+    }
+    a{
+        font-size: 14px!important;
+    }
+    table, h6, button{
+        font-size: 12px!important;
     }
 }

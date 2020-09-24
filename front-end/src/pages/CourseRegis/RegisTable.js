@@ -5,7 +5,7 @@ import RegisControl from './RegisControl';
 
 function RegisTable(props) {
 
-    const [chosenSubject, setChosenSubject] = useState({});
+    const [chosenSubject, setChosenSubject] = useState();
     
     const onShowSubjectList = (option)=>{
         setChosenSubject(option[0]);
@@ -15,13 +15,12 @@ function RegisTable(props) {
         var code = e.target.getAttribute('data-code');
         var id = e.target.getAttribute('data-id');
         props.onUpdateCart(code, id);
-        console.log(e.target.checked);
     }
 
     const mapListToTable = ()=>{
         let table = [];
-        if(chosenSubject !== {}){
-            if(chosenSubject.list !== undefined){
+        if(chosenSubject){
+            if(chosenSubject.list){
                 let sub = chosenSubject;
                 let list = sub.list;
                 let tr;
@@ -112,31 +111,34 @@ function RegisTable(props) {
             onShowSubjectList={onShowSubjectList}
             >
             </RegisControl>
-            <div className="table-responsive">
-                <table className="table table-striped regis-table table-bordered">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th>Check</th>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>ID</th>
-                            <th>PG</th>
-                            <th>Crt</th>
-                            <th>Qtt</th>
-                            <th>Slot</th>
-                            <th>Day</th>
-                            <th>Start</th>
-                            <th>Les</th>
-                            <th>Room</th>
-                            <th>Professor</th>
-                            <th>Week</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {mapListToTable()}
-                    </tbody>
-                </table>
-            </div>
+            {
+                chosenSubject && 
+                <div className="table-responsive">
+                    <table className="table table-striped regis-table table-bordered">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th>Check</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>ID</th>
+                                <th>PG</th>
+                                <th>Crt</th>
+                                <th>Qtt</th>
+                                <th>Slot</th>
+                                <th>Day</th>
+                                <th>Start</th>
+                                <th>Les</th>
+                                <th>Room</th>
+                                <th>Professor</th>
+                                <th>Week</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {mapListToTable()}
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
     )
 }
