@@ -15,6 +15,7 @@ function CourseRegis(props) {
     useEffect(()=>{
         props.onGetSubjects();
     }, [])
+    console.log('render', cart);
 
     const onShowSubjectList = (value)=>{
         var option = props.subjects.filter(sub=>{
