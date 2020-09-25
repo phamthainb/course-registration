@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "time_of_class")
+@Table(name = "times")
 public class Time extends BaseEntity {
     @Column(name = "lesson")
     private Integer lesson;
@@ -12,7 +12,9 @@ public class Time extends BaseEntity {
     private String room;
     @Column(name = "day")
     private String day;
-    @OneToMany(mappedBy = "time")
+    @ManyToMany(cascade = CascadeType.MERGE , fetch = FetchType.LAZY)
+    @JoinTable(name = "time_week" , joinColumns = @JoinColumn(name = "time_id")
+                , inverseJoinColumns = @JoinColumn(name = "week_id"))
     private List<Week> weeks;
 
     public Integer getLesson() {
