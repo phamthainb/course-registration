@@ -11,7 +11,7 @@ const crawler = async (id) => {
         "accept-language": "en-GB,en-US;q=0.9,en;q=0.8,vi;q=0.7",
         "content-type": "text/plain; charset=UTF-8",
         "x-ajaxpro-method": "LocTheoMonHoc",
-        cookie: "ASP.NET_SessionId=y3kveo45xhtjrg55jnbjv355",
+        cookie: "ASP.NET_SessionId=xxxxx",
       },
       referrer: "http://qldt.ptit.edu.vn/Default.aspx?page=dkmonhoc",
       referrerPolicy: "strict-origin-when-cross-origin",
