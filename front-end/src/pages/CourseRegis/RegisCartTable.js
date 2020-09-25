@@ -55,7 +55,7 @@ function RegisCartTable(props){
     
     return(
         <div className="table-responsive mt-5">
-            <table className="table table-striped regis-submit-table table-bordered">
+            <table className="table regis-submit-table table-bordered">
                 <thead className="thead-dark">
                     <tr>
                         <th colSpan={9}>Chosen Subjects</th>
