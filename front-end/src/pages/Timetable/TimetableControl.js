@@ -1,19 +1,13 @@
 import React, { useState } from 'react';
+import {START_DAY} from '../categories/constants';
 
 function TimetableControl(props){
 
-    const weeks = 20;
-
     const [timetable, setTimetable] = useState('weekly');
 
-    const startDay = new Date(2020, 8, 7).getTime(); // month starts from 0
+    const {currentWeek} = props;
 
-    const currentDay = new Date().getTime();
-    
-    const currentWeek = ()=>{
-        // currentWeek = (currentDay - startDay) / 7days
-        return Math.floor((currentDay - startDay)/604800000);
-    }
+    const weeks = 20;
 
     const mapWeeks = (weeks)=>{
         var xhtml = [];
@@ -33,13 +27,18 @@ function TimetableControl(props){
 
     const convertDayToMilliseconds = (i)=>{
         // startDay + i(weeks)
-        return startDay + (i * 604800000);
+        return START_DAY + (i * 604800000);
     }
 
     const onChangeTimetable = (e)=>{
         const value = e.target.value;
         props.onChangeTimetable(value);
         setTimetable(value);
+    }
+
+    const onSetWeek = (e)=>{
+        var value = e.target.value;
+        props.onSetWeek(parseInt(value)+1);
     }
 
     return(
@@ -52,7 +51,8 @@ function TimetableControl(props){
 
             <select
             disabled={timetable === "weekly" ? false : true}
-            defaultValue={currentWeek()}
+            defaultValue={currentWeek}
+            onChange={onSetWeek}
             >
                 {mapWeeks(weeks)}
             </select>

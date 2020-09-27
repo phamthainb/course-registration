@@ -1,64 +1,58 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import * as constants from '../categories/constants';
 
 function RegisCartTable(props){
-    // const cart = [
-    //     {
-    //         code: "BAS1146",
-    //         name: "tieng anh b12",
-    //         crt: 4,
-    //         id: 19,
-    //         pg: {
-    //             id: ''
-    //         }
-    //     },
-    //     {
-    //         code: "INT1313",
-    //         name: "co so du lieu",
-    //         crt: 3,
-    //         id: 6,
-    //         pg: {
-    //             id: 2,
-    //         }
-    //     },
-    //     {
-    //         code: "INT1319",
-    //         name: "he dieu hanh",
-    //         crt: 3,
-    //         id: 9,
-    //         pg: {
-    //             id: 1
-    //         }
-    //     },
-    //     {
-    //         code: "INT1330",
-    //         name: "ki thuat vi xu li",
-    //         crt: 3,
-    //         id: 5,
-    //         pg: {
-    //             id: ''
-    //         }
-    //     },
-    // ]
 
-    // const mapToCart = cart.map((item, index)=>{
-    //     return(
-    //         <tr key={index}>
-    //             <td>{index+1}</td>
-    //             <td>{item.code}</td>
-    //             <td>{item.name}</td>
-    //             <td>{item.id}</td>
-    //             <td>{item.pg.id}</td>
-    //             <td>{item.crt}</td>
-    //             <td>{480000 * item.crt}</td>
-    //             <td>Saved to database</td>
-    //             <td>
-    //                 <button className="btn btn-outline-dark">Delete</button>
-    //             </td>
-    //         </tr>
-    //     )
-    // })
+    const onUpdateCart = (code, id)=>{
+        props.onUpdateCart(code, id);
+    }
 
+    const onDeleteAllFromCart = ()=>{
+        props.onDeleteAllFromCart();
+    }
+
+    const totalCredits = ()=>{
+        var total = 0;
+        props.cart.forEach(item=>{
+            total += parseInt(item.crt);
+        })
+        return total;
+    }
+
+    const totalFee = ()=>{
+        var total = 0;
+        props.cart.forEach(item=>{
+            total += parseInt(item.crt) * 480000;
+        })
+        return total;
+    }
+
+    const mapToCart = props.cart.map((item, index)=>{
+        return(
+            <tr key={index}>
+                <td>{index+1}</td>
+                <td>{item.code}</td>
+                <td>{item.name}</td>
+                <td>{item.id}</td>
+                <td>null</td>
+                <td>{item.crt}</td>
+                <td>{480000 * item.crt}</td>
+                <td>{constants.ADD_TO_CART_SUCCESSFUL}</td>
+                <td>
+                    <button
+                    className="btn btn-outline-dark"
+                    onClick={() => onUpdateCart(item.code, item.id)}>
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        )
+    })
+
+    const onSaveSubjects = (e)=>{
+        
+    }
+    
     return(
         <div className="table-responsive mt-5">
             <table className="table table-striped regis-submit-table table-bordered">
@@ -75,20 +69,22 @@ function RegisCartTable(props){
                         <th>Crt</th>
                         <th>Fee</th>
                         <th>Status</th>
-                        <th>Check</th>
+                        <th>Act</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {/* {mapToCart} */}
-                    <tr>
+                    {mapToCart}
+                    <tr className="table-active" style={{fontWeight: 800}}>
                         <td colSpan={5} className="text-center">Total</td>
-                        <td>12</td>
-                        <td>1 billion</td>
+                        <td>{totalCredits()}</td>
+                        <td>{totalFee()}</td>
                         <td>
-                            <button className="btn btn-info">
+                            <button className="btn btn-info" onClick={onSaveSubjects}>
                                 <i className="fa fa-check" aria-hidden="true"></i> Save
                             </button>
-                            <button className="btn btn-dark float-right">
+                            <button
+                            className="btn btn-dark float-right"
+                            onClick={onDeleteAllFromCart}>
                                 Delete All
                             </button>
                         </td>
@@ -100,14 +96,4 @@ function RegisCartTable(props){
     )
 }
 
-const mapState = state=>{
-    return{
-        cart: state.cart
-    }
-}
-
-const mapDispatch = dispatch =>{
-    return{}
-}
-
-export default connect(mapState, mapDispatch)(RegisCartTable);
+export default RegisCartTable;

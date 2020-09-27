@@ -2,7 +2,7 @@
     "subjects": [
         {
             "code": "BAS1146",
-            "name": "tieng anh b12",
+            "name": "English B12",
             "crt": 4,
             "qtt": 36,
             "list": [
@@ -163,7 +163,7 @@
         },
         {
             "code": "INT1313",
-            "name": "co so du lieu",
+            "name": "Co so du lieu",
             "crt": 3,
             "qtt": 41,
             "list": [

@@ -1,7 +1,5 @@
 package com.dangki.data.dto;
 
-import com.dangki.data.entites.User;
-
 import java.util.List;
 
 public class RoleDto extends BaseDto {

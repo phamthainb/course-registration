@@ -3,7 +3,7 @@ package com.dangki.service;
 import com.dangki.common.utils.Converter;
 import com.dangki.data.MyUserDetails;
 import com.dangki.data.dto.UserDto;
-import com.dangki.data.entites.User;
+import com.dangki.data.entities.User;
 import com.dangki.data.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,7 +30,7 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Invalid username");
         List<GrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getCode()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
         });
         return new MyUserDetails(user.getUsername(), user.getPassword(),true,true,
                 true,true,authorities,converter.toDto(user));

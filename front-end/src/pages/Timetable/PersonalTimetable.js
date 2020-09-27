@@ -78,7 +78,7 @@ function PersonalTimetable() {
         var td = [];
         time.forEach(item => {
             td.push(
-                <p>{item.week}</p>
+                <p>{item.week.toString()}</p>
             )
         })
         return td;
