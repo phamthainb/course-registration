@@ -49,7 +49,7 @@ function RegisTable(props) {
                     tr = (
                         <tr
                         key={Date.now().toString() + i}
-                        className = {sub.list[`${i}`].slot ? "" : "table-danger"}>
+                        className={changeTrColor(sub.list[`${i}`])}>
                             <td>
                                 <button
                                 className="btn btn-outline-dark"
@@ -130,6 +130,16 @@ function RegisTable(props) {
                 <p>{item.week.toString()}</p>
             )
         })
+    }
+
+    const changeTrColor = (sub)=>{
+        if(sub.status === true){
+            return "table-success";
+        }
+        else if(sub.slot === 0){
+            return "table-danger";
+        }
+        return "";
     }
 
     return(

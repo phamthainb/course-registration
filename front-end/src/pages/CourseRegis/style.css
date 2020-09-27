@@ -1,3 +1,7 @@
+.course-regis{
+    min-height: 72vh;
+}
+
 .regis-control{
     display: flex;
     justify-content: center;
