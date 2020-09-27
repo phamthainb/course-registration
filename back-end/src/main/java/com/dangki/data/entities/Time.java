@@ -10,7 +10,7 @@ import java.io.Serializable;
  * A Time.
  */
 @Entity
-@Table(name = "time")
+@Table(name = "times")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Time extends BaseEntity implements Serializable {
 
@@ -25,9 +25,6 @@ public class Time extends BaseEntity implements Serializable {
 
     @Column(name = "lesson")
     private Integer lesson;
-
-    @Column(name = "day")
-    private String day;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -64,18 +61,6 @@ public class Time extends BaseEntity implements Serializable {
         this.lesson = lesson;
     }
 
-    public String getDay() {
-        return day;
-    }
-
-    public Time day(String day) {
-        this.day = day;
-        return this;
-    }
-
-    public void setDay(String day) {
-        this.day = day;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -101,7 +86,6 @@ public class Time extends BaseEntity implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", lesson=" + getLesson() +
-            ", day='" + getDay() + "'" +
             "}";
     }
 }

@@ -1,49 +1,57 @@
 package com.dangki.service.impl;
 
-import com.dangki.common.utils.Converter;
-import com.dangki.data.dto.ClassDto;
-import com.dangki.data.dto.ProfessorDto;
-import com.dangki.data.dto.SubjectDto;
-import com.dangki.data.entites.Professor;
-import com.dangki.data.entites.Subject;
+
+import com.dangki.data.entities.Professor;
 import com.dangki.data.repository.ProfessorRepository;
-import com.dangki.service.ClassService;
 import com.dangki.service.ProfessorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.Optional;
 
+/**
+ * Service Implementation for managing {@link Professor}.
+ */
 @Service
 @Transactional
 public class ProfessorServiceImpl implements ProfessorService {
 
-    @Autowired
-    private ProfessorRepository professorRepository;
-    private final Converter<ProfessorDto, Professor> converter = new Converter<>(ProfessorDto.class, Professor.class);
+    private final Logger log = LoggerFactory.getLogger(ProfessorServiceImpl.class);
 
-    @Override
-    public ProfessorDto add(ProfessorDto professorDto) {
-        Professor professor = converter.toEntity(professorDto);
-        return converter.toDto(professorRepository.save(professor));
+    private final ProfessorRepository professorRepository;
+
+    public ProfessorServiceImpl(ProfessorRepository professorRepository) {
+        this.professorRepository = professorRepository;
     }
 
     @Override
-    public ProfessorDto update(ProfessorDto professorDto) {
-        Professor professor = converter.toEntity(professorDto);
-        return converter.toDto(professorRepository.save(professor));
+    public Professor save(Professor professor) {
+        log.debug("Request to save Professor : {}", professor);
+        return professorRepository.save(professor);
     }
 
     @Override
-    public void delete(List<ProfessorDto> professorDtos) {
-        List<Professor> professors = converter.toEntity(professorDtos);
-        professorRepository.deleteAll(professors);
+    @Transactional(readOnly = true)
+    public Page<Professor> findAll(Pageable pageable) {
+        log.debug("Request to get all Professors");
+        return professorRepository.findAll(pageable);
+    }
+
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Professor> findOne(Long id) {
+        log.debug("Request to get Professor : {}", id);
+        return professorRepository.findById(id);
     }
 
     @Override
-    public List<ProfessorDto> findAll() {
-        List<Professor> professors = professorRepository.findAll();
-        return converter.toDto(professors);
+    public void delete(Long id) {
+        log.debug("Request to delete Professor : {}", id);
+        professorRepository.deleteById(id);
     }
 }

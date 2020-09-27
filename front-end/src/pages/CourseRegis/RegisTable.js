@@ -1,39 +1,37 @@
-import React, { useState } from 'react'
-import { connect } from 'react-redux';
-import * as actions from '../../pages/categories/actions';
-import RegisControl from './RegisControl';
+import React from 'react';
 
 function RegisTable(props) {
-
-    const [chosenSubject, setChosenSubject] = useState({});
     
-    const onShowSubjectList = (option)=>{
-        setChosenSubject(option[0]);
-    }
+    const {chosenSubject} = props;
 
-    const onAddToCart = (e)=>{
+    const onUpdateCart = (e)=>{
         var code = e.target.getAttribute('data-code');
         var id = e.target.getAttribute('data-id');
-        props.onUpdateCart(code, id);
+        var name = e.target.getAttribute('data-name');
+        var crt = e.target.getAttribute('data-crt');
+        props.onUpdateCart(code, id, name, crt);
     }
 
     const mapListToTable = ()=>{
         let table = [];
-        if(chosenSubject !== {}){
-            if(chosenSubject.list !== undefined){
+        if(chosenSubject){
+            if(chosenSubject.list){
                 let sub = chosenSubject;
                 let list = sub.list;
                 let tr;
                 for(let i=0; i<list.length; i++){
                     tr = (
-                        <tr key={i}>
+                        <tr key={Date.now().toString() + i}>
                             <td>
-                                <input
-                                type="checkbox"
-                                onChange={onAddToCart}
+                                <button
+                                className="btn btn-outline-dark"
+                                onClick={onUpdateCart}
                                 data-code={sub.code}
                                 data-id={sub.list[`${i}`].id}
-                                />
+                                data-name={sub.name}
+                                data-crt={sub.crt}>
+                                    Add
+                                </button>
                             </td>
                             <td>{sub.code}</td>
                             <td>{sub.name}</td>
@@ -57,48 +55,48 @@ function RegisTable(props) {
         return table;
     }
 
-    const mapStartDay = (time)=>{
-        return time.map(item => {
+    const mapStartDay = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.day}</p>
             )
         })
     }
 
-    const mapLessionQuantity = (time)=>{
-        return time.map(item => {
+    const mapLessionQuantity = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.less}</p>
             )
         })
     }
 
-    const mapStartLession = (time)=>{
-        return time.map(item => {
+    const mapStartLession = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.start}</p>
             )
         })
     }
 
-    const mapRoom = (time)=>{
-        return time.map(item => {
+    const mapRoom = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.room}</p>
             )
         })
     }
 
-    const mapProfessor = (time)=>{
-        return time.map(item => {
+    const mapProfessor = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.professor}</p>
             )
         })
     }
 
-    const mapWeek = (time)=>{
-        return time.map(item => {
+    const mapWeek = (sub)=>{
+        return sub.map(item => {
             return(
                 <p>{item.week.toString()}</p>
             )
@@ -107,49 +105,36 @@ function RegisTable(props) {
 
     return(
         <div>
-            <RegisControl
-            onShowSubjectList={onShowSubjectList}
-            >
-            </RegisControl>
-            <div className="table-responsive">
-                <table className="table table-striped regis-table table-bordered">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th>Check</th>
-                            <th>Code</th>
-                            <th>Name</th>
-                            <th>ID</th>
-                            <th>PG</th>
-                            <th>Crt</th>
-                            <th>Qtt</th>
-                            <th>Slot</th>
-                            <th>Day</th>
-                            <th>Start</th>
-                            <th>Les</th>
-                            <th>Room</th>
-                            <th>Professor</th>
-                            <th>Week</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {mapListToTable()}
-                    </tbody>
-                </table>
-            </div>
+            {
+                chosenSubject && 
+                <div className="table-responsive">
+                    <table className="table table-striped regis-table table-bordered">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th>Act</th>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>ID</th>
+                                <th>PG</th>
+                                <th>Crt</th>
+                                <th>Qtt</th>
+                                <th>Slot</th>
+                                <th>Day</th>
+                                <th>Start</th>
+                                <th>Les</th>
+                                <th>Room</th>
+                                <th>Professor</th>
+                                <th>Week</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {mapListToTable()}
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
     )
 }
 
-const mapState = state=>{
-    return{}
-}
-
-const mapDispatch = dispatch=>{
-    return{
-        onUpdateCart: (code, id) => {
-            dispatch(actions.updateCart(code, id));
-        }
-    }
-}
-
-export default connect(mapState, mapDispatch)(RegisTable);
+export default RegisTable;

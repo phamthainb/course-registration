@@ -1,4 +1,5 @@
 import * as constants from '../pages/categories/constants';
+import * as toast from '../common/toast';
 
 var initState = [];
 
@@ -9,6 +10,7 @@ var subjectReducer = (state = initState, action)=>{
             return action.data.data;
         
         case constants.FETCH_SUJBECTS_FAILED:
+            toast.errNotify(action.err.message);
             return [...state];
 
         default:
