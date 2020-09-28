@@ -6,10 +6,6 @@ import './style.css';
 import { connect } from "react-redux";
 import * as actions from '../categories/actions';
 import RegisControl from './RegisControl';
-<<<<<<< HEAD
-import * as toast from '../../common/toast';
-=======
->>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
 
 function CourseRegis(props) {
 
@@ -37,37 +33,21 @@ function CourseRegis(props) {
                     check = true;
                     if(item.id === id){
                         tempCart.splice(index, 1);
-<<<<<<< HEAD
-                        toast.errNotify('Subject deleted');
-                    }
-                    else{
-                        tempCart[index] = {...tempCart[index], id};
-                        toast.warningNotify('Subject updated');
-=======
                     }
                     else{
                         tempCart[index] = {...tempCart[index], id}
->>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
                     }
                 }
             })
         }
         if(check === false){
             tempCart.push({code, id, name, crt});
-<<<<<<< HEAD
-            toast.successNotify('Subject added');
-=======
->>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
         }
         setCart([...tempCart]);
     }
 
     const onDeleteAllFromCart = ()=>{
         setCart([]);
-<<<<<<< HEAD
-        toast.errNotify('All deleted');
-=======
->>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
     }
 
     return(
@@ -83,12 +63,7 @@ function CourseRegis(props) {
                 <div>
                     <RegisTable
                     onUpdateCart={onUpdateCart}
-<<<<<<< HEAD
-                    chosenSubject={chosenSubject}
-                    cart={cart}>
-=======
                     chosenSubject={chosenSubject}>
->>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
                     </RegisTable>
 
                     {
