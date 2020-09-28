@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,4 +27,9 @@ public interface DetailsRepository extends JpaRepository<Details, Long> {
 
     @Query("select details from Details details left join fetch details.weeks where details.id =:id")
     Optional<Details> findOneWithEagerRelationships(@Param("id") Long id);
+
+    @Query("select d from Details d where" +
+            " d.time.name=:name and d.time.lesson=:lesson and d.professor.name=:professorName")
+    Details find(@Param("name") String name , @Param("lesson") Integer lesson ,
+                 @Param("professorName") String professorName);
 }
