@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,9 +30,19 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public Room save(Room room) {
+    public Room update(Room room) {
         log.debug("Request to save Room : {}", room);
         return roomRepository.save(room);
+    }
+
+    @Override
+    public List<Room> add(List<Room> rooms) {
+        List<Room> result = new ArrayList<>();
+        for (Room room : rooms) {
+            if (roomRepository.findByName(room.getName()) == null)
+                result.add(roomRepository.save(room));
+        }
+        return result;
     }
 
     @Override

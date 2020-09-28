@@ -25,8 +25,6 @@ public class Professor extends BaseEntity implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "major")
-    private String major;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -50,18 +48,6 @@ public class Professor extends BaseEntity implements Serializable {
         this.name = name;
     }
 
-    public String getMajor() {
-        return major;
-    }
-
-    public Professor major(String major) {
-        this.major = major;
-        return this;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
@@ -85,8 +71,6 @@ public class Professor extends BaseEntity implements Serializable {
     public String toString() {
         return "Professor{" +
             "id=" + getId() +
-            ", name='" + getName() + "'" +
-            ", major='" + getMajor() + "'" +
-            "}";
+            ", name='" + getName() + "}";
     }
 }

@@ -1,9 +1,11 @@
 package com.dangki.service;
 
+import com.dangki.data.dto.ClassRoomDto;
 import com.dangki.data.entities.ClassRoom;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,13 +14,20 @@ import java.util.Optional;
 public interface ClassRoomService {
 
     /**
-     * Save a classRoom.
+     * add a classRoom.
+     *
+     * @param classRooms the entity to save.
+     * @return the persisted entity.
+     */
+    List<ClassRoomDto> add(List<ClassRoomDto> classRooms);
+
+    /**
+     * update a classRoom.
      *
      * @param classRoom the entity to save.
      * @return the persisted entity.
      */
-    ClassRoom save(ClassRoom classRoom);
-
+    ClassRoom update(ClassRoom classRoom);
     /**
      * Get all the classRooms.
      *

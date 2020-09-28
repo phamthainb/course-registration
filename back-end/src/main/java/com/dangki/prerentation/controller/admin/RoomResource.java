@@ -36,16 +36,15 @@ public class RoomResource {
     /**
      * {@code POST  /rooms} : Create a new room.
      *
-     * @param room the room to create.
+     * @param rooms the room to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new room, or with status {@code 400 (Bad Request)} if the room has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/rooms")
-    public ResponseEntity<Room> createRoom(@Valid @RequestBody Room room) throws URISyntaxException {
-        log.debug("REST request to save Room : {}", room);
-        Room result = roomService.save(room);
-        return ResponseEntity.created(new URI("/api/rooms/" + result.getId()))
-            .body(result);
+    public ResponseEntity<List<Room>> createRoom(@Valid @RequestBody List<Room> rooms) throws URISyntaxException {
+        log.debug("REST request to save Room : {}", rooms);
+        List<Room> result = roomService.add(rooms);
+        return ResponseEntity.ok().body(result);
     }
 
     /**
@@ -60,7 +59,7 @@ public class RoomResource {
     @PutMapping("/rooms")
     public ResponseEntity<Room> updateRoom(@Valid @RequestBody Room room) throws URISyntaxException {
         log.debug("REST request to update Room : {}", room);
-        Room result = roomService.save(room);
+        Room result = roomService.update(room);
         return ResponseEntity.ok()
             .body(result);
     }

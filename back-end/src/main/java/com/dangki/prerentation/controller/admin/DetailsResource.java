@@ -1,5 +1,6 @@
 package com.dangki.prerentation.controller.admin;
 
+import com.dangki.data.dto.DetailsDto;
 import com.dangki.data.entities.Details;
 import com.dangki.service.DetailsService;
 import org.slf4j.Logger;
@@ -39,11 +40,11 @@ public class DetailsResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/details")
-    public ResponseEntity<Details> createDetails(@Valid @RequestBody Details details) throws URISyntaxException {
+    public ResponseEntity<List<DetailsDto>> createDetails(@Valid @RequestBody List<DetailsDto> details) throws URISyntaxException {
         log.debug("REST request to save Details : {}", details);
 
-        Details result = detailsService.save(details);
-        return ResponseEntity.created(new URI("/api/details/" + result.getId()))
+        List<DetailsDto> result = detailsService.add(details);
+        return ResponseEntity.ok()
                 .body(result);
     }
 
@@ -59,7 +60,7 @@ public class DetailsResource {
     @PutMapping("/details")
     public ResponseEntity<Details> updateDetails(@Valid @RequestBody Details details) throws URISyntaxException {
         log.debug("REST request to update Details : {}", details);
-        Details result = detailsService.save(details);
+        Details result = detailsService.update(details);
         return ResponseEntity.ok()
                 .body(result);
     }

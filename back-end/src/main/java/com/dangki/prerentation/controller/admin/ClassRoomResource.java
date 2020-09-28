@@ -1,6 +1,7 @@
 package com.dangki.prerentation.controller.admin;
 
 
+import com.dangki.data.dto.ClassRoomDto;
 import com.dangki.data.entities.ClassRoom;
 import com.dangki.service.ClassRoomService;
 import org.slf4j.Logger;
@@ -42,10 +43,10 @@ public class ClassRoomResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/class-rooms")
-    public ResponseEntity<ClassRoom> createClassRoom(@Valid @RequestBody ClassRoom classRoom) throws URISyntaxException {
+    public ResponseEntity<List<ClassRoomDto>> createClassRoom(@Valid @RequestBody List<ClassRoomDto> classRoom) throws URISyntaxException {
         log.debug("REST request to save ClassRoom : {}", classRoom);
-        ClassRoom result = classRoomService.save(classRoom);
-        return ResponseEntity.created(new URI("/api/class-rooms/" + result.getId()))
+        List<ClassRoomDto> result = classRoomService.add(classRoom);
+        return ResponseEntity.ok()
             .body(result);
     }
 
@@ -61,7 +62,7 @@ public class ClassRoomResource {
     @PutMapping("/class-rooms")
     public ResponseEntity<ClassRoom> updateClassRoom(@Valid @RequestBody ClassRoom classRoom) throws URISyntaxException {
         log.debug("REST request to update ClassRoom : {}", classRoom);
-        ClassRoom result = classRoomService.save(classRoom);
+        ClassRoom result = classRoomService.update(classRoom);
         return ResponseEntity.ok()
             .body(result);
     }

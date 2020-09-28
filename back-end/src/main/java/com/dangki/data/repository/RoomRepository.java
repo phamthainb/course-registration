@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long> {
+    Room findByName(String name);
 }

@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -28,9 +30,19 @@ public class ProfessorServiceImpl implements ProfessorService {
         this.professorRepository = professorRepository;
     }
 
+
     @Override
-    public Professor save(Professor professor) {
-        log.debug("Request to save Professor : {}", professor);
+    public List<Professor> add(List<Professor> professors) {
+        List<Professor> result = new ArrayList<>();
+        for (Professor professor : professors) {
+            result.add(professor);
+            professorRepository.save(professor);
+        }
+        return result;
+    }
+
+    @Override
+    public Professor update(Professor professor) {
         return professorRepository.save(professor);
     }
 
