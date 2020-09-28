@@ -24,20 +24,17 @@ public class Details extends BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
-    private String name;
-
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties(value = "details", allowSetters = true)
     private Time time;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL , optional = false)
     @NotNull
     @JsonIgnoreProperties(value = "details", allowSetters = true)
     private Professor professor;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(cascade = CascadeType.ALL , optional = false)
     @NotNull
     @JsonIgnoreProperties(value = "details", allowSetters = true)
     private Room room;
@@ -57,19 +54,6 @@ public class Details extends BaseEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Details name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Time getTime() {
@@ -151,12 +135,4 @@ public class Details extends BaseEntity implements Serializable {
         return 31;
     }
 
-    // prettier-ignore
-    @Override
-    public String toString() {
-        return "Details{" +
-            "id=" + getId() +
-            ", name='" + getName() + "'" +
-            "}";
-    }
 }

@@ -34,16 +34,15 @@ public class ProfessorResource {
     /**
      * {@code POST  /professors} : Create a new professor.
      *
-     * @param professor the professor to create.
+     * @param professors the professor to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new professor, or with status {@code 400 (Bad Request)} if the professor has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/professors")
-    public ResponseEntity<Professor> createProfessor(@Valid @RequestBody Professor professor) throws URISyntaxException {
-        log.debug("REST request to save Professor : {}", professor);
-        Professor result = professorService.save(professor);
-        return ResponseEntity.created(new URI("/api/professors/" + result.getId()))
-            .body(result);
+    public ResponseEntity<List<Professor>> createProfessor(@Valid @RequestBody List<Professor> professors) throws URISyntaxException {
+        log.debug("REST request to save Professor : {}", professors);
+        List<Professor> result = professorService.add(professors);
+        return ResponseEntity.ok(result);
     }
 
     /**
@@ -58,7 +57,7 @@ public class ProfessorResource {
     @PutMapping("/professors")
     public ResponseEntity<Professor> updateProfessor(@Valid @RequestBody Professor professor) throws URISyntaxException {
         log.debug("REST request to update Professor : {}", professor);
-        Professor result = professorService.save(professor);
+        Professor result = professorService.update(professor);
         return ResponseEntity.ok()
             .body(result);
     }

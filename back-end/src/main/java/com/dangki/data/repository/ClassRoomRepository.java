@@ -26,4 +26,5 @@ public interface ClassRoomRepository extends JpaRepository<ClassRoom, Long> {
 
     @Query("select classRoom from ClassRoom classRoom left join fetch classRoom.details left join fetch classRoom.users where classRoom.id =:id")
     Optional<ClassRoom> findOneWithEagerRelationships(@Param("id") Long id);
+
 }

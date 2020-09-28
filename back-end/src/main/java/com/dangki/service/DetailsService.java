@@ -1,9 +1,11 @@
 package com.dangki.service;
 
+import com.dangki.data.dto.DetailsDto;
 import com.dangki.data.entities.Details;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -12,13 +14,29 @@ import java.util.Optional;
 public interface DetailsService {
 
     /**
+     * add a detail.
+     *
+     * @param detail the list to save.
+     * @return the persisted entity.
+     */
+    DetailsDto add(DetailsDto detail);
+
+    /**
+     * add details.
+     *
+     * @param details the list to save.
+     * @return the persisted entity.
+     */
+    List<DetailsDto> add(List<DetailsDto> details);
+
+
+    /**
      * Save a details.
      *
      * @param details the entity to save.
      * @return the persisted entity.
      */
-    Details save(Details details);
-
+    Details update(Details details);
     /**
      * Get all the details.
      *
