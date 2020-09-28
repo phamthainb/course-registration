@@ -2,7 +2,7 @@ package com.dangki.service.impl;
 
 import com.dangki.common.utils.Converter;
 import com.dangki.data.dto.UserDto;
-import com.dangki.data.entites.User;
+import com.dangki.data.entities.User;
 import com.dangki.data.repository.RoleRepository;
 import com.dangki.data.repository.UserRepository;
 import com.dangki.service.UserService;
@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDto add(UserDto userDto) {
         User user = converter.toEntity(userDto);
-        user.setRoles(roleRepository.findByCode("USER"));
+        user.setRoles(roleRepository.findByName("USER"));
         return converter.toDto(userRepository.save(user));
     }
 

@@ -1,13 +1,45 @@
 package com.dangki.service;
 
-import com.dangki.data.dto.SubjectDto;
-import com.dangki.data.dto.UserDto;
+import com.dangki.data.entities.Subject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
+import java.util.Optional;
 
+/**
+ * Service Interface for managing {@link Subject}.
+ */
 public interface SubjectService {
-    SubjectDto add(SubjectDto subjectDto);
-    SubjectDto update(SubjectDto subjectDto);
-    void delete(List<SubjectDto> subjects);
-    List<SubjectDto> findAll();
+
+    /**
+     * Save a subject.
+     *
+     * @param subject the entity to save.
+     * @return the persisted entity.
+     */
+    Subject save(Subject subject);
+
+    /**
+     * Get all the subjects.
+     *
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    Page<Subject> findAll(Pageable pageable);
+
+
+    /**
+     * Get the "id" subject.
+     *
+     * @param id the id of the entity.
+     * @return the entity.
+     */
+    Optional<Subject> findOne(Long id);
+
+    /**
+     * Delete the "id" subject.
+     *
+     * @param id the id of the entity.
+     */
+    void delete(Long id);
 }

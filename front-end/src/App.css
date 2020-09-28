@@ -38,4 +38,10 @@ a:hover{
     a{
         font-size: 14px!important;
     }
+<<<<<<< HEAD
+=======
+    table, h6, button{
+        font-size: 12px!important;
+    }
+>>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
 }

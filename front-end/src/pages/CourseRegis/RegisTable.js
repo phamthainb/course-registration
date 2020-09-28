@@ -2,6 +2,7 @@ import React from 'react';
 
 function RegisTable(props) {
     
+<<<<<<< HEAD
     const {chosenSubject, cart} = props;
 
     const checkChosenSubject = ()=>{
@@ -30,6 +31,10 @@ function RegisTable(props) {
 
     checkChosenSubject();
 
+=======
+    const {chosenSubject} = props;
+
+>>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
     const onUpdateCart = (e)=>{
         var code = e.target.getAttribute('data-code');
         var id = e.target.getAttribute('data-id');
@@ -47,9 +52,13 @@ function RegisTable(props) {
                 let tr;
                 for(let i=0; i<list.length; i++){
                     tr = (
+<<<<<<< HEAD
                         <tr
                         key={Date.now().toString() + i}
                         className = {sub.list[`${i}`].slot ? "" : "table-danger"}>
+=======
+                        <tr key={Date.now().toString() + i}>
+>>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
                             <td>
                                 <button
                                 className="btn btn-outline-dark"
@@ -57,9 +66,14 @@ function RegisTable(props) {
                                 data-code={sub.code}
                                 data-id={sub.list[`${i}`].id}
                                 data-name={sub.name}
+<<<<<<< HEAD
                                 data-crt={sub.crt}
                                 disabled={sub.list[`${i}`].slot ? false : true}>
                                     {sub.list[`${i}`].status === true ? "Delete" : "Add"}
+=======
+                                data-crt={sub.crt}>
+                                    Add
+>>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
                                 </button>
                             </td>
                             <td>{sub.code}</td>
@@ -137,7 +151,11 @@ function RegisTable(props) {
             {
                 chosenSubject && 
                 <div className="table-responsive">
+<<<<<<< HEAD
                     <table className="table regis-table table-bordered">
+=======
+                    <table className="table table-striped regis-table table-bordered">
+>>>>>>> 6b397b5f0af17b9bcef9c181e8b0daf34cd5c828
                         <thead className="thead-dark">
                             <tr>
                                 <th>Act</th>
