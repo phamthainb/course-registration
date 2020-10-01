@@ -6,7 +6,6 @@ import './style.css';
 import { connect } from "react-redux";
 import * as actions from '../categories/actions';
 import RegisControl from './RegisControl';
-import * as toast from '../../common/toast';
 
 function CourseRegis(props) {
 
@@ -34,25 +33,21 @@ function CourseRegis(props) {
                     check = true;
                     if(item.id === id){
                         tempCart.splice(index, 1);
-                        toast.errNotify('Subject deleted');
                     }
                     else{
-                        tempCart[index] = {...tempCart[index], id};
-                        toast.warningNotify('Subject updated');
+                        tempCart[index] = {...tempCart[index], id}
                     }
                 }
             })
         }
         if(check === false){
             tempCart.push({code, id, name, crt});
-            toast.successNotify('Subject added');
         }
         setCart([...tempCart]);
     }
 
     const onDeleteAllFromCart = ()=>{
         setCart([]);
-        toast.errNotify('All deleted');
     }
 
     return(
@@ -68,8 +63,7 @@ function CourseRegis(props) {
                 <div>
                     <RegisTable
                     onUpdateCart={onUpdateCart}
-                    chosenSubject={chosenSubject}
-                    cart={cart}>
+                    chosenSubject={chosenSubject}>
                     </RegisTable>
 
                     {

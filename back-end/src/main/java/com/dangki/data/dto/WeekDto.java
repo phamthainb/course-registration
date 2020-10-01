@@ -11,4 +11,3 @@ public class WeekDto extends BaseDto {
         this.name = name;
     }
 }
-

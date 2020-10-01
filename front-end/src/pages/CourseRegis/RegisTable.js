@@ -2,33 +2,7 @@ import React from 'react';
 
 function RegisTable(props) {
     
-    const {chosenSubject, cart} = props;
-
-    const checkChosenSubject = ()=>{
-        if(chosenSubject){
-            chosenSubject.list.forEach((sub, index) => {
-                var check = false;
-                if(cart.length){
-                    cart.forEach(item => {
-                        if(item.code === chosenSubject.code){
-                            check = true;
-                            if(parseInt(item.id) === parseInt(sub.id)){
-                                chosenSubject.list[index].status = true;
-                            }
-                            else{
-                                chosenSubject.list[index].status = false;
-                            }
-                        }
-                    })
-                }
-                if(check === false){
-                    chosenSubject.list[index].status = false;
-                }
-            })
-        }
-    }
-
-    checkChosenSubject();
+    const {chosenSubject} = props;
 
     const onUpdateCart = (e)=>{
         var code = e.target.getAttribute('data-code');
@@ -57,9 +31,8 @@ function RegisTable(props) {
                                 data-code={sub.code}
                                 data-id={sub.list[`${i}`].id}
                                 data-name={sub.name}
-                                data-crt={sub.crt}
-                                disabled={sub.list[`${i}`].slot ? false : true}>
-                                    {sub.list[`${i}`].status === true ? "Delete" : "Add"}
+                                data-crt={sub.crt}>
+                                    Add
                                 </button>
                             </td>
                             <td>{sub.code}</td>
@@ -147,7 +120,7 @@ function RegisTable(props) {
             {
                 chosenSubject && 
                 <div className="table-responsive">
-                    <table className="table regis-table table-bordered">
+                    <table className="table table-striped regis-table table-bordered">
                         <thead className="thead-dark">
                             <tr>
                                 <th>Act</th>

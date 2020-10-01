@@ -1,7 +1,14 @@
 package com.dangki.data.repository;
 
-import com.dangki.data.entites.Time;
+import com.dangki.data.entities.Time;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface TimeRepository extends JpaRepository<Time,Integer> {
+/**
+ * Spring Data  repository for the Time entity.
+ */
+@SuppressWarnings("unused")
+@Repository
+public interface TimeRepository extends JpaRepository<Time, Long> {
+    Time findByNameAndAndLesson(String name, Integer lesson);
 }

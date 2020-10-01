@@ -3,4 +3,3 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export const successNotify = (message)=> toast.info(message);
 export const errNotify = (message)=> toast.dark(message);
-export const warningNotify = (message)=> toast.warning(message);

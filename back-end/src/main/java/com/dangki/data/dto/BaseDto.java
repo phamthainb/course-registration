@@ -3,17 +3,17 @@ package com.dangki.data.dto;
 import java.util.Date;
 
 public class BaseDto {
-    protected Integer id;
+    protected Long id;
     protected String creator;
     protected Date createdTime;
     protected String modifier;
     protected Date modifiedTime;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
