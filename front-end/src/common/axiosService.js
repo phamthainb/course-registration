@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { API_ENDPOINT } from '../pages/categories/constants';
+import axios from "axios";
+import { API_ENDPOINT } from "../pages/categories/constants";
 
 // class AxiosService{
 //     constructor(){
@@ -28,46 +28,46 @@ import { API_ENDPOINT } from '../pages/categories/constants';
 const withInterceptors = axios.create();
 
 withInterceptors.interceptors.request.use(
-    function(config){
-        //do sth before request is sent
-        return config;
-    },
-    function(err){
-        // do sth with request err
-        return Promise.reject(err);
-    }
+  function (config) {
+    //do sth before request is sent
+    return config;
+  },
+  function (err) {
+    // do sth with request err
+    return Promise.reject(err);
+  }
 );
 
 // response interceptors
 
 withInterceptors.interceptors.response.use(
-    function(response){
-        //do sth before request is sent
-        return response;
-    },
-    function(err){
-        // do sth with request err
-        return Promise.reject(err);
-    }
+  function (response) {
+    //do sth before request is sent
+    return response;
+  },
+  function (err) {
+    // do sth with request err
+    return Promise.reject(err);
+  }
 );
 
-export const apiInterceptors = async(method, url, data)=>{
-    withInterceptors({
-        method: method | "GET",
-        url: `${API_ENDPOINT}/${url}`,
-        data
-    })
-}
+export const apiInterceptors = async (method, url, data) => {
+  withInterceptors({
+    method: method | "GET",
+    url: `${API_ENDPOINT}/${url}`,
+    data: data,
+  });
+};
 
 // ================================================
 // config axios without interceptors;
 
 const request = axios.create();
 
-export const api = (method, url, data)=>{
-    request({
-        method: method | "GET",
-        url: `${API_ENDPOINT}/${url}`,
-        data
-    })
-}
+export const api = (method, url, data) => {
+  return request({
+    method: method | "GET",
+    url: `${API_ENDPOINT}/${url}`,
+    data,
+  });
+};

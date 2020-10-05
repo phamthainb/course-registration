@@ -1,5 +1,5 @@
 // import { getApi } from "../../apis/index";
-import { apiInterceptors } from '../../common/axiosService';
+import { apiInterceptors, api } from "../../common/axiosService";
 import * as constants from "./constants";
 
 const getSubjectsSuccess = (data) => {
@@ -25,13 +25,13 @@ export const getSubjectRequest = () => {
     //   .catch((err) => {
     //     dispatch(getSubjectsFailed(err));
     //   });
-    apiInterceptors("GET", "subjects")
-    .then(res => {
-      dispatch(getSubjectsSuccess(res));
-    })
-    .catch(err => {
-      dispatch(getSubjectsFailed(err));
-    })
+    api("GET", "subjects", null)
+      .then((res) => {
+        dispatch(getSubjectsSuccess(res));
+      })
+      .catch((err) => {
+        dispatch(getSubjectsFailed(err));
+      });
   };
 };
 
