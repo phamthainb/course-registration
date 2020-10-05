@@ -1,4 +1,5 @@
-import { getApi } from "../../apis/index";
+// import { getApi } from "../../apis/index";
+import { apiInterceptors } from '../../common/axiosService';
 import * as constants from "./constants";
 
 const getSubjectsSuccess = (data) => {
@@ -17,22 +18,29 @@ const getSubjectsFailed = (err) => {
 
 export const getSubjectRequest = () => {
   return (dispatch) => {
-    getApi("subjects")
-      .then((res) => {
-        dispatch(getSubjectsSuccess(res));
-      })
-      .catch((err) => {
-        dispatch(getSubjectsFailed(err));
-      });
+    // getApi("subjects")
+    //   .then((res) => {
+    //     dispatch(getSubjectsSuccess(res));
+    //   })
+    //   .catch((err) => {
+    //     dispatch(getSubjectsFailed(err));
+    //   });
+    apiInterceptors("GET", "subjects")
+    .then(res => {
+      dispatch(getSubjectsSuccess(res));
+    })
+    .catch(err => {
+      dispatch(getSubjectsFailed(err));
+    })
   };
 };
 
 export const updateCart = (code, id) => {
-  return{
+  return {
     type: constants.UPDATE_CART,
     subject: {
       code,
-      id
-    }
-  }
-}
+      id,
+    },
+  };
+};

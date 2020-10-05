@@ -6,17 +6,12 @@ import {
 } from "react-router-dom";
 import React from "react";
 import "./App.css";
-import Menu from "./components/Menu";
-import Footer from "./components/Footer";
 import routes from "./routes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotFound from "components/NotFound";
 import Layout from "components/Layout";
-import Home from "pages/Home";
 import Login from "pages/Login";
-
-// {routes.}
 
 function App() {
     return (

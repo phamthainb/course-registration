@@ -7,7 +7,7 @@ body{
     letter-spacing: 1px;
     font-weight: 400;
     color: rgb(82, 82, 82);
-    min-height: 100wh;
+    min-height: 100vh;
 }
 input, button, select{
     border: none;
