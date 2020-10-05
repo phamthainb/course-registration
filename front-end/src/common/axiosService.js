@@ -1,29 +1,9 @@
 import axios from "axios";
 import { API_ENDPOINT } from "../pages/categories/constants";
 
-// class AxiosService{
-//     constructor(){
-//         const instance = axios.create();
-//         instance.interceptors.request.use(this.handleSuccess, this.handleError);
-//         this.instance = instance;
-//     }
-//     handleSuccess(response){
-//         return response;
-//     }
-//     handleError(err){
-//         return Promise.reject(err);
-//     }
-//     get(url){
-//         return this.instance.get(url);
-//     }
-// }
-
-// export default new AxiosService();
-
-// ================================================
 // config axios with interceptors;
 
-// request interceptors
+// * request interceptors
 
 const withInterceptors = axios.create();
 
@@ -38,7 +18,7 @@ withInterceptors.interceptors.request.use(
   }
 );
 
-// response interceptors
+// * response interceptors
 
 withInterceptors.interceptors.response.use(
   function (response) {

@@ -18,13 +18,6 @@ const getSubjectsFailed = (err) => {
 
 export const getSubjectRequest = () => {
   return (dispatch) => {
-    // getApi("subjects")
-    //   .then((res) => {
-    //     dispatch(getSubjectsSuccess(res));
-    //   })
-    //   .catch((err) => {
-    //     dispatch(getSubjectsFailed(err));
-    //   });
     api("GET", "subjects", null)
       .then((res) => {
         dispatch(getSubjectsSuccess(res));
