@@ -17,14 +17,6 @@ import java.util.Optional;
 @Repository
 public interface ClassRoomRepository extends JpaRepository<ClassRoom, Long> {
 
-    @Query(value = "select distinct classRoom from ClassRoom classRoom left join fetch classRoom.details left join fetch classRoom.users",
-        countQuery = "select count(distinct classRoom) from ClassRoom classRoom")
-    Page<ClassRoom> findAllWithEagerRelationships(Pageable pageable);
-
-    @Query("select distinct classRoom from ClassRoom classRoom left join fetch classRoom.details left join fetch classRoom.users")
-    List<ClassRoom> findAllWithEagerRelationships();
-
-    @Query("select classRoom from ClassRoom classRoom left join fetch classRoom.details left join fetch classRoom.users where classRoom.id =:id")
-    Optional<ClassRoom> findOneWithEagerRelationships(@Param("id") Long id);
-
+    @Query("select c from ClassRoom c where c.subject.id=:id")
+    List<ClassRoom> findAllBySubjectId(@Param("id") Long id);
 }

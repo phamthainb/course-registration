@@ -24,7 +24,7 @@ public class SubjectSemesterUser extends BaseEntity implements Serializable {
 
     @NotNull
     @Column(name = "active", nullable = false)
-    private Boolean active;
+    private Boolean active = false;
 
     @ManyToOne(optional = false)
     @NotNull

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -45,13 +46,6 @@ public class ClassRoom extends BaseEntity implements Serializable {
             joinColumns = @JoinColumn(name = "class_room_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "details_id", referencedColumnName = "id"))
     private Set<Details> details = new HashSet<>();
-
-    @ManyToMany
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JoinTable(name = "class_room_user",
-            joinColumns = @JoinColumn(name = "class_room_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private Set<User> users = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -150,28 +144,6 @@ public class ClassRoom extends BaseEntity implements Serializable {
         this.details = details;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public ClassRoom users(Set<User> users) {
-        this.users = users;
-        return this;
-    }
-
-    public ClassRoom addUser(User user) {
-        this.users.add(user);
-        return this;
-    }
-
-    public ClassRoom removeUser(User user) {
-        this.users.remove(user);
-        return this;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
