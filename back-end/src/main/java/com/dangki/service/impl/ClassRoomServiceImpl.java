@@ -3,6 +3,7 @@ package com.dangki.service.impl;
 import com.dangki.common.utils.Converter;
 import com.dangki.data.dto.ClassRoomDto;
 import com.dangki.data.dto.DetailsDto;
+import com.dangki.data.dto.UserDto;
 import com.dangki.data.entities.ClassRoom;
 import com.dangki.data.entities.Details;
 import com.dangki.data.entities.Subject;
@@ -83,24 +84,9 @@ public class ClassRoomServiceImpl implements ClassRoomService {
         return classRoomRepository.save(classRoom);
     }
 
-
     @Override
-    @Transactional(readOnly = true)
-    public Page<ClassRoom> findAll(Pageable pageable) {
-        log.debug("Request to get all ClassRooms");
-        return classRoomRepository.findAll(pageable);
-    }
-
-
-    public Page<ClassRoom> findAllWithEagerRelationships(Pageable pageable) {
-        return classRoomRepository.findAllWithEagerRelationships(pageable);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public Optional<ClassRoom> findOne(Long id) {
-        log.debug("Request to get ClassRoom : {}", id);
-        return classRoomRepository.findOneWithEagerRelationships(id);
+    public List<ClassRoomDto> findAllBySubjectId(Long id) {
+        return converter.toDto(classRoomRepository.findAllBySubjectId(id));
     }
 
     @Override

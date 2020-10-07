@@ -1,10 +1,12 @@
 package com.dangki.prerentation.controller.admin;
 
+import com.dangki.common.utils.SecurityUtil;
 import com.dangki.data.dto.ParamDto;
 import com.dangki.data.entities.SubjectSemesterUser;
 import com.dangki.service.SubjectSemesterUserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -39,10 +41,9 @@ public class SubjectSemesterUserResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/subject-semester-users")
-    public ResponseEntity<SubjectSemesterUser> createSubjectSemesterUser(@Valid @RequestBody ParamDto params) throws URISyntaxException {
-        SubjectSemesterUser result = subjectSemesterUserService.add(params);
-        return ResponseEntity.created(new URI("/api/subject-semester-users/" + result.getId()))
-            .body(result);
+    public ResponseEntity<List<SubjectSemesterUser>> createSubjectSemesterUser(@Valid @RequestBody List<ParamDto> params) throws URISyntaxException {
+        List<SubjectSemesterUser> result = subjectSemesterUserService.add(params);
+        return ResponseEntity.ok().body(result);
     }
 
     /**
@@ -63,28 +64,15 @@ public class SubjectSemesterUserResource {
     }
 
     /**
-     * {@code GET  /subject-semester-users} : get all the subjectSemesterUsers.
-     *
-     * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of subjectSemesterUsers in body.
-     */
-    @GetMapping("/subject-semester-users")
-    public ResponseEntity<List<SubjectSemesterUser>> getAllSubjectSemesterUsers(Pageable pageable) {
-        log.debug("REST request to get a page of SubjectSemesterUsers");
-        Page<SubjectSemesterUser> page = subjectSemesterUserService.findAll(pageable);
-        return ResponseEntity.ok().body(page.getContent());
-    }
-
-    /**
      * {@code GET  /subject-semester-users/:id} : get the "id" subjectSemesterUser.
      *
      *
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the subjectSemesterUser, or with status {@code 404 (Not Found)}.
      */
-    @GetMapping("/semester-users")
-    public ResponseEntity<SubjectSemesterUser> getSubjectSemesterUser(@RequestBody Long id) {
-        Optional<SubjectSemesterUser> subjectSemesterUser = subjectSemesterUserService.findOne(id);
-        return ResponseEntity.ok(subjectSemesterUser.get());
+    @GetMapping("/subject-semester-users")
+    public ResponseEntity<List<SubjectSemesterUser>> getSubjectSemesterUser() {
+        List<SubjectSemesterUser> subjectSemesterUsers = subjectSemesterUserService.findAll();
+        return ResponseEntity.ok(subjectSemesterUsers);
     }
 
     /**

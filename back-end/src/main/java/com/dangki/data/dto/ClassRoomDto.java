@@ -1,6 +1,7 @@
 package com.dangki.data.dto;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class ClassRoomDto extends BaseDto {
@@ -10,7 +11,7 @@ public class ClassRoomDto extends BaseDto {
     private Integer slot;
     private SubjectDto subject;
     private Set<DetailsDto> details = new HashSet<>();
-    private Set<UserDto> users = new HashSet<>();
+    private List<UserDto> users;
 
     public Integer getNhm() {
         return nhm;
@@ -60,11 +61,11 @@ public class ClassRoomDto extends BaseDto {
         this.details = details;
     }
 
-    public Set<UserDto> getUsers() {
+    public List<UserDto> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<UserDto> users) {
+    public void setUsers(List<UserDto> users) {
         this.users = users;
     }
 }

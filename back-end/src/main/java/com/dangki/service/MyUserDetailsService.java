@@ -17,10 +17,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Service("userDetailsService")
+@Transactional
 public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+
     private final Converter<UserDto,User> converter = new Converter<>(UserDto.class,User.class);
     @Override
     @Transactional
@@ -30,9 +32,9 @@ public class MyUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("Invalid username");
         List<GrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getName()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
         });
-        return new MyUserDetails(user.getUsername(), user.getPassword(),true,true,
-                true,true,authorities,converter.toDto(user));
+        return new MyUserDetails(user.getUsername(), user.getPassword(), true, true,
+                true, true, authorities, converter.toDto(user));
     }
 }
