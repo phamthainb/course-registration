@@ -6,7 +6,7 @@ import { API_ENDPOINT } from "../pages/categories/constants";
 // * request interceptors
 
 const withInterceptors = axios.create();
-
+// withInterceptors.Header().Set()
 withInterceptors.interceptors.request.use(
   function (config) {
     //do sth before request is sent
@@ -36,6 +36,7 @@ export const apiInterceptors = async (method, url, data) => {
     method: method | "GET",
     url: `${API_ENDPOINT}/${url}`,
     data: data,
+    headers: { "Access-Control-Allow-Origin": "*" },
   });
 };
 
