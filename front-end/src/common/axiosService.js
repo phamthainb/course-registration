@@ -36,7 +36,7 @@ export const apiInterceptors = async (method, url, data) => {
     method: method | "GET",
     url: `${API_ENDPOINT}/${url}`,
     data: data,
-    headers: { "Access-Control-Allow-Origin": "*" },
+    // headers: { "Access-Control-Allow-Origin": "*" },
   });
 };
 
