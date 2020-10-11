@@ -5,6 +5,7 @@ import com.dangki.data.entities.SubjectSemesterUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -18,7 +19,7 @@ public interface SubjectSemesterUserService {
      * @param params have user_id , semester_id and subject_id
      * @return the persisted entity.
      */
-    SubjectSemesterUser add(ParamDto params);
+    List<SubjectSemesterUser> add(List<ParamDto> params);
     /**
      * Save a subjectSemesterUser.
      *
@@ -29,10 +30,10 @@ public interface SubjectSemesterUserService {
     /**
      * Get all the subjectSemesterUsers.
      *
-     * @param pageable the pagination information.
+     * @param  the pagination information.
      * @return the list of entities.
      */
-    Page<SubjectSemesterUser> findAll(Pageable pageable);
+    List<SubjectSemesterUser> findAll();
 
 
     /**

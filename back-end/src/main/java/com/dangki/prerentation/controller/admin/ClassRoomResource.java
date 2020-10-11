@@ -2,6 +2,7 @@ package com.dangki.prerentation.controller.admin;
 
 
 import com.dangki.data.dto.ClassRoomDto;
+import com.dangki.data.dto.UserDto;
 import com.dangki.data.entities.ClassRoom;
 import com.dangki.service.ClassRoomService;
 import org.slf4j.Logger;
@@ -68,35 +69,16 @@ public class ClassRoomResource {
     }
 
     /**
-     * {@code GET  /class-rooms} : get all the classRooms.
+     * {@code GET  /class-rooms/subjectId} : get all the classRooms of subject
      *
-     * @param pageable the pagination information.
-     * @param eagerload flag to eager load entities from relationships (This is applicable for many-to-many).
+     * @param subjectId
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of classRooms in body.
      */
-    @GetMapping("/class-rooms")
-    public ResponseEntity<List<ClassRoom>> getAllClassRooms(Pageable pageable, @RequestParam(required = false, defaultValue = "false") boolean eagerload) {
+    @GetMapping("/class-rooms/{subjectId}")
+    public ResponseEntity<List<ClassRoomDto>> getAllClassRooms(@PathVariable Long subjectId) {
         log.debug("REST request to get a page of ClassRooms");
-        Page<ClassRoom> page;
-        if (eagerload) {
-            page = classRoomService.findAllWithEagerRelationships(pageable);
-        } else {
-            page = classRoomService.findAll(pageable);
-        }
-        return ResponseEntity.ok().body(page.getContent());
-    }
-
-    /**
-     * {@code GET  /class-rooms/:id} : get the "id" classRoom.
-     *
-     * @param id the id of the classRoom to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the classRoom, or with status {@code 404 (Not Found)}.
-     */
-    @GetMapping("/class-rooms/{id}")
-    public ResponseEntity<ClassRoom> getClassRoom(@PathVariable Long id) {
-        log.debug("REST request to get ClassRoom : {}", id);
-        Optional<ClassRoom> classRoom = classRoomService.findOne(id);
-        return ResponseEntity.ok(classRoom.get());
+        List<ClassRoomDto> classes = classRoomService.findAllBySubjectId(subjectId);
+        return ResponseEntity.ok().body(classes);
     }
 
     /**

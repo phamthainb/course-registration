@@ -1,7 +1,11 @@
 package com.dangki.data.entities;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.util.List;
+import org.hibernate.annotations.Cache;
+
 
 @Entity
 @Table(name = "users" , uniqueConstraints ={ @UniqueConstraint(columnNames = "username")
@@ -36,12 +40,15 @@ public class User extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "semester_id")
     private Semester semester;
+    @ManyToMany(cascade = CascadeType.PERSIST , fetch = FetchType.LAZY)
+    @JoinTable(name = "user_class_room",
+                joinColumns = @JoinColumn(name = "user_id"),
+                inverseJoinColumns = @JoinColumn(name = "class_room_id"))
+    private List<ClassRoom> classRooms;
     @ManyToMany(cascade = CascadeType.PERSIST , fetch = FetchType.EAGER)
     @JoinTable(name = "user_role" , joinColumns = @JoinColumn(name = "user_id")
                 , inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
-    @ManyToMany(mappedBy = "users")
-    private List<ClassRoom> classRooms;
 
     public Long getId() {
         return id;
@@ -59,14 +66,6 @@ public class User extends BaseEntity {
         this.semester = semester;
     }
 
-    public List<ClassRoom> getClassRooms() {
-        return classRooms;
-    }
-
-    public void setClassRooms(List<ClassRoom> classRooms) {
-        this.classRooms = classRooms;
-    }
-
     public Boolean getActive() {
         return active;
     }
@@ -75,11 +74,11 @@ public class User extends BaseEntity {
         this.active = active;
     }
 
-    public List<ClassRoom> getClasses() {
+    public List<ClassRoom> getClassRooms() {
         return classRooms;
     }
 
-    public void setClasses(List<ClassRoom> classRooms) {
+    public void setClassRooms(List<ClassRoom> classRooms) {
         this.classRooms = classRooms;
     }
 

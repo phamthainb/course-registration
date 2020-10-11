@@ -1,7 +1,9 @@
 package com.dangki.service.impl;
 
 import com.dangki.common.utils.Converter;
+import com.dangki.common.utils.SecurityUtil;
 import com.dangki.data.dto.UserDto;
+import com.dangki.data.entities.ClassRoom;
 import com.dangki.data.entities.User;
 import com.dangki.data.repository.RoleRepository;
 import com.dangki.data.repository.UserRepository;
@@ -19,6 +21,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private SecurityUtil securityUtil;
     private final Converter<UserDto, User> converter = new Converter<>(UserDto.class,User.class);
     @Override
     @Transactional
@@ -35,9 +39,17 @@ public class UserServiceImpl implements UserService {
         User result = converter.toEntity(userDto);
         result.setUsername(user.getUsername());
         result.setRoles(user.getRoles());
-        result.setClasses(user.getClasses());
+//        result.setClasses(user.getClasses());
         result.setProfessor(user.getProfessor());
         return converter.toDto(userRepository.save(result));
+    }
+
+    @Override
+    public UserDto updateClass(List<ClassRoom> classRooms) {
+        User user = converter.toEntity(securityUtil.getUserDetails().getUser());
+        user.setClassRooms(classRooms);
+        user = userRepository.save(user);
+        return converter.toDto(user);
     }
 
     @Override
@@ -48,8 +60,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void removeClasses(List<ClassRoom> classRooms) {
+        User user = converter.toEntity(securityUtil.getUserDetails().getUser());
+        boolean list = user.getClassRooms().removeAll(classRooms);
+        userRepository.save(user);
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<UserDto> findAll() {
         return converter.toDto(userRepository.findAll());
+    }
+
+    @Override
+    public List<UserDto> findAllUsersOfClassRoom(Long id) {
+        return converter.toDto(userRepository.findAllByClassRoomId(id));
     }
 }
