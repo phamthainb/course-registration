@@ -1,4 +1,4 @@
-import { api } from "common/axiosService";
+import { api, apiInterceptors } from "common/axiosService";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Logo from "../../assets/images/ptit-logo.jpg";
@@ -28,7 +28,7 @@ function Login() {
 
   const onLogin = (e) => {
     e.preventDefault();
-    api("POST", constants.AUTHENTICATE, {
+    apiInterceptors("POST", constants.AUTHENTICATE, {
       username: account.username,
       password: account.password,
     })
@@ -39,7 +39,7 @@ function Login() {
             isSaveUser
               ? localStorage.setItem("jwt", jwt)
               : sessionStorage.setItem("jwt", jwt);
-            history.push("/home");
+            history.push("/course-regis");
             successNotify(constants.LOGIN_SUCCESSFUL);
           }
         }

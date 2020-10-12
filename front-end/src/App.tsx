@@ -12,11 +12,14 @@ import "react-toastify/dist/ReactToastify.css";
 import NotFound from "components/NotFound";
 import Layout from "components/Layout";
 import Login from "pages/Login";
+import Loading from "components/Loading";
+import { useSelector } from "react-redux";
 
 function App() {
   let jwt = localStorage.getItem("jwt") || sessionStorage.getItem("jwt");
   const list = useMemo(() => routes.map((e) => e.path), []);
-
+  // get loading
+  const loading = useSelector((state: any) => state.app.loading);
   return (
     <Router>
       <Switch>
@@ -33,6 +36,7 @@ function App() {
       </Switch>
 
       <ToastContainer></ToastContainer>
+      <Loading active={loading} />
     </Router>
   );
 }
