@@ -11,7 +11,7 @@ var subjectReducer = (state = initState, action)=>{
         
         case constants.FETCH_SUJBECTS_FAILED:
             toast.errNotify(action.err.message);
-            return [...state];
+            return [];
 
         default:
             return [...state];

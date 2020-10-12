@@ -68,7 +68,7 @@ function Menu() {
             <div
               className="dropdown-menu"
               aria-labelledby="dropdownId"
-              style={{ left: -100 }}
+              style={{ left: -120 }}
             >
               <NavLink className="dropdown-item" to="/edit-info">
                 Edit info

@@ -20,7 +20,7 @@ const routes = [
     },
     {
         path: "/course-regis",
-        private : false,
+        private : true,
         exact: false,
         main: ()=> <CourseRegis/>
     },

@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import Logo from "../../assets/images/ptit-logo.jpg";
 import "./style.css";
 import * as constants from "../../pages/categories/constants";
-import { errNotify } from "common/toast";
+import { errNotify, successNotify } from "common/toast";
 
 function Login() {
   const history = useHistory();
@@ -40,11 +40,12 @@ function Login() {
               ? localStorage.setItem("jwt", jwt)
               : sessionStorage.setItem("jwt", jwt);
             history.push("/home");
+            successNotify(constants.LOGIN_SUCCESSFUL);
           }
         }
       })
       .catch((err) => {
-        errNotify("Invalid user !");
+        errNotify(constants.LOGIN_FAILED);
       });
   };
 

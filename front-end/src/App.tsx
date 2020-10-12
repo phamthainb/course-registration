@@ -19,8 +19,8 @@ function App() {
 
     return (
         <Router>
-            {jwt ? <Redirect to="/home" /> : <Redirect to="/login" />}
             <Switch>
+            {/* {jwt ? <Redirect to="/home" /> : <Redirect to="/login" />} */}
                 <Route path={routes.map(e => e.path)}>
                     <Layout route={routes}></Layout>
                 </Route>
