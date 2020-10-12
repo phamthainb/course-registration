@@ -14,12 +14,15 @@ import Layout from "components/Layout";
 import Login from "pages/Login";
 
 function App() {
+
+    let jwt = localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+
     return (
         <Router>
+            {jwt ? <Redirect to="/home" /> : <Redirect to="/login" />}
             <Switch>
                 <Route path={routes.map(e => e.path)}>
-                    <Layout route={routes}>
-                    </Layout>
+                    <Layout route={routes}></Layout>
                 </Route>
                 <Route exact path="/login">
                     <Login></Login>

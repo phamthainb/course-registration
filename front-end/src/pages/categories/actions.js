@@ -1,4 +1,3 @@
-// import { getApi } from "../../apis/index";
 import { apiInterceptors, api } from "../../common/axiosService";
 import * as constants from "./constants";
 

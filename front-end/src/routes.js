@@ -26,13 +26,13 @@ const routes = [
     },
     {
         path: "/timetable",
-        private : false,
+        private : true,
         exact: false,
         main: ()=> <Timetable/>
     },
     {
         path: "/edit-info",
-        private : false,
+        private : true,
         exact: false,
         main: ()=> <EditInfoForm/>
     }
