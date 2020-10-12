@@ -40,6 +40,18 @@ export const apiInterceptors = async (method, url, data) => {
   });
 };
 
+// //with token
+// export const apiTokenInterceptors = async (method, url, data)=>{
+//   withInterceptors({
+//     method: method | "GET",
+//     url: `${API_ENDPOINT}/${url}`,
+//     data: data,
+//     headers: {
+//       Authorization: ``
+//     },
+//   })
+// }
+
 // ================================================
 // config axios without interceptors;
 
