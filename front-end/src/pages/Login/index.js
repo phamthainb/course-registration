@@ -26,7 +26,8 @@ function Login(){
     const onLogin = (e)=>{
         e.preventDefault();
         // history.push('/home');
-        apiInterceptors('post', 'api/user/authenticate', 
+        console.log("a");
+        apiInterceptors('POST', 'api/user/authenticate', 
         {
             "username":"admin",
             "password":"admin"
