@@ -27,17 +27,17 @@ function ChangePassForm(){
                         <div className="modal-body">
                             <div className="form-group">
                                 <input
-                                placeholder="Your old password ?"
+                                placeholder="Old password"
                                 type="password"/>
                             </div>
                             <div className="form-group">
                                 <input
-                                placeholder="New password ?"
+                                placeholder="New password"
                                 type="password"/>
                             </div>
                             <div className="form-group">
                                 <input
-                                placeholder="Confirm new password"
+                                placeholder="Confirm password"
                                 type="password"/>
                             </div>
                         </div>

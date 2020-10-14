@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Redirect, Route } from "react-router-dom";
 
-export default function RouteProtect(route) {
+export default function RouteProtect(props) {
   
-//     useEffect(() => {
-//     if (!localStorage.getItem("token")) return <Redirect to="/login" />;
-//   }, []);
+  const {path, exact, main} = props;
+  let jwt = localStorage.getItem("jwt") || sessionStorage.getItem("jwt");
 
   return (
-    <Route path={route.path} exact={route.exact}>
-      {route.main}
+    <Route path={path} exact={exact}>
+      {jwt ? main : <Redirect to="/login"/> }
     </Route>
   );
 }

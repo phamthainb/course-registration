@@ -8,3 +8,5 @@ export const SAVE_SUCCESSFUL = "Saved to database"
 
 export const START_DAY = new Date(2020, 8, 7).getTime();
 export const CURRENT_DAY = new Date().getTime();
+
+export const AUTHENTICATE = "api/user/authenticate";

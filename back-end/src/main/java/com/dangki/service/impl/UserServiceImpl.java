@@ -2,9 +2,11 @@ package com.dangki.service.impl;
 
 import com.dangki.common.utils.Converter;
 import com.dangki.common.utils.SecurityUtil;
+import com.dangki.data.dto.ClassRoomDto;
 import com.dangki.data.dto.UserDto;
 import com.dangki.data.entities.ClassRoom;
 import com.dangki.data.entities.User;
+import com.dangki.data.repository.ClassRoomRepository;
 import com.dangki.data.repository.RoleRepository;
 import com.dangki.data.repository.UserRepository;
 import com.dangki.service.UserService;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,6 +24,8 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private ClassRoomRepository classRoomRepository;
     @Autowired
     private SecurityUtil securityUtil;
     private final Converter<UserDto, User> converter = new Converter<>(UserDto.class,User.class);
@@ -45,9 +50,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto updateClass(List<ClassRoom> classRooms) {
+    public UserDto updateClass(List<ClassRoomDto> classRooms) {
         User user = converter.toEntity(securityUtil.getUserDetails().getUser());
-        user.setClassRooms(classRooms);
+        List<ClassRoom> list = new ArrayList<>();
+        classRooms.forEach(classRoomDto -> {
+            list.add(classRoomRepository.findById(classRoomDto.getId()).get());
+        });
+        user.setClassRooms(list);
         user = userRepository.save(user);
         return converter.toDto(user);
     }

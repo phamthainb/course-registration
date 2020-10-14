@@ -1,12 +1,12 @@
 import axios from "axios";
 import { API_ENDPOINT } from "../pages/categories/constants";
 
-// config axios with interceptors;
+//
+// * config axios WITH interceptors * //
+//
 
-// * request interceptors
-
+// request interceptors
 const withInterceptors = axios.create();
-// withInterceptors.Header().Set()
 withInterceptors.interceptors.request.use(
   function (config) {
     //do sth before request is sent
@@ -18,8 +18,7 @@ withInterceptors.interceptors.request.use(
   }
 );
 
-// * response interceptors
-
+// response interceptors
 withInterceptors.interceptors.response.use(
   function (response) {
     //do sth before request is sent
@@ -31,24 +30,59 @@ withInterceptors.interceptors.response.use(
   }
 );
 
+// 
+// * call api  * //
+//
+
+//without token
 export const apiInterceptors = async (method, url, data) => {
-  withInterceptors({
-    method: method | "GET",
+  return withInterceptors({
+    method: method,
     url: `${API_ENDPOINT}/${url}`,
     data: data,
     // headers: { "Access-Control-Allow-Origin": "*" },
   });
 };
 
-// ================================================
-// config axios without interceptors;
-
-const request = axios.create();
-
-export const api = (method, url, data) => {
-  return request({
+//with token
+export const apiTokenInterceptors = async (method, url, data)=>{
+  let jwt = localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+  return withInterceptors({
     method: method | "GET",
     url: `${API_ENDPOINT}/${url}`,
-    data,
+    data: data,
+    headers: {
+      Authorization: jwt
+    },
+  })
+}
+
+// ================================================
+
+//
+// * config axios WITHOUT interceptors * //
+//
+
+const instance = axios.create();
+
+// without token
+export const api = (method, url, data) => {
+  return instance({
+    method: method,
+    url: `${API_ENDPOINT}/${url}`,
+    data: data,
   });
 };
+
+// with token
+export const apiToken = (method, url, data)=>{
+  let jwt = localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+  return instance({
+    method: method,
+    url: `${API_ENDPOINT}/${url}`,
+    data: data,
+    headers: {
+      Authorization: jwt
+    }
+  })
+}

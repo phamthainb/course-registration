@@ -4,6 +4,9 @@ import rocket from './rocket.png';
 import "./style.css";
 
 export default function NotFound() {
+
+  let jwt = localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+
   useEffect(() => {
     var body = document.querySelector('.not-found');
     console.log(body);
@@ -44,7 +47,7 @@ export default function NotFound() {
         <h3>404!</h3>
         <p>This page is not found</p>
         <button>
-            <Link to="/home">Go back</Link>
+            <Link to={jwt ? "/home" : "/login"}>Go back</Link>
         </button>
       </div>
     </div>
