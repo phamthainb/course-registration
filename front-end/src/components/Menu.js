@@ -18,7 +18,7 @@ function Menu() {
         backgroundColor: "#eee",
       }}
     >
-      <NavLink to="/home">
+      <NavLink to="/">
         <img src={Logo} alt="" style={{ width: 50 }} />
       </NavLink>
       <button
@@ -35,7 +35,7 @@ function Menu() {
       <div className="collapse navbar-collapse" id="collapsibleNavId">
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
           <li className="nav-item ml-2">
-            <NavLink className="nav-link" to="/home">
+            <NavLink className="nav-link" to="/">
               Home
             </NavLink>
           </li>
@@ -68,7 +68,7 @@ function Menu() {
             <div
               className="dropdown-menu"
               aria-labelledby="dropdownId"
-              style={{ left: -100 }}
+              style={{ left: -120 }}
             >
               <NavLink className="dropdown-item" to="/edit-info">
                 Edit info

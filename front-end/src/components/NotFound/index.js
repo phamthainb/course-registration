@@ -9,7 +9,6 @@ export default function NotFound() {
 
   useEffect(() => {
     var body = document.querySelector('.not-found');
-    console.log(body);
     var colors = ["#ff6600", "#880000", "#ff9933", "#ff3300", "#ff3366"];
 
     setInterval(createStar, 100);
@@ -36,7 +35,7 @@ export default function NotFound() {
       setInterval(starFly, 10);
       setTimeout(function () {
         star.remove();
-      }, 6000);
+      }, 7000);
     }
   }, []);
 
@@ -46,7 +45,7 @@ export default function NotFound() {
       <div className="title">
         <h3>404!</h3>
         <p>This page is not found</p>
-        <button>
+        <button className="mt-3">
             <Link to={jwt ? "/home" : "/login"}>Go back</Link>
         </button>
       </div>

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { API_ENDPOINT } from "../pages/categories/constants";
-
+import store from "../redux/index";
+import { changeLoading } from "../reducers/app";
 //
 // * config axios WITH interceptors * //
 //
@@ -10,10 +11,12 @@ const withInterceptors = axios.create();
 withInterceptors.interceptors.request.use(
   function (config) {
     //do sth before request is sent
+    store.dispatch(changeLoading(true));
     return config;
   },
   function (err) {
     // do sth with request err
+    store.dispatch(changeLoading(false));
     return Promise.reject(err);
   }
 );
@@ -22,15 +25,17 @@ withInterceptors.interceptors.request.use(
 withInterceptors.interceptors.response.use(
   function (response) {
     //do sth before request is sent
+    store.dispatch(changeLoading(false));
     return response;
   },
   function (err) {
     // do sth with request err
+    store.dispatch(changeLoading(false));
     return Promise.reject(err);
   }
 );
 
-// 
+//
 // * call api  * //
 //
 
@@ -45,17 +50,17 @@ export const apiInterceptors = async (method, url, data) => {
 };
 
 //with token
-export const apiTokenInterceptors = async (method, url, data)=>{
-  let jwt = localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+export const apiTokenInterceptors = async (method, url, data) => {
+  let jwt = localStorage.getItem("jwt") || sessionStorage.getItem("jwt");
   return withInterceptors({
     method: method | "GET",
     url: `${API_ENDPOINT}/${url}`,
     data: data,
     headers: {
-      Authorization: jwt
+      Authorization: jwt,
     },
-  })
-}
+  });
+};
 
 // ================================================
 
@@ -75,14 +80,14 @@ export const api = (method, url, data) => {
 };
 
 // with token
-export const apiToken = (method, url, data)=>{
-  let jwt = localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+export const apiToken = (method, url, data) => {
+  let jwt = localStorage.getItem("jwt") || sessionStorage.getItem("jwt");
   return instance({
     method: method,
     url: `${API_ENDPOINT}/${url}`,
     data: data,
     headers: {
-      Authorization: jwt
-    }
-  })
-}
+      Authorization: jwt,
+    },
+  });
+};

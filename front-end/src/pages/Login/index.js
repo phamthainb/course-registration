@@ -1,10 +1,10 @@
-import { api } from "common/axiosService";
+import { api, apiInterceptors } from "common/axiosService";
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Logo from "../../assets/images/ptit-logo.jpg";
 import "./style.css";
 import * as constants from "../../pages/categories/constants";
-import { errNotify } from "common/toast";
+import { errNotify, successNotify } from "common/toast";
 
 function Login() {
   const history = useHistory();
@@ -27,7 +27,7 @@ function Login() {
 s
   const onLogin = (e) => {
     e.preventDefault();
-    api("POST", constants.AUTHENTICATE, {
+    apiInterceptors("POST", constants.AUTHENTICATE, {
       username: account.username,
       password: account.password,
     })
@@ -38,12 +38,13 @@ s
             isSaveUser
               ? localStorage.setItem("jwt", jwt)
               : sessionStorage.setItem("jwt", jwt);
-            history.push("/home");
+            history.push("/course-regis");
+            successNotify(constants.LOGIN_SUCCESSFUL);
           }
         }
       })
       .catch((err) => {
-        errNotify("Invalid user !");
+        errNotify(constants.LOGIN_FAILED);
       });
   };
 
