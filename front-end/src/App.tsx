@@ -17,13 +17,12 @@ import { useSelector } from "react-redux";
 
 function App() {
   let jwt = localStorage.getItem("jwt") || sessionStorage.getItem("jwt");
-  const list = useMemo(() => routes.map((e) => e.path), []);
+  const list = useMemo(() => routes.map((route) => route.path), []);
   // get loading
   const loading = useSelector((state: any) => state.app.loading);
   return (
     <Router>
       <Switch>
-        {/* {jwt ? <Redirect to="/home" /> : <Redirect to="/login" />} */}
         <Route exact path={list}>
           <Layout route={routes}></Layout>
         </Route>

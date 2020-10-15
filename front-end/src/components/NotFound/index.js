@@ -46,7 +46,7 @@ export default function NotFound() {
         <h3>404!</h3>
         <p>This page is not found</p>
         <button className="mt-3">
-            <Link to={jwt ? "/home" : "/login"}>Go back</Link>
+            <Link to={jwt ? "/" : "/login"}>Go back</Link>
         </button>
       </div>
     </div>

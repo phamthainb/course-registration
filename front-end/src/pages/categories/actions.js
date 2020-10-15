@@ -1,4 +1,4 @@
-import { apiInterceptors, api } from "../../common/axiosService";
+import { apiInterceptors } from "../../common/axiosService";
 import * as constants from "./constants";
 
 const getSubjectsSuccess = (data) => {
@@ -17,7 +17,7 @@ const getSubjectsFailed = (err) => {
 
 export const getSubjectRequest = () => {
   return (dispatch) => {
-    api("GET", "subjects", null)
+    apiInterceptors("GET", "subjects", null)
       .then((res) => {
         dispatch(getSubjectsSuccess(res));
       })
