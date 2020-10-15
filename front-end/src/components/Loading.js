@@ -19,7 +19,7 @@ export default function Loading({ active }) {
           justifyContent: "center",
           alignItems: "center",
           fontSize: 18,
-          opacity: 0.5,
+          opacity: 0.6,
         }}
       >
         Loading ...

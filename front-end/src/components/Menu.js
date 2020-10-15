@@ -3,7 +3,7 @@ import Logo from "../assets/images/ptit-icon.png";
 import { BrowserRouter as Link, NavLink } from "react-router-dom";
 
 function Menu() {
-  const onLogout = () => {
+    const onLogout = () => {
     localStorage.removeItem("jwt");
     sessionStorage.removeItem("jwt");
   };
