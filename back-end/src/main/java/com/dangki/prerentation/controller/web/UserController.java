@@ -4,6 +4,7 @@ import com.dangki.common.utils.SecurityConstants;
 import com.dangki.common.utils.SecurityUtil;
 import com.dangki.data.MyUserDetails;
 import com.dangki.data.dto.AuthenticationResponse;
+import com.dangki.data.dto.ClassRoomDto;
 import com.dangki.data.dto.UserDto;
 import com.dangki.data.entities.ClassRoom;
 import com.dangki.service.JwtUtil;
@@ -63,7 +64,7 @@ public class UserController {
         return ResponseEntity.ok(userService.update(userDto));
     }
     @PutMapping("/class-rooms")
-    public ResponseEntity<?> registerClass(@RequestBody List<ClassRoom> classRooms) {
+    public ResponseEntity<?> registerClass(@RequestBody List<ClassRoomDto> classRooms) {
         UserDto userDto = userService.updateClass(classRooms);
         return ResponseEntity.ok(userDto);
     }
