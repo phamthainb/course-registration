@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "crawler": "node crawler.js",
-    "convert": "nodemon convert-subject.js"
+    "convert": "nodemon convert-class.js"
   },
   "keywords": [],
   "author": "",
