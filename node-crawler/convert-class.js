@@ -18,21 +18,59 @@ for (let i = 0; i < allData.length; i++) {
   let element = allData[i];
   for (let j = 0; j < element.length; j++) {
     let mh = element[j];
+    // console.log(mh[16].split(sp), mh[2]);
+    let weeks = mh[16].split(sp);
+    let spWeeks = weeks.map((w) => w.split(""));
+    // console.log(spWeeks);
+
+    let time = mh[11].split(sp);
+    let lesson = mh[12].split(sp);
+    let room = mh[14].split(sp);
+    let professor = mh[15].split(sp);
     classs.push({
       nmh: mh[3],
-      quantity: mh[8],
-      slot: mh[8],
-      tth: mh[4],
-      thu: mh[11].split(sp),
-      tbd: mh[12].split(sp),
+      quantity: Number(mh[8]),
+      slot: Number(mh[8]),
+      tth: Number(mh[4]),
+      // thu: mh[11].split(sp),
+      // tbd: mh[12].split(sp),
       subject: {
+        code: mh[1],
         name: mh[2],
+        credit: Number(mh[5]),
       },
-      details: {
-        professor: mh[15].split(sp),
-        room: mh[14].split(sp),
-        time: { name: mh[11].split(sp), lesson: mh[12].split(sp) },
-      },
+      details: time.map((thu, index) => {
+        // let ww = spWeeks[index].filter((w, j) => {
+        //   if (w !== "-") {
+        //     // console.log(Number(w) + 10);
+        //     let r = { name: Number(w) };
+        //     if (j >= 10) {
+        //       r.name = Number(w) + Number(j);
+        //       // console.log(JSON.stringify(r));
+        //     }
+        //     // console.log(j);
+        //     return r;
+        //   }
+        // });
+        // console.log(JSON.stringify(ww));
+        let we = spWeeks[index];
+        let ww = [];
+        for (let k = 0; k < we.length; k++) {
+          if (we[k] !== "-") {
+            let element = Number(we[k]);
+            if (k >= 9) element += k + 1;
+            // console.log("element", element);
+            ww.push({ name: element });
+          }
+        }
+        // console.log(ww);
+        return {
+          time: { name: thu, lesson: lesson[index] },
+          room: { name: room[index] },
+          professor: { name: professor[index] },
+          weeks: ww,
+        };
+      }),
     });
   }
 }
@@ -41,7 +79,7 @@ for (let i = 0; i < allData.length; i++) {
 // let r = classs.filter((k) => {
 //   if (k) return k;
 // });
-console.log(JSON.stringify(classs));
+console.log(JSON.stringify(classs[0]));
 // fs.writeFile(`data/classs.json`, JSON.stringify(classs), (err) => {
 //   if (err) console.log(err);
 //   console.log("Data written to file");
