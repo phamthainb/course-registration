@@ -28,6 +28,11 @@ for (let i = 0; i < allData.length; i++) {
       subject: {
         name: mh[2],
       },
+      details: {
+        professor: mh[15].split(sp),
+        room: mh[14].split(sp),
+        time: { name: mh[11].split(sp), lesson: mh[12].split(sp) },
+      },
     });
   }
 }
@@ -36,9 +41,8 @@ for (let i = 0; i < allData.length; i++) {
 // let r = classs.filter((k) => {
 //   if (k) return k;
 // });
-console.log(classs);
+console.log(JSON.stringify(classs));
 // fs.writeFile(`data/classs.json`, JSON.stringify(classs), (err) => {
 //   if (err) console.log(err);
 //   console.log("Data written to file");
 // });
-
