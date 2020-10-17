@@ -64,8 +64,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .invalidateHttpSession(true)
                 .clearAuthentication(true);
-//        http.and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-//                .a
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         http.cors().and().csrf().disable()
                 .authorizeRequests()
