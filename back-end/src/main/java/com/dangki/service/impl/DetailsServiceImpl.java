@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link Details}.
  */
 @Service
-@Transactional
 public class DetailsServiceImpl implements DetailsService {
 
     private final Logger log = LoggerFactory.getLogger(DetailsServiceImpl.class);
@@ -51,27 +51,22 @@ public class DetailsServiceImpl implements DetailsService {
 
     @Override
     public DetailsDto add(DetailsDto detail) {
+        String timeName = detail.getTime().getName().trim();
         Details details = new Details();
-        Time time = timeRepository.findByNameAndAndLesson(detail.getTime().getName(), detail.getTime().getLesson());
-        Professor professor = professorRepository.findByName(detail.getProfessor().getName());
-        if (professor == null)
-        {
-            professor = new Professor();
-            professor.setName(detail.getProfessor().getName());
-        }
-        Room room = roomRepository.findByName(detail.getRoom().getName());
-        if (room == null)
-        {
-            room = new Room();
-            room.name(detail.getRoom().getName());
-        }
+        Time time = timeRepository.findByNameAndLesson(timeName, detail.getTime().getLesson());
+        System.out.println(time);
+        String professorName = detail.getProfessor().getName().trim();
+        Professor professor = professorRepository.findByName(professorName);
+        System.out.println(professor);
+        String roomName = detail.getRoom().getName().trim();
+        Room room = roomRepository.findByName(roomName);
         Set<Week> weeks = new HashSet<>();
         detail.getWeeks().forEach(weekDto -> {
             weeks.add(weekRepository.findByName(weekDto.getName()));
         });
+        System.out.println(weeks);
         return converter.toDto(detailsRepository.save(details.time(time).professor(professor).room(room).weeks(weeks)));
     }
-
     @Override
     public List<DetailsDto> add(List<DetailsDto> details) {
         List<DetailsDto> list = new ArrayList<>();

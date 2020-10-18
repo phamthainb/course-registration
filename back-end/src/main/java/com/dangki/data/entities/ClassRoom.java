@@ -7,7 +7,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -22,8 +21,8 @@ public class ClassRoom extends BaseEntity implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "nhm", nullable = false)
-    private Integer nhm;
+    @Column(name = "nmh", nullable = false)
+    private String nmh;
 
     @Column(name = "tth")
     private Integer tth;
@@ -56,17 +55,12 @@ public class ClassRoom extends BaseEntity implements Serializable {
         this.id = id;
     }
 
-    public Integer getNhm() {
-        return nhm;
+    public String getNmh() {
+        return nmh;
     }
 
-    public ClassRoom nhm(Integer nhm) {
-        this.nhm = nhm;
-        return this;
-    }
-
-    public void setNhm(Integer nhm) {
-        this.nhm = nhm;
+    public void setNmh(String nmh) {
+        this.nmh = nmh;
     }
 
     public Integer getTth() {
@@ -167,7 +161,7 @@ public class ClassRoom extends BaseEntity implements Serializable {
     public String toString() {
         return "ClassRoom{" +
                 "id=" + getId() +
-                ", nhm=" + getNhm() +
+                ", nhm=" + getNmh() +
                 ", tth=" + getTth() +
                 ", quantity=" + getQuantity() +
                 ", slot=" + getSlot() +

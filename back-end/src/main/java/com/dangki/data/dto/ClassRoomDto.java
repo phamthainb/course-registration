@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 public class ClassRoomDto extends BaseDto {
-    private Integer nhm;
+    private String nmh;
     private Integer tth;
     private Integer quantity;
     private Integer slot;
@@ -13,12 +13,12 @@ public class ClassRoomDto extends BaseDto {
     private Set<DetailsDto> details = new HashSet<>();
     private List<UserDto> users;
 
-    public Integer getNhm() {
-        return nhm;
+    public String getNmh() {
+        return nmh;
     }
 
-    public void setNhm(Integer nhm) {
-        this.nhm = nhm;
+    public void setNmh(String nmh) {
+        this.nmh = nmh;
     }
 
     public Integer getTth() {

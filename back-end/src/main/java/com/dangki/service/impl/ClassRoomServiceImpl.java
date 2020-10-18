@@ -3,29 +3,22 @@ package com.dangki.service.impl;
 import com.dangki.common.utils.Converter;
 import com.dangki.data.dto.ClassRoomDto;
 import com.dangki.data.dto.DetailsDto;
-import com.dangki.data.dto.UserDto;
-import com.dangki.data.entities.ClassRoom;
-import com.dangki.data.entities.Details;
-import com.dangki.data.entities.Subject;
-import com.dangki.data.repository.ClassRoomRepository;
-import com.dangki.data.repository.DetailsRepository;
-import com.dangki.data.repository.SubjectRepository;
+import com.dangki.data.entities.*;
+import com.dangki.data.repository.*;
 import com.dangki.service.ClassRoomService;
 import com.dangki.service.DetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Service Implementation for managing {@link ClassRoom}.
  */
 @Service
-@Transactional
 public class ClassRoomServiceImpl implements ClassRoomService {
 
     private final Logger log = LoggerFactory.getLogger(ClassRoomServiceImpl.class);
@@ -38,14 +31,25 @@ public class ClassRoomServiceImpl implements ClassRoomService {
 
     private final DetailsService detailsService;
 
+    private final TimeRepository timeRepository;
+
+    private final ProfessorRepository professorRepository;
+
+    private final WeekRepository weekRepository;
+
+    private final RoomRepository roomRepository;
     private final Converter<ClassRoomDto , ClassRoom> converter = new Converter<>(ClassRoomDto.class,ClassRoom.class);
     private final Converter<DetailsDto, Details> detailsConverter = new Converter<>(DetailsDto.class,Details.class);
 
-    public ClassRoomServiceImpl(ClassRoomRepository classRoomRepository, SubjectRepository subjectRepository, DetailsRepository detailsRepository, DetailsService detailsService) {
+    public ClassRoomServiceImpl(ClassRoomRepository classRoomRepository, SubjectRepository subjectRepository, DetailsRepository detailsRepository, DetailsService detailsService, TimeRepository timeRepository, ProfessorRepository professorRepository, WeekRepository weekRepository, RoomRepository roomRepository) {
         this.classRoomRepository = classRoomRepository;
         this.subjectRepository = subjectRepository;
         this.detailsRepository = detailsRepository;
         this.detailsService = detailsService;
+        this.timeRepository = timeRepository;
+        this.professorRepository = professorRepository;
+        this.weekRepository = weekRepository;
+        this.roomRepository = roomRepository;
     }
 
     @Override
@@ -53,24 +57,26 @@ public class ClassRoomServiceImpl implements ClassRoomService {
         List<ClassRoomDto> result = new ArrayList<>();
         classRooms.forEach(classRoomDto -> {
             ClassRoom classRoom = converter.toEntity(classRoomDto);
-            Subject subject = subjectRepository.findByName(classRoomDto.getSubject().getName());
-            if (subject == null)
-            {
-                subject = new Subject();
-                subject.name(classRoomDto.getSubject().getName())
-                        .code(classRoomDto.getSubject().getCode())
-                        .credit(classRoomDto.getSubject().getCredit())
-                        .fee(500000*subject.getCredit());
-                subject = subjectRepository.save(subject);
-            }
+            System.out.println(classRoom.getNmh());
+            String subjectName = classRoomDto.getSubject().getName().substring(1);
+            Subject subject = subjectRepository.findByName(subjectName);
+            System.out.println(subject);
             classRoom.setSubject(subject);
             Set<Details> detailsSet = new HashSet<>();
             classRoomDto.getDetails().forEach(detailsDto -> {
-                Details details = detailsRepository.find(detailsDto.getTime().getName(),
-                        detailsDto.getTime().getLesson(),detailsDto.getProfessor().getName());
-                if (details == null)
-                    details = detailsConverter.toEntity(detailsService.add(detailsDto));
-                detailsSet.add(details);
+              Set<Week> weeks = new HashSet<>();
+              detailsDto.getWeeks().forEach(weekDto -> {
+                  weeks.add(weekRepository.findByName(weekDto.getName()));
+              });
+                List<Details> details = detailsRepository
+                        .find(detailsDto.getTime().getName(),detailsDto.getTime().getLesson(),
+                                detailsDto.getProfessor().getName(),detailsDto.getRoom().getName())
+                        .stream().filter(item -> {
+                    return item.getWeeks().containsAll(weeks);
+                }).collect(Collectors.toList());
+                if (details.size()==0)
+                    details.add(detailsConverter.toEntity(detailsService.add(detailsDto)));
+                detailsSet.add(details.get(0));
             });
             classRoom.setDetails(detailsSet);
             result.add(converter.toDto(classRoomRepository.save(classRoom)));

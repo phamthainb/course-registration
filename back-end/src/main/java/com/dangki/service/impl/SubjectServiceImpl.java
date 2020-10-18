@@ -10,6 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -29,8 +31,17 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Subject save(Subject subject) {
-        log.debug("Request to save Subject : {}", subject);
         return subjectRepository.save(subject);
+    }
+
+    @Override
+    public List<Subject> save(List<Subject> subjects) {
+        log.debug("Request to save Subject : {}", subjects);
+        List<Subject> list = new ArrayList<>();
+        subjects.forEach(subject -> {
+            list.add(subjectRepository.save(subject));
+        });
+        return list;
     }
 
     @Override

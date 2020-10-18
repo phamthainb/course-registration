@@ -23,7 +23,7 @@ public class Week extends BaseEntity implements Serializable {
 
     @NotNull
     @Column(name = "name", nullable = false)
-    private String name;
+    private Integer name;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -34,16 +34,16 @@ public class Week extends BaseEntity implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
+    public Integer getName() {
         return name;
     }
 
-    public Week name(String name) {
+    public Week name(Integer name) {
         this.name = name;
         return this;
     }
 
-    public void setName(String name) {
+    public void setName(Integer name) {
         this.name = name;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

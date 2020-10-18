@@ -1,6 +1,6 @@
 package com.dangki.data.repository;
 
-import com.dangki.data.entities.Details;
+import com.dangki.data.entities.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Spring Data  repository for the Details entity.
@@ -29,7 +30,7 @@ public interface DetailsRepository extends JpaRepository<Details, Long> {
     Optional<Details> findOneWithEagerRelationships(@Param("id") Long id);
 
     @Query("select d from Details d where" +
-            " d.time.name=:name and d.time.lesson=:lesson and d.professor.name=:professorName")
-    Details find(@Param("name") String name , @Param("lesson") Integer lesson ,
-                 @Param("professorName") String professorName);
+            " d.time.name=:name and d.time.lesson=:lesson and d.professor.name=:professor and d.room.name=:room")
+    List<Details> find(@Param("name") String name ,@Param("lesson")Integer lesson, @Param("professor") String professor ,
+                 @Param("room") String room);
 }

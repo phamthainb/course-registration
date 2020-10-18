@@ -38,7 +38,7 @@ public class TimeServiceImpl implements TimeService {
         List<TimeDto> result = new ArrayList<>();
         for (TimeDto timeDto : timeDtos) {
             log.debug("Request to save Time : {}", timeDto);
-            Time time = timeRepository.findByNameAndAndLesson(timeDto.getName(),timeDto.getLesson());
+            Time time = timeRepository.findByNameAndLesson(timeDto.getName(),timeDto.getLesson());
             if (time == null)
             {
                 time = converter.toEntity(timeDto);
