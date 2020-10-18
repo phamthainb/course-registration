@@ -17,7 +17,7 @@ const getSubjectsFailed = (err) => {
 
 export const getSubjectRequest = () => {
   return (dispatch) => {
-    apiInterceptors("GET", "subjects", null)
+    apiInterceptors("GET", constants.SUBJECTS, null)
       .then((res) => {
         dispatch(getSubjectsSuccess(res));
       })

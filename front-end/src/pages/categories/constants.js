@@ -21,3 +21,4 @@ export const CURRENT_DAY = new Date().getTime();
 export const AUTHENTICATE = "api/user/authenticate";
 export const GET_USER = "api/user";
 export const SUBJECTS = "api/subjects";
+export const CLASSES = "api/class-rooms";

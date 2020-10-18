@@ -7,6 +7,8 @@ import { connect } from "react-redux";
 import * as actions from '../categories/actions';
 import RegisControl from './RegisControl';
 import * as toast from '../../common/toast';
+import * as constansts from '../categories/constants';
+import { apiInterceptors } from 'common/axiosService';
 
 function CourseRegis(props) {
 
@@ -18,27 +20,36 @@ function CourseRegis(props) {
     }, [])
 
     const onShowSubjectList = (value)=>{
-        var option = props.subjects.filter(sub=>{
-            return sub.code === value;
+        apiInterceptors("GET", `${constansts.CLASSES}/${value}`)
+        .then(res => {
+            let data = res.data.map((e, i)=>{
+                return ({...e, details : e.details.map((d, j)=> {
+                    let weeks = d.weeks.map(w => Number(w.name));
+                    weeks.sort((a, b)=> a - b)
+                    return ({...d, weeks : weeks})
+                })})
+            })
+            setChosenSubject(data);
         })
-        props.onGetSubjects();
-        setChosenSubject(option[0]);
+        .catch(err => {
+            console.log(err);
+        })
     }
 
-    const onUpdateCart = (code, id, name, crt)=>{
+    const onUpdateCart = (id, code, nmh, name, crt, pg)=>{
         var tempCart = [...cart];
         var check = false;
         if(tempCart.length){
             tempCart.forEach((item, index)=>{
                 if(item.code === code){
                     check = true;
-                    if(item.id === id){
+                    if(item.nmh === nmh && parseInt(item.pg) === parseInt(pg)){
                         tempCart.splice(index, 1);
                         //toast
                         toast.errNotify('Subject deleted');
                     }
                     else{
-                        tempCart[index] = {...tempCart[index], id}
+                        tempCart[index] = {...tempCart[index], id, nmh, pg}
                         //toast
                         toast.warningNotify('Subject updated');
                     }
@@ -46,7 +57,7 @@ function CourseRegis(props) {
             })
         }
         if(check === false){
-            tempCart.push({code, id, name, crt});
+            tempCart.push({id, code, nmh, name, crt, pg});
             //toast
             toast.successNotify('Subject added');
         }

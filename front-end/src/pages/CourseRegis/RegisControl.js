@@ -9,8 +9,8 @@ function RegisControl(props) {
 
   const mapSubjects = props.subjects.map((sub, index) => {
     return (
-      <option key={index} value={sub.code}>
-        {`${sub.code} - ${sub.name} ( ${sub.crt} TC )`}
+      <option key={index} value={sub.id}>
+        {`${sub.code} - ${sub.name} ( ${sub.credit} TC )`}
       </option>
     );
   });

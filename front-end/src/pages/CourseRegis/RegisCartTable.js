@@ -3,8 +3,8 @@ import * as constants from '../categories/constants';
 
 function RegisCartTable(props){
 
-    const onUpdateCart = (code, id)=>{
-        props.onUpdateCart(code, id);
+    const onUpdateCart = (id, code, nmh, name, crt, pg)=>{
+        props.onUpdateCart(id, code, nmh, name, crt, pg);
     }
 
     const onDeleteAllFromCart = ()=>{
@@ -33,15 +33,15 @@ function RegisCartTable(props){
                 <td>{index+1}</td>
                 <td>{item.code}</td>
                 <td>{item.name}</td>
-                <td>{item.id}</td>
-                <td>null</td>
+                <td>{item.nmh}</td>
+                <td>{item.pg === "0" ? "null" : item.pg}</td>
                 <td>{item.crt}</td>
                 <td>{480000 * item.crt}</td>
                 <td>{constants.ADD_TO_CART_SUCCESSFUL}</td>
                 <td>
                     <button
                     className="btn btn-outline-dark"
-                    onClick={() => onUpdateCart(item.code, item.id)}>
+                    onClick={() => onUpdateCart(item.id, item.code, item.nmh, item.name, item.crt, item.pg)}>
                         Delete
                     </button>
                 </td>
