@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface WeekRepository extends JpaRepository<Week, Long> {
-    Week findByName(String name);
+    Week findByName(Integer name);
 }

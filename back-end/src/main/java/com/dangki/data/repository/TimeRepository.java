@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface TimeRepository extends JpaRepository<Time, Long> {
-    Time findByNameAndAndLesson(String name, Integer lesson);
+    Time findByNameAndLesson(String name, Integer lesson);
 }

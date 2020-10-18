@@ -20,12 +20,9 @@ public class UserController {
         return ResponseEntity.ok(userService.findAll());
     }
     @PostMapping
-    public ResponseEntity<?> add(@RequestBody UserDto userDto)
+    public ResponseEntity<?> add(@RequestBody List<UserDto> usersDto)
     {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String password = userDto.getPassword();
-        userDto.setPassword(passwordEncoder.encode(password));
-        return ResponseEntity.ok(userService.add(userDto));
+        return ResponseEntity.ok(userService.add(usersDto));
     }
     @PutMapping
     public ResponseEntity<?> update(@RequestBody UserDto userDto)

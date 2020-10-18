@@ -1,13 +1,13 @@
 package com.dangki.data.dto;
 
 public class WeekDto extends BaseDto {
-    private String name;
+    private Integer name;
 
-    public String getName() {
+    public Integer getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Integer name) {
         this.name = name;
     }
 }

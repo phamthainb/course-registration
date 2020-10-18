@@ -19,3 +19,5 @@ export const CURRENT_DAY = new Date().getTime();
 
 //url
 export const AUTHENTICATE = "api/user/authenticate";
+export const GET_USER = "api/user";
+export const SUBJECTS = "api/subjects";

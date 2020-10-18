@@ -37,17 +37,16 @@ public class SubjectResource {
     /**
      * {@code POST  /subjects} : Create a new subject.
      *
-     * @param subject the subject to create.
+     * @param subjects the subject to create.
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new subject, or with status {@code 400 (Bad Request)} if the subject has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/subjects")
-    public ResponseEntity<Subject> createSubject(@Valid @RequestBody Subject subject) throws URISyntaxException {
-        log.debug("REST request to save Subject : {}", subject);
+    public ResponseEntity<List<Subject>> createSubject(@Valid @RequestBody List<Subject> subjects) throws URISyntaxException {
+        log.debug("REST request to save Subjects: {}", subjects);
 
-        Subject result = subjectService.save(subject);
-        return ResponseEntity.created(new URI("/api/subjects/" + result.getId()))
-            .body(result);
+        List<Subject> result = subjectService.save(subjects);
+        return ResponseEntity.ok(result);
     }
 
     /**
