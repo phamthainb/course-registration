@@ -25,7 +25,7 @@ import java.util.Optional;
  * REST controller for managing {@link ClassRoom}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/admin")
 public class ClassRoomResource {
 
     private final Logger log = LoggerFactory.getLogger(ClassRoomResource.class);
@@ -66,19 +66,6 @@ public class ClassRoomResource {
         ClassRoom result = classRoomService.update(classRoom);
         return ResponseEntity.ok()
             .body(result);
-    }
-
-    /**
-     * {@code GET  /class-rooms/subjectId} : get all the classRooms of subject
-     *
-     * @param subjectId
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of classRooms in body.
-     */
-    @GetMapping("/class-rooms/{subjectId}")
-    public ResponseEntity<List<ClassRoomDto>> getAllClassRooms(@PathVariable Long subjectId) {
-        log.debug("REST request to get a page of ClassRooms");
-        List<ClassRoomDto> classes = classRoomService.findAllBySubjectId(subjectId);
-        return ResponseEntity.ok().body(classes);
     }
 
     /**

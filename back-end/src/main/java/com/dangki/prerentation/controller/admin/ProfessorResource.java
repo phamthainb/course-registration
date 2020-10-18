@@ -20,7 +20,7 @@ import java.util.Optional;
  * REST controller for managing {@link Professor}.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/admin/api")
 public class ProfessorResource {
 
     private final Logger log = LoggerFactory.getLogger(ProfessorResource.class);
