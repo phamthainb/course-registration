@@ -1,13 +1,7 @@
 import React from "react";
-// import { connect } from "http2";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/ptit-icon.png";
-<<<<<<< HEAD
-import { BrowserRouter as Link, NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-=======
->>>>>>> 239f162faaf185befb7ad522acdb13f128963fff
 
 function Menu(props) {
   const onLogout = () => {
@@ -97,11 +91,7 @@ function Menu(props) {
 
 const mapState = state => {
   return {
-<<<<<<< HEAD
     user: state.app.user?.name
-=======
-    user: state?.user?.username
->>>>>>> 239f162faaf185befb7ad522acdb13f128963fff
   }
 }
 
