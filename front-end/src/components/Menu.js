@@ -1,7 +1,8 @@
 import React from "react";
+// import { connect } from "http2";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/ptit-icon.png";
-import { BrowserRouter as Link, NavLink } from "react-router-dom";
-import { connect } from "http2";
 
 function Menu(props) {
   const onLogout = () => {
@@ -91,7 +92,7 @@ function Menu(props) {
 
 const mapState = state => {
   return {
-    user: state.user.username
+    user: state?.user?.username
   }
 }
 
