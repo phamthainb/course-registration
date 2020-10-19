@@ -38,7 +38,7 @@ function RegisCartTable(props){
                 <td>{item.code}</td>
                 <td>{item.name}</td>
                 <td>{item.nmh}</td>
-                <td>{item.pg === "0" ? "null" : item.pg}</td>
+                <td>{item.pg === 0 ? "null" : item.pg}</td>
                 <td>{item.crt}</td>
                 <td>{480000 * item.crt}</td>
                 <td>{constants.ADD_TO_CART_SUCCESSFUL}</td>

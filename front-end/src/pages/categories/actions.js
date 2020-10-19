@@ -26,13 +26,3 @@ export const getSubjectRequest = () => {
       });
   };
 };
-
-// export const updateCart = (code, id) => {
-//   return {
-//     type: constants.UPDATE_CART,
-//     subject: {
-//       code,
-//       id,
-//     },
-//   };
-// };

@@ -25,7 +25,7 @@ function RegisTable(props) {
   const checkChosenSubject = () => {
     chosenSubject.forEach((sub) => {
       sub.status = false;
-      if (cart.length) {
+      if (cart) {
         cart.forEach((item) => {
           if (item.id == sub.id) {
             sub.status = true;

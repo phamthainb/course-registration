@@ -12,10 +12,12 @@ export const SAVE_SUCCESSFUL = "Saved to database"
 export const LOGIN_SUCCESSFUL = "Login successfully"
 export const LOGIN_FAILED = "Invalid user !"
 
-
 //day
+const currentYear = new Date().getUTCFullYear();
+const currentMonth = new Date().getUTCMonth();
+const currentDate = new Date().getUTCDate();
 export const START_DAY = new Date(2020, 8, 7).getTime();
-export const CURRENT_DAY = new Date().getTime();
+export const CURRENT_DAY = new Date(currentYear, currentMonth, currentDate).getTime();
 
 //url
 export const AUTHENTICATE = "api/user/authenticate";

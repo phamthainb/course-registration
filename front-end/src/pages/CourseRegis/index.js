@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import RegisCartTable from './RegisCartTable';
 import RegisNote from './RegisNote';
 import RegisTable from './RegisTable';
@@ -15,87 +15,102 @@ function CourseRegis(props) {
     const [chosenSubject, setChosenSubject] = useState();
     const [cart, setCart] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         props.onGetSubjects();
+        var userCart = props.user?.classRooms.map(item => {
+            return (
+                {
+                    id: item.id,
+                    code: item.subject.code,
+                    nmh: item.nmh,
+                    name: item.subject.name,
+                    crt: item.subject.credit,
+                    pg: item.tth,
+                }
+            )
+        })
+        setCart(userCart);
     }, [])
 
-    const onShowSubjectList = (value)=>{
+    const onShowSubjectList = (value) => {
         apiInterceptors("GET", `${constansts.CLASSES}/${value}`)
-        .then(res => {
-            let data = res.data.map((e, i)=>{
-                return ({...e, details : e.details.map((d, j)=> {
-                    let weeks = d.weeks.map(w => Number(w.name));
-                    weeks.sort((a, b)=> a - b)
-                    return ({...d, weeks : weeks})
-                })})
+            .then(res => {
+                let data = res.data.map((e, i) => {
+                    return ({
+                        ...e, details: e.details.map((d, j) => {
+                            let weeks = d.weeks.map(w => Number(w.name));
+                            weeks.sort((a, b) => a - b)
+                            return ({ ...d, weeks: weeks })
+                        })
+                    })
+                })
+                setChosenSubject(data);
             })
-            setChosenSubject(data);
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .catch(err => {
+                console.log(err);
+            })
     }
 
-    const onUpdateCart = (id, code, nmh, name, crt, pg)=>{
+    const onUpdateCart = (id, code, nmh, name, crt, pg) => {
         var tempCart = [...cart];
         var check = false;
-        if(tempCart.length){
-            tempCart.forEach((item, index)=>{
-                if(item.code === code){
+        if (tempCart.length) {
+            tempCart.forEach((item, index) => {
+                if (item.code === code) {
                     check = true;
-                    if(item.nmh === nmh && parseInt(item.pg) === parseInt(pg)){
+                    if (item.nmh === nmh && parseInt(item.pg) === parseInt(pg)) {
                         tempCart.splice(index, 1);
                         //toast
                         toast.errNotify('Subject deleted');
                     }
-                    else{
-                        tempCart[index] = {...tempCart[index], id, nmh, pg}
+                    else {
+                        tempCart[index] = { ...tempCart[index], id, nmh, pg }
                         //toast
                         toast.warningNotify('Subject updated');
                     }
                 }
             })
         }
-        if(check === false){
-            tempCart.push({id, code, nmh, name, crt, pg});
+        if (check === false) {
+            tempCart.push({ id, code, nmh, name, crt, pg });
             //toast
             toast.successNotify('Subject added');
         }
         setCart([...tempCart]);
     }
 
-    const onDeleteAllFromCart = ()=>{
+    const onDeleteAllFromCart = () => {
         setCart([]);
         //toast
         toast.errNotify('All deleted');
     }
 
-    return(
+    return (
         <div className="course-regis">
-            
+
             <RegisControl
-            subjects={props.subjects}
-            onShowSubjectList={onShowSubjectList}>
+                subjects={props.subjects}
+                onShowSubjectList={onShowSubjectList}>
             </RegisControl>
 
             {
-                chosenSubject && 
+                chosenSubject &&
                 <div>
                     <RegisTable
-                    onUpdateCart={onUpdateCart}
-                    chosenSubject={chosenSubject}
-                    cart={cart}>
+                        onUpdateCart={onUpdateCart}
+                        chosenSubject={chosenSubject}
+                        cart={cart}>
                     </RegisTable>
 
                     {
-                        cart.length > 0 &&
+                        cart &&
                         <RegisCartTable
-                        cart={cart}
-                        onUpdateCart={onUpdateCart}
-                        onDeleteAllFromCart={onDeleteAllFromCart}>
+                            cart={cart}
+                            onUpdateCart={onUpdateCart}
+                            onDeleteAllFromCart={onDeleteAllFromCart}>
                         </RegisCartTable>
                     }
-                    
+
                     <RegisNote></RegisNote>
                 </div>
             }
@@ -104,18 +119,19 @@ function CourseRegis(props) {
     )
 }
 
-    const mapState = state => {
-        return{
-            subjects: state.subjects
+const mapState = state => {
+    return {
+        subjects: state.subjects,
+        user: state.app.user
+    }
+}
+
+const mapDispatch = dispatch => {
+    return {
+        onGetSubjects: () => {
+            dispatch(actions.getSubjectRequest())
         }
     }
-  
-    const mapDispatch = dispatch => {
-        return{
-            onGetSubjects: ()=>{
-                dispatch(actions.getSubjectRequest())
-            }
-        }
-    }
+}
 
 export default connect(mapState, mapDispatch)(CourseRegis);

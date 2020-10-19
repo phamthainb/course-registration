@@ -1,3 +1,4 @@
+import { logDOM } from '@testing-library/react';
 import React, { useState } from 'react';
 import {START_DAY} from '../categories/constants';
 
@@ -7,7 +8,7 @@ function TimetableControl(props){
 
     const {currentWeek} = props;
 
-    const weeks = 20;
+    const weekCount = 20;
 
     const mapWeeks = (weeks)=>{
         var xhtml = [];
@@ -16,7 +17,7 @@ function TimetableControl(props){
             //date2 = date1 + 6days
             let date2 = new Date(convertDayToMilliseconds(i) + 518400000);
             let option = (
-                <option key={i} value={i}>
+                <option key={i} value={i+1}>
                     Week {i+1} [{date1.getDate()}/{date1.getMonth()+1} -- {date2.getDate()}/{date2.getMonth()+1}]
                 </option>   
             )
@@ -38,7 +39,7 @@ function TimetableControl(props){
 
     const onSetWeek = (e)=>{
         var value = e.target.value;
-        props.onSetWeek(parseInt(value)+1);
+        props.onSetWeek(parseInt(value));
     }
 
     return(
@@ -54,7 +55,7 @@ function TimetableControl(props){
             defaultValue={currentWeek}
             onChange={onSetWeek}
             >
-                {mapWeeks(weeks)}
+                {mapWeeks(weekCount)}
             </select>
 
         </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../assets/images/ptit-icon.png";
 import { BrowserRouter as Link, NavLink } from "react-router-dom";
-import { connect } from "http2";
+import { connect } from "react-redux";
 
 function Menu(props) {
   const onLogout = () => {
@@ -73,7 +73,7 @@ function Menu(props) {
             >
               <p
               style={{ textAlign: "center", padding: "10px 0", borderBottom: "1px solid rgba(0,0,0,.15)", color: "gray", fontWeight: 300 }}>
-                {props.user}
+                {props.user ? props.user : ""}
               </p>
               <NavLink className="dropdown-item" to="/edit-info">
                 Edit info
@@ -91,7 +91,7 @@ function Menu(props) {
 
 const mapState = state => {
   return {
-    user: state.user.username
+    user: state.app.user?.name
   }
 }
 
