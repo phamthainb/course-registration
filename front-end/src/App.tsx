@@ -4,7 +4,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import "./App.css";
 import routes from "./routes";
 import { ToastContainer } from "react-toastify";
@@ -14,10 +14,27 @@ import Layout from "components/Layout";
 import Login from "pages/Login";
 import Loading from "components/Loading";
 import { useSelector } from "react-redux";
+import { apiToken } from "common/axiosService";
+import * as constants from './pages/categories/constants';
+import store from "./redux";
+import { getUser } from "reducers/app";
 
 function App() {
-  let jwt = localStorage.getItem("jwt") || sessionStorage.getItem("jwt");
+  console.log('app');
+  
+  let jwt = localStorage.getItem("jwt") || sessionStorage.getItem("jwt")
+  useEffect(()=>{
+    apiToken("GET", constants.GET_USER, null)
+    .then(res => {
+      store.dispatch(getUser(res.data));
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  })
+
   const list = useMemo(() => routes.map((route) => route.path), []);
+
   // get loading
   const loading = useSelector((state: any) => state.app.loading);
   return (

@@ -1,9 +1,10 @@
 import React from "react";
 import Logo from "../assets/images/ptit-icon.png";
 import { BrowserRouter as Link, NavLink } from "react-router-dom";
+import { connect } from "http2";
 
-function Menu() {
-    const onLogout = () => {
+function Menu(props) {
+  const onLogout = () => {
     localStorage.removeItem("jwt");
     sessionStorage.removeItem("jwt");
   };
@@ -70,6 +71,10 @@ function Menu() {
               aria-labelledby="dropdownId"
               style={{ left: -120 }}
             >
+              <p
+              style={{ textAlign: "center", padding: "10px 0", borderBottom: "1px solid rgba(0,0,0,.15)", color: "gray", fontWeight: 300 }}>
+                {props.user}
+              </p>
               <NavLink className="dropdown-item" to="/edit-info">
                 Edit info
               </NavLink>
@@ -84,4 +89,10 @@ function Menu() {
   );
 }
 
-export default Menu;
+const mapState = state => {
+  return {
+    user: state.user.username
+  }
+}
+
+export default connect(mapState, null)(Menu);

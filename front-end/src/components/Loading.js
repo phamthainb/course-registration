@@ -5,8 +5,6 @@ export default function Loading({ active }) {
     return (
       <div
         style={{
-          width: "100vw",
-          height: "100vh",
           position: "fixed",
           top: 0,
           left: 0,
@@ -20,6 +18,7 @@ export default function Loading({ active }) {
           alignItems: "center",
           fontSize: 18,
           opacity: 0.6,
+          overflow: "hidden"
         }}
       >
         Loading ...

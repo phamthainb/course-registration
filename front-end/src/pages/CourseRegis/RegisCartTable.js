@@ -1,7 +1,11 @@
+import { apiTokenInterceptors } from 'common/axiosService';
 import React from 'react';
 import * as constants from '../categories/constants';
+import * as toast from '../../common/toast';
 
 function RegisCartTable(props){
+
+    const {cart} = props;
 
     const onUpdateCart = (id, code, nmh, name, crt, pg)=>{
         props.onUpdateCart(id, code, nmh, name, crt, pg);
@@ -13,7 +17,7 @@ function RegisCartTable(props){
 
     const totalCredits = ()=>{
         var total = 0;
-        props.cart.forEach(item=>{
+        cart.forEach(item=>{
             total += parseInt(item.crt);
         })
         return total;
@@ -21,13 +25,13 @@ function RegisCartTable(props){
 
     const totalFee = ()=>{
         var total = 0;
-        props.cart.forEach(item=>{
+        cart.forEach(item=>{
             total += parseInt(item.crt) * 480000;
         })
         return total;
     }
 
-    const mapToCart = props.cart.map((item, index)=>{
+    const mapToCart = cart.map((item, index)=>{
         return(
             <tr key={index}>
                 <td>{index+1}</td>
@@ -50,7 +54,18 @@ function RegisCartTable(props){
     })
 
     const onSaveSubjects = (e)=>{
-        
+        var idList = cart.map(item => {
+            var itemObj = {id: parseInt(item.id)}
+            return itemObj;
+        })
+        console.log(idList);
+        apiTokenInterceptors("PUT", constants.CLASSES, idList)
+        .then(res => {
+            toast.successNotify("Saved to database");
+        })
+        .catch(err => {
+            console.log(err);
+        })
     }
     
     return(
