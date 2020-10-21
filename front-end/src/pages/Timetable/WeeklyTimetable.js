@@ -4,7 +4,6 @@ import React from 'react';
 function WeeklyTimetable(props){
 
     const {subjects, currentWeek} = props;
-    console.log(subjects);
 
     const mapToTimetable = ()=>{
         var xhtml = [];
@@ -14,7 +13,6 @@ function WeeklyTimetable(props){
                 var subElementArr = [];
                 subjects.forEach((sub)=>{
                     subElement = findSubjectElement(sub.time, i);
-                    console.log(subElement);
                     if(subElement.length > 0){
                         subElement.forEach(detail => {
                             subElementArr.push({
@@ -24,7 +22,6 @@ function WeeklyTimetable(props){
                         })
                     }
                 })
-                console.log(subElementArr);
                 let tr = (
                     <tr>
                         <td className="table-dark" width="5%" height={100}>{i} + {i+1}</td>

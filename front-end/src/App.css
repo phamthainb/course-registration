@@ -18,6 +18,7 @@ input, select{
     padding: 10px;
     background-color: inherit;
     color: inherit;
+    max-width: 100%;
 }
 img{
     width: 100%;

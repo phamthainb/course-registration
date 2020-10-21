@@ -95,26 +95,24 @@ function CourseRegis(props) {
 
             {
                 chosenSubject &&
+                <RegisTable
+                    onUpdateCart={onUpdateCart}
+                    chosenSubject={chosenSubject}
+                    cart={cart}>
+                </RegisTable>
+
+            }
+            {
+                cart &&
                 <div>
-                    <RegisTable
+                    <RegisCartTable
+                        cart={cart}
                         onUpdateCart={onUpdateCart}
-                        chosenSubject={chosenSubject}
-                        cart={cart}>
-                    </RegisTable>
-
-                    {
-                        cart &&
-                        <RegisCartTable
-                            cart={cart}
-                            onUpdateCart={onUpdateCart}
-                            onDeleteAllFromCart={onDeleteAllFromCart}>
-                        </RegisCartTable>
-                    }
-
+                        onDeleteAllFromCart={onDeleteAllFromCart}>
+                    </RegisCartTable>
                     <RegisNote></RegisNote>
                 </div>
             }
-
         </div>
     )
 }

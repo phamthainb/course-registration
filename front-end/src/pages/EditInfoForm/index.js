@@ -26,16 +26,29 @@ function EditInfoForm(props) {
     }
 
     const onUpdate =()=>{
-        apiTokenInterceptors("PUT", constants.GET_USER, {
-            phone: phone,
-            email: email
-        })
-        .then(res => {
-            toast.successNotify("Updated successfully");
-        })
-        .catch(err => {
-            console.log(err);
-        })
+        if(validate(phone, email)){
+            apiTokenInterceptors("PUT", constants.GET_USER, {
+                ...user, phone, email
+            })
+            .then(res => {
+                toast.successNotify("Updated successfully");
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+        else{
+            toast.errNotify("Wrong validate !")
+        }
+    }
+
+    const validate = (phone, email)=>{
+        const phoneRegex = "^[0-9]{10}$";
+        const emailRegex = "^[a-zA-Z0-9]+@gmail.com$";
+        if(phone.match(phoneRegex) && email.match(emailRegex)){
+            return true;
+        }
+        return false;
     }
 
     const onCancel =()=>{
@@ -83,6 +96,7 @@ function EditInfoForm(props) {
                             value={phone}
                             autoComplete={false}
                             onChange={onEditInfo}
+                            type="number"
                             name="phone"/>
                         </td>
                     </tr>

@@ -69,7 +69,10 @@ function RegisCartTable(props){
     }
     
     return(
-        <div className="table-responsive mt-5">
+        <div className="table-responsive mt-5" style={{
+            maxHeight: 400,
+            overflow: "auto"
+        }}>
             <table className="table regis-submit-table table-bordered">
                 <thead className="thead-dark">
                     <tr>

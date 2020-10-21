@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/ptit-icon.png";
@@ -8,6 +8,16 @@ function Menu(props) {
     localStorage.removeItem("jwt");
     sessionStorage.removeItem("jwt");
   };
+
+  const [showMenu, setShowMenu] = useState(false);
+
+  const onCloseMenu = ()=>{
+    setShowMenu(false);
+  }
+
+  const onOpenMenu = ()=>{
+    setShowMenu(true);
+  }
 
   return (
     <nav
@@ -29,6 +39,7 @@ function Menu(props) {
         data-target="#collapsibleNavId"
         aria-controls="collapsibleNavId"
         aria-expanded="false"
+        onClick={onOpenMenu}
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>
@@ -36,22 +47,22 @@ function Menu(props) {
       <div className="collapse navbar-collapse" id="collapsibleNavId">
         <ul className="navbar-nav ml-auto mt-2 mt-lg-0">
           <li className="nav-item ml-2">
-            <NavLink className="nav-link" to="/">
+            <NavLink className="nav-link" to="/" onClick={onCloseMenu}>
               Home
             </NavLink>
           </li>
           <li className="nav-item ml-2">
-            <NavLink className="nav-link" to="/course-regis">
+            <NavLink className="nav-link" to="/course-regis" onClick={onCloseMenu}>
               Course-regis
             </NavLink>
           </li>
           <li className="nav-item ml-2">
-            <NavLink className="nav-link" to="/timetable">
+            <NavLink className="nav-link" to="/timetable" onClick={onCloseMenu}>
               Timetable
             </NavLink>
           </li>
           <li className="nav-item ml-2">
-            <NavLink className="nav-link" to="/about">
+            <NavLink className="nav-link" to="/about" onClick={onCloseMenu}>
               About
             </NavLink>
           </li>
@@ -75,7 +86,7 @@ function Menu(props) {
               style={{ textAlign: "center", padding: "10px 0", borderBottom: "1px solid rgba(0,0,0,.15)", color: "gray", fontWeight: 300 }}>
                 {props.user ? props.user : ""}
               </p>
-              <NavLink className="dropdown-item" to="/edit-info">
+              <NavLink className="dropdown-item" to="/edit-info" onClick={onCloseMenu}>
                 Edit info
               </NavLink>
               <NavLink className="dropdown-item" to="/login" onClick={onLogout}>
