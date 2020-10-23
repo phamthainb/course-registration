@@ -22,6 +22,7 @@ import { getUser } from "reducers/app";
 function App() {
   
   useEffect(()=>{
+    
     apiToken("GET", constants.GET_USER, null)
     .then(res => {
       store.dispatch(getUser(res.data));

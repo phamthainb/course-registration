@@ -87,7 +87,7 @@ function Menu(props) {
                 {props.user ? props.user : ""}
               </p>
               <NavLink className="dropdown-item" to="/edit-info" onClick={onCloseMenu}>
-                Edit info
+                Information
               </NavLink>
               <NavLink className="dropdown-item" to="/login" onClick={onLogout}>
                 Log out

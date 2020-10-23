@@ -1,5 +1,5 @@
 import { apiTokenInterceptors } from 'common/axiosService';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import ChangePassForm from './ChangePassForm';
 import * as constants from '../categories/constants';
@@ -9,6 +9,10 @@ import './style.css';
 function EditInfoForm(props) {
 
     const {user} = props;
+    useEffect(()=>{
+        setPhone(user?.phone);
+        setEmail(user?.email);
+    } , [user])
 
     const [phone, setPhone] = useState(user?.phone);
     const [email, setEmail] = useState(user?.email);
@@ -39,12 +43,13 @@ function EditInfoForm(props) {
         }
         else{
             toast.errNotify("Wrong validate !")
+            console.log(phone, email);
         }
     }
 
     const validate = (phone, email)=>{
         const phoneRegex = "^[0-9]{10}$";
-        const emailRegex = "^[a-zA-Z0-9]+@gmail.com$";
+        const emailRegex = "^[a-zA-Z]+[a-zA-Z0-9]*@(gmail.com|ptit.edu.vn)$";
         if(phone.match(phoneRegex) && email.match(emailRegex)){
             return true;
         }
@@ -52,10 +57,8 @@ function EditInfoForm(props) {
     }
 
     const onCancel =()=>{
-        console.log('cancel');
         setPhone(user?.phone);
         setEmail(user?.email);
-        console.log(phone, email);
     }
 
     return(

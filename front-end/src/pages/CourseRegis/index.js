@@ -18,16 +18,14 @@ function CourseRegis(props) {
     useEffect(() => {
         props.onGetSubjects();
         var userCart = props.user?.classRooms.map(item => {
-            return (
-                {
-                    id: item.id,
-                    code: item.subject.code,
-                    nmh: item.nmh,
-                    name: item.subject.name,
-                    crt: item.subject.credit,
-                    pg: item.tth,
-                }
-            )
+            return ({
+                id: item.id,
+                code: item.subject.code,
+                nmh: item.nmh,
+                name: item.subject.name,
+                crt: item.subject.credit,
+                pg: item.tth,
+            })
         })
         setCart(userCart);
     }, [])

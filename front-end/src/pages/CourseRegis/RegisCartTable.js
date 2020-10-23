@@ -1,11 +1,12 @@
 import { apiTokenInterceptors } from 'common/axiosService';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as constants from '../categories/constants';
 import * as toast from '../../common/toast';
 
 function RegisCartTable(props){
 
     const {cart} = props;
+    console.log('render');
 
     const onUpdateCart = (id, code, nmh, name, crt, pg)=>{
         props.onUpdateCart(id, code, nmh, name, crt, pg);

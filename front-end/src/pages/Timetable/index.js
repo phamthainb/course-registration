@@ -42,7 +42,7 @@ function Timetable(props) {
 			)
 		})
 		setSubjects(subjects);
-	}, [])
+	}, [props.inCartSubjects])
 
 	const onChangeTimetable = (value) => {
 		setTimetable(value);
