@@ -86,7 +86,7 @@ function PersonalTimetable(props) {
     }
 
     return(
-        <div className="table-responsive mt-4" >
+        <div className="table-responsive mt-4" style={{minHeight: "70vh"}}>
             <table className="table table-striped table-bordered">
                 <thead className="thead-dark">
                     <tr>

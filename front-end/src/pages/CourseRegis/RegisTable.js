@@ -114,7 +114,7 @@ function RegisTable(props) {
   });
 
   return (
-    <div>
+    <div style={{margin: "0 20px"}}>
       <div
         className="table-responsive"
         style={{ maxHeight: 400, overflow: "auto" }}
