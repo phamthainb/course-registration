@@ -43,6 +43,8 @@ public class UserServiceImpl implements UserService {
             User user = converter.toEntity(userDto);
             String password = user.getCode();
             String username = user.getCode();
+            if (userRepository.findByUsername(username) != null)
+                throw ApiException.from(HttpStatus.INTERNAL_SERVER_ERROR).message(MessageConstants.USER_CONSIST)
             user.setPassword(passwordEncoder.encode(password));
             user.setUsername(username);
             user.setActive(true);
@@ -77,6 +79,8 @@ public class UserServiceImpl implements UserService {
         });
         classRooms.forEach(classRoomDto -> {
             ClassRoom classRoom = classRoomRepository.findById(classRoomDto.getId()).get();
+            if (classRoom.getSlot() == 0)
+                throw ApiException.from(HttpStatus.INTERNAL_SERVER_ERROR).message(MessageConstants.CLASS_FULL)
             classRoom.setSlot(classRoom.getSlot()-1);
             list.add(classRoom);
         });
@@ -92,12 +96,6 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteAll(list);
     }
 
-    @Override
-    public void removeClasses(List<ClassRoom> classRooms) {
-        User user = userRepository.findById(securityUtil.getUserDetails().getUser().getId()).get();
-        boolean list = user.getClassRooms().removeAll(classRooms);
-        userRepository.save(user);
-    }
 
     @Override
     @Transactional(readOnly = true)
