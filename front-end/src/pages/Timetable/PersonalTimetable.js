@@ -1,9 +1,7 @@
 import RegisNote from 'pages/CourseRegis/RegisNote';
 import React from 'react';
-// import subjects from './subjects';
 
 function PersonalTimetable(props) {
-
 
     const {subjects} = props;
 

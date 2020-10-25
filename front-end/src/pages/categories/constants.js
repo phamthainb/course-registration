@@ -5,12 +5,15 @@ export const API_ENDPOINT = process.env.REACT_APP_API;
 export const FETCH_SUBJECTS_SUCCESS = "FETCH_SUBJECTS_SUCCESS";
 export const FETCH_SUJBECTS_FAILED = "FETCH_SUJBECTS_FAILED";
 export const UPDATE_CART = "UPDATE_CART";
+export const SHOW_SUBJECT_LIST = "SHOW_SUBJECT_LIST";
+export const SHOW_CHOSEN_SUBJECT = "SHOW_CHOSEN_SUBJECT";
+export const DELETE_ALL_FROM_CART = "DELETE_ALL_FROM_CART";
 
 //message
-export const ADD_TO_CART_SUCCESSFUL = "Add to cart successfully"
-export const SAVE_SUCCESSFUL = "Saved to database"
-export const LOGIN_SUCCESSFUL = "Login successfully"
-export const LOGIN_FAILED = "Invalid user !"
+export const ADD_TO_CART_SUCCESSFUL = "Add to cart successfully";
+export const SAVE_SUCCESSFUL = "Saved to database";
+export const LOGIN_SUCCESSFUL = "Login successfully";
+export const LOGIN_FAILED = "Invalid user !";
 
 //day
 const currentYear = new Date().getUTCFullYear();

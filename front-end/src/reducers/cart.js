@@ -1,36 +1,46 @@
-// import * as constants from '../pages/categories/constants';
+import * as constants from '../pages/categories/constants';
+import * as toast from '../common/toast';
 
-// var initState = [];
+var initState = [];
 
-// var cartReducer = (state = initState, action)=>{
-//     switch (action.type){
+var cartReducer = (state = initState, action) => {
 
-//         case constants.UPDATE_CART:
-//             var {subject} = action;
-//             updateCart(state, subject);
-//             return [...state];
+    switch (action.type) {
 
-//         default:
-//             return [];
-//     }
-// }
+        case constants.UPDATE_CART:
+            var { id, code, nmh, name, crt, pg } = action.payload;
+            var check = false;
+            if (state.length > 0) {
+                state.forEach((item, index) => {
+                    if (item.code === code) {
+                        check = true;
+                        if (item.nmh === nmh && parseInt(item.pg) === parseInt(pg)) {
+                            state.splice(index, 1);
+                            //toast
+                            toast.errNotify('Subject deleted');
+                        }
+                        else {
+                            state[index] = { ...state[index], id, nmh, pg }
+                            //toast
+                            // toast.warningNotify('Subject updated');
+                        }
+                    }
+                })
+            }
+            if (check === false) {
+                state.push({ id, code, nmh, name, crt, pg });
+                //toast
+                // toast.successNotify('Subject added');
+            }
+            return [...state];
 
-// const updateCart = function(cart, sub){
-//     var check = false;
-//     cart.forEach((item, index)=>{
-//         if(item.code === sub.code){
-//             check=true;
-//             if(item.id === sub.id){
-//                 cart.splice(index, 1);
-//             }
-//             else{
-//                 cart = [...cart, cart[index].id = sub.id];
-//             }
-//         }
-//     })
-//     if(check === false){
-//         cart.push(sub);
-//     }
-// }
+        case constants.DELETE_ALL_FROM_CART:
+            toast.errNotify("All deleted");
+            return [];
 
-// export default cartReducer;
+        default:
+            return [...state];
+    }
+}
+
+export default cartReducer;

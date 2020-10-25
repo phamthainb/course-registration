@@ -1,6 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import * as actions from '../categories/actions';
 
 function RegisTable(props) {
+
   const { chosenSubject, cart } = props;
 
   const onUpdateCart = (e) => {
@@ -135,11 +138,26 @@ function RegisTable(props) {
               <th>Week</th>
             </tr>
           </thead>
-          <tbody>{mapListToTable}</tbody>
+          <tbody>{chosenSubject.length > 0 && mapListToTable}</tbody>
         </table>
       </div>
     </div>
   );
 }
 
-export default RegisTable;
+const mapState = state => {
+  return{
+    cart: state.cart,
+    chosenSubject: state.chosenSubject
+  }
+}
+
+const mapDispatch = dispatch => {
+  return{
+    onUpdateCart: (id, code, nmh, name, crt, pg)=>{
+      dispatch(actions.updateCart(id, code, nmh, name, crt, pg))
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(RegisTable);

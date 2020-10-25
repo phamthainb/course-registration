@@ -1,41 +1,58 @@
 import { apiTokenInterceptors } from 'common/axiosService';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import * as constants from '../categories/constants';
 import * as toast from '../../common/toast';
+import { connect } from 'react-redux';
+import * as actions from '../categories/actions';
 
-function RegisCartTable(props){
+function RegisCartTable(props) {
 
-    const {cart} = props;
-    console.log('render');
+    const { cart } = props;
 
-    const onUpdateCart = (id, code, nmh, name, crt, pg)=>{
+    useEffect(() => (
+        props.userCart?.forEach(item => {
+            if(cart.findIndex(cartItem => {
+                return cartItem.id === item.id
+            }) === -1){
+                props.onUpdateCart(
+                    item.id,
+                    item.subject.code,
+                    item.nmh,
+                    item.subject.name,
+                    item.subject.credit,
+                    item.tth);
+            }
+        })
+    ), []);
+
+    const onUpdateCart = (id, code, nmh, name, crt, pg) => {
         props.onUpdateCart(id, code, nmh, name, crt, pg);
     }
 
-    const onDeleteAllFromCart = ()=>{
+    const onDeleteAllFromCart = () => {
         props.onDeleteAllFromCart();
     }
 
-    const totalCredits = ()=>{
+    const totalCredits = () => {
         var total = 0;
-        cart.forEach(item=>{
+        cart.forEach(item => {
             total += parseInt(item.crt);
         })
         return total;
     }
 
-    const totalFee = ()=>{
+    const totalFee = () => {
         var total = 0;
-        cart.forEach(item=>{
+        cart.forEach(item => {
             total += parseInt(item.crt) * 480000;
         })
         return total;
     }
 
-    const mapToCart = cart.map((item, index)=>{
-        return(
+    const mapToCart = cart.map((item, index) => {
+        return (
             <tr key={index}>
-                <td>{index+1}</td>
+                <td>{index + 1}</td>
                 <td>{item.code}</td>
                 <td>{item.name}</td>
                 <td>{item.nmh}</td>
@@ -45,8 +62,8 @@ function RegisCartTable(props){
                 <td>{constants.ADD_TO_CART_SUCCESSFUL}</td>
                 <td>
                     <button
-                    className="btn btn-outline-dark"
-                    onClick={() => onUpdateCart(item.id, item.code, item.nmh, item.name, item.crt, item.pg)}>
+                        className="btn btn-outline-dark"
+                        onClick={() => onUpdateCart(item.id, item.code, item.nmh, item.name, item.crt, item.pg)}>
                         Delete
                     </button>
                 </td>
@@ -54,22 +71,21 @@ function RegisCartTable(props){
         )
     })
 
-    const onSaveSubjects = (e)=>{
+    const onSaveSubjects = () => {
         var idList = cart.map(item => {
-            var itemObj = {id: parseInt(item.id)}
+            var itemObj = { id: parseInt(item.id) }
             return itemObj;
         })
-        console.log(idList);
         apiTokenInterceptors("PUT", constants.CLASSES, idList)
-        .then(res => {
-            toast.successNotify("Saved to database");
-        })
-        .catch(err => {
-            console.log(err);
-        })
+            .then(res => {
+                toast.successNotify("Saved to database");
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
-    
-    return(
+
+    return (
         <div className="table-responsive mt-5" style={{
             maxHeight: 400,
             overflow: "auto"
@@ -93,17 +109,17 @@ function RegisCartTable(props){
                 </thead>
                 <tbody>
                     {mapToCart}
-                    <tr className="table-active" style={{fontWeight: 800}}>
+                    <tr className="table-active" style={{ fontWeight: 800 }}>
                         <td colSpan={5} className="text-center">Total</td>
                         <td>{totalCredits()}</td>
                         <td>{totalFee()}</td>
-                        <td>
+                        <td style={{display: "flex", justifyContent: "space-between"}}>
                             <button className="btn btn-info" onClick={onSaveSubjects}>
                                 <i className="fa fa-check" aria-hidden="true"></i> Save
                             </button>
                             <button
-                            className="btn btn-dark float-right"
-                            onClick={onDeleteAllFromCart}>
+                                className="btn btn-dark float-right"
+                                onClick={onDeleteAllFromCart}>
                                 Delete All
                             </button>
                         </td>
@@ -115,4 +131,22 @@ function RegisCartTable(props){
     )
 }
 
-export default RegisCartTable;
+const mapState = state => {
+    return {
+        cart: state.cart,
+        userCart: state.app.user?.classRooms
+    }
+}
+
+const mapDispatch = dispatch => {
+    return {
+        onUpdateCart: (id, code, nmh, name, crt, pg) => {
+            dispatch(actions.updateCart(id, code, nmh, name, crt, pg))
+        },
+        onDeleteAllFromCart: () => {
+            dispatch(actions.deleteAllFromCart());
+        }
+    }
+}
+
+export default connect(mapState, mapDispatch)(RegisCartTable);

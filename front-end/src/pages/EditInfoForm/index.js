@@ -14,6 +14,7 @@ function EditInfoForm(props) {
         setEmail(user?.email);
     } , [user])
 
+
     const [phone, setPhone] = useState(user?.phone);
     const [email, setEmail] = useState(user?.email);
 
@@ -32,7 +33,7 @@ function EditInfoForm(props) {
     const onUpdate =()=>{
         if(validate(phone, email)){
             apiTokenInterceptors("PUT", constants.GET_USER, {
-                ...user, phone, email
+                ...user, phone: phone, email: email
             })
             .then(res => {
                 toast.successNotify("Updated successfully");
@@ -50,8 +51,10 @@ function EditInfoForm(props) {
     const validate = (phone, email)=>{
         const phoneRegex = "^[0-9]{10}$";
         const emailRegex = "^[a-zA-Z]+[a-zA-Z0-9]*@(gmail.com|ptit.edu.vn)$";
-        if(phone.match(phoneRegex) && email.match(emailRegex)){
-            return true;
+        if(phone && email){
+            if(phone.match(phoneRegex) && email.match(emailRegex)){
+                return true;
+            }
         }
         return false;
     }
