@@ -23,7 +23,7 @@ function WeeklyTimetable(props){
                     }
                 })
                 let tr = (
-                    <tr>
+                    <tr key={Date.now().toString() + i}>
                         <td className="table-dark" width="5%" height={100}>{i} + {i+1}</td>
                         <td>{mapToTr(subElementArr, "Hai")}</td>
                         <td>{mapToTr(subElementArr, "Ba")}</td>

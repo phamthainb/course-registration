@@ -99,7 +99,7 @@ function EditInfoForm(props) {
                         <td className="label">Phone number : </td>
                         <td>
                             <input
-                            value={phone}
+                            value={phone ? phone : ''}
                             autoComplete={false}
                             onChange={onEditInfo}
                             type="number"
@@ -110,7 +110,7 @@ function EditInfoForm(props) {
                         <td className="label">Email : </td>
                         <td>
                             <input
-                            value={email}
+                            value={email ? email : ''}
                             autoComplete={false}
                             onChange={onEditInfo}
                             name="email"/>

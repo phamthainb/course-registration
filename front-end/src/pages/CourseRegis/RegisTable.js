@@ -30,7 +30,7 @@ function RegisTable(props) {
       sub.status = false;
       if (cart) {
         cart.forEach((item) => {
-          if (item.id == sub.id) {
+          if (parseInt(item.id) === parseInt(sub.id)) {
             sub.status = true;
           }
         });
