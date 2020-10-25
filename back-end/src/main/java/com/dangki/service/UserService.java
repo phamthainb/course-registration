@@ -11,7 +11,6 @@ public interface UserService {
     UserDto update(UserDto userDto);
     UserDto updateClass(List<ClassRoomDto> classRooms);
     void delete(List<UserDto> users);
-    void removeClasses(List<ClassRoom> ClassRoom);
     List<UserDto> findAll();
     List<UserDto> findAllUsersOfClassRoom(Long id);
 }

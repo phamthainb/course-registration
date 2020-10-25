@@ -57,9 +57,9 @@ for (let i = 0; i < allData.length; i++) {
         let ww = [];
         for (let k = 0; k < we.length; k++) {
           if (we[k] !== "-") {
-            let element = Number(we[k]);
-            if (k >= 9) element += k + 1;
-            // console.log("element", element);
+            let element = k+1;
+            // if (k >= 9) element +=1;
+            console.log("element", element);
             ww.push({ name: element });
           }
         }
