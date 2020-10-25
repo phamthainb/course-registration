@@ -1,49 +1,57 @@
 import React from 'react';
 // import BottomButton from './BottomButton.js';
-import subjects from './subjects.js';
 
 function WeeklyTimetable(props){
 
+    const {subjects, currentWeek} = props;
+
     const mapToTimetable = ()=>{
         var xhtml = [];
-        for(let i=1; i<12; i+=2){
-            var subElement = null;
-            var subElementArr = [];
-            subjects.forEach((sub)=>{
-                subElement = findSubjectElement(sub.time, i);
-                if(subElement[0]){
-                    subElementArr.push({
-                        name: sub.name,
-                        detail: subElement[0]
-                    });
-                }
-            })
-            let tr = (
-                <tr>
-                    <td className="table-dark" width="5%" height={100}>{i} + {i+1}</td>
-                    <td>{mapToTr(subElementArr, "mon")}</td>
-                    <td>{mapToTr(subElementArr, "tue")}</td>
-                    <td>{mapToTr(subElementArr, "wed")}</td>
-                    <td>{mapToTr(subElementArr, "thu")}</td>
-                    <td>{mapToTr(subElementArr, "fri")}</td>
-                    <td>{mapToTr(subElementArr, "sat")}</td>
-                    <td>{mapToTr(subElementArr, "sun")}</td>
-                </tr>
-            );
-            xhtml.push(tr);
+        if(subjects){
+            for(let i=1; i<12; i+=2){
+                var subElement = null;
+                var subElementArr = [];
+                subjects.forEach((sub)=>{
+                    subElement = findSubjectElement(sub.time, i);
+                    if(subElement.length > 0){
+                        subElement.forEach(detail => {
+                            subElementArr.push({
+                                name: sub.name,
+                                detail: detail
+                            })
+                        })
+                    }
+                })
+                let tr = (
+                    <tr key={Date.now().toString() + i}>
+                        <td className="table-dark" width="5%" height={100}>{i} + {i+1}</td>
+                        <td>{mapToTr(subElementArr, "Hai")}</td>
+                        <td>{mapToTr(subElementArr, "Ba")}</td>
+                        <td>{mapToTr(subElementArr, "Tư")}</td>
+                        <td>{mapToTr(subElementArr, "Năm")}</td>
+                        <td>{mapToTr(subElementArr, "Sáu")}</td>
+                        <td>{mapToTr(subElementArr, "Bảy")}</td>
+                        <td>{mapToTr(subElementArr, "CN")}</td>
+                    </tr>
+                );
+                xhtml.push(tr);
+            }
         }
         return xhtml;
     }
 
-    const findSubjectElement = (list, id)=>{
-        return list.filter(item => {
-            return item.start === id;
+    const findSubjectElement = (list, value)=>{
+        var listDetails = [];
+        list.forEach(item => {
+            if(item.start === value){
+                listDetails.push(item);
+            }
         })
+        return listDetails;
     }
 
     const mapToTr = (subElementArr, value)=>{
         var xhtml = [];
-        var {currentWeek} = props;
         subElementArr.forEach(sub => {
             if(sub.detail.week.includes(parseInt(currentWeek))){
                 if(sub.detail.day.toLowerCase() === value.toLowerCase()){

@@ -1,19 +1,67 @@
-import React from 'react';
+import { apiTokenInterceptors } from 'common/axiosService';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import ChangePassForm from './ChangePassForm';
+import * as constants from '../categories/constants';
+import * as toast from '../../common/toast';
 import './style.css';
 
-function EditInfoForm() {
+function EditInfoForm(props) {
+
+    const {user} = props;
+    useEffect(()=>{
+        setPhone(user?.phone);
+        setEmail(user?.email);
+    } , [user])
+
+
+    const [phone, setPhone] = useState(user?.phone);
+    const [email, setEmail] = useState(user?.email);
 
     const onEditInfo = (e)=>{
-        
+        var target = e.target;
+        var name = target.name;
+        var value = target.value;
+        if(name === 'phone'){
+            setPhone(value);
+        }
+        else{
+            setEmail(value);
+        }
     }
 
-    const onUpdate =(e)=>{
-        
+    const onUpdate =()=>{
+        if(validate(phone, email)){
+            apiTokenInterceptors("PUT", constants.GET_USER, {
+                ...user, phone: phone, email: email
+            })
+            .then(res => {
+                toast.successNotify("Updated successfully");
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
+        else{
+            toast.errNotify("Wrong validate !")
+            console.log(phone, email);
+        }
     }
 
-    const onCancel =(e)=>{
+    const validate = (phone, email)=>{
+        const phoneRegex = "^[0-9]{10}$";
+        const emailRegex = "^[a-zA-Z]+[a-zA-Z0-9]*@(gmail.com|ptit.edu.vn)$";
+        if(phone && email){
+            if(phone.match(phoneRegex) && email.match(emailRegex)){
+                return true;
+            }
+        }
+        return false;
+    }
 
+    const onCancel =()=>{
+        setPhone(user?.phone);
+        setEmail(user?.email);
     }
 
     return(
@@ -25,42 +73,47 @@ function EditInfoForm() {
                 <tbody>
                     <tr>
                         <td className="label">Name : </td>
-                        <td>Hoang thai son</td>
+                        <td>{user?.name}</td>
                     </tr>
                     <tr>
                         <td className="label">ID : </td>
-                        <td>B18DCCN511</td>
+                        <td>{user?.code}</td>
                     </tr>
                     <tr>
-                        <td className="label">Gender : </td>
-                        <td>Male</td>
+                        <td className="label">Grade : </td>
+                        <td>{user?.lop}</td>
                     </tr>
                     <tr>
                         <td className="label">Birthday : </td>
-                        <td>18/09/2000</td>
+                        <td>{user?.birthday}</td>
                     </tr>
                     <tr>
                         <td className="label">Cohort : </td>
-                        <td>2018 -- 2023</td>
+                        <td>{user?.code && convertCohort(user.code)}</td>
                     </tr>
                     <tr>
                         <td className="label">Major : </td>
-                        <td>Information technology</td>
+                        <td>{user?.code && convertMajor(user.code)}</td>
                     </tr>
                     <tr>
                         <td className="label">Phone number : </td>
                         <td>
                             <input
-                            defaultValue="0329271723"
-                            onChange={onEditInfo}/>
+                            value={phone ? phone : ''}
+                            autoComplete={false}
+                            onChange={onEditInfo}
+                            type="number"
+                            name="phone"/>
                         </td>
                     </tr>
                     <tr>
                         <td className="label">Email : </td>
                         <td>
                             <input
-                            defaultValue="sonht1109@edu.ptit.vn"
-                            onChange={onEditInfo}/>
+                            value={email ? email : ''}
+                            autoComplete={false}
+                            onChange={onEditInfo}
+                            name="email"/>
                         </td>
                     </tr>
                 </tbody>
@@ -77,4 +130,22 @@ function EditInfoForm() {
         </div>
     )
 }
-export default EditInfoForm;
+
+const mapState = state => {
+    return{
+        user:  state.app.user
+    }
+}
+
+const convertCohort = (s)=>{
+    var startYear = parseInt(s.substring(1, 3)) + 2000;
+    var endYear = startYear + 5;
+    return startYear + " -- " + endYear;
+}
+
+const convertMajor = (s)=>{
+    var major = s.substring(5, 7);
+    return major;
+}
+
+export default connect(mapState, null)(EditInfoForm);

@@ -1,43 +1,81 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.css';
 import TimetableControl from './TimetableControl';
 import WeeklyTimetable from './WeeklyTimetable';
 import PersonalTimetable from './PersonalTimetable';
-import {START_DAY, CURRENT_DAY} from '../categories/constants'
+import { connect } from 'react-redux';
+import { CURRENT_DAY, START_DAY } from '../categories/constants';
 
-function Timetable() {
+function Timetable(props) {
 
-    const [timetable, setTimetable] = useState('weekly');
+	const [timetable, setTimetable] = useState('weekly');
 
-    const [currentWeek, setCurrentWeek] = 
-    useState(Math.floor((CURRENT_DAY - START_DAY)/604800000)); //currentDay - startDay
+	const [currentWeek, setCurrentWeek] =
+		useState(Math.floor((CURRENT_DAY - START_DAY) / 604800000) + 1);
+		//currentDay - startDay
 
+	const [subjects, setSubjects] = useState([]);
 
-    const onChangeTimetable = (value)=>{
-        setTimetable(value);
-    }
+	useEffect(() => {
+		var subjects = props.inCartSubjects?.map(item => {
+			return (
+				{
+					code: item.subject.code,
+					name: item.subject.name,
+					id: item.nmh,
+					crt: item.subject.credit,
+					pg: item.tth,
+					time: item.details.map(detail => {
+						return (
+							{
+								day: detail.time.name,
+								start: detail.time.lesson,
+								less: 2,
+								room: detail.room.name,
+								week: detail.weeks.map(week => {
+									return Number(week.name);
+								}).sort((a, b) => a - b),
+							}
+						)
+					})
+				}
+			)
+		})
+		setSubjects(subjects);
+	}, [props.inCartSubjects])
 
-    const onSetWeek = (week)=>{
-        setCurrentWeek(week)
-    }
+	const onChangeTimetable = (value) => {
+		setTimetable(value);
+	}
 
-    return(
-        <div>
-            <TimetableControl
-            onChangeTimetable={onChangeTimetable}
-            currentWeek={currentWeek}
-            onSetWeek={onSetWeek}
-            >
-            </TimetableControl>
-            {
-                timetable === "weekly" &&
-                <WeeklyTimetable currentWeek={currentWeek}></WeeklyTimetable>
-            }
-            {
-                timetable === "personal" &&
-                <PersonalTimetable></PersonalTimetable>
-            }
-        </div>
-    )
+	const onSetWeek = (week) => {
+		setCurrentWeek(week)
+	}
+
+	return (
+		<div>
+			<TimetableControl
+				onChangeTimetable={onChangeTimetable}
+				currentWeek={currentWeek}
+				onSetWeek={onSetWeek}
+			>
+			</TimetableControl>
+			{
+				timetable === "weekly" &&
+				<WeeklyTimetable subjects={subjects} currentWeek={currentWeek}></WeeklyTimetable>
+			}
+			{
+				timetable === "personal" &&
+				<PersonalTimetable subjects={subjects} ></PersonalTimetable>
+			}
+		</div>
+	)
 }
-export default Timetable;
+
+const mapState = state => {
+	return {
+		inCartSubjects: state.app.user?.classRooms
+	}
+}
+
+export default connect(mapState, null)(Timetable);

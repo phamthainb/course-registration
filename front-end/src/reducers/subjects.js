@@ -12,6 +12,9 @@ var subjectReducer = (state = initState, action)=>{
             toast.errNotify(action.err.message);
             return [];
 
+        case constants.SHOW_SUBJECT_LIST:
+            return action.data
+
         default:
             return [...state];
     }

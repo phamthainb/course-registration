@@ -1,8 +1,9 @@
 import RegisNote from 'pages/CourseRegis/RegisNote';
 import React from 'react';
-import subjects from './subjects';
 
-function PersonalTimetable() {
+function PersonalTimetable(props) {
+
+    const {subjects} = props;
 
     const mapListToTable = ()=>{
         let table = [];
@@ -13,7 +14,7 @@ function PersonalTimetable() {
                         <td>{sub.code}</td>
                         <td>{sub.name}</td>
                         <td>{sub.id}</td>
-                        <td>null</td>
+                        <td>{sub.pg}</td>
                         <td>{sub.crt}</td>
                         <td>{mapDay(sub.time)}</td>
                         <td>{mapStart(sub.time)}</td>
@@ -85,7 +86,7 @@ function PersonalTimetable() {
     }
 
     return(
-        <div className="table-responsive mt-4">
+        <div className="table-responsive mt-4" >
             <table className="table table-striped table-bordered">
                 <thead className="thead-dark">
                     <tr>

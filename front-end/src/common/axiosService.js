@@ -53,7 +53,7 @@ export const apiInterceptors = async (method, url, data) => {
 export const apiTokenInterceptors = async (method, url, data) => {
   let jwt = localStorage.getItem("jwt") || sessionStorage.getItem("jwt");
   return withInterceptors({
-    method: method | "GET",
+    method: method,
     url: `${API_ENDPOINT}/${url}`,
     data: data,
     headers: {

@@ -1,28 +1,69 @@
-import React from "react";
+import { apiTokenInterceptors } from "common/axiosService";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import * as actions from '../categories/actions';
+import * as constants from '../categories/constants';
 
 function RegisControl(props) {
 
-  const onShowSubjectList = (e)=>{
-    var value = e.target.value;
-    props.onShowSubjectList(value);
-  }
+    useEffect(() => {
+        props.onGetSubjects();
+    }, [])
 
-  const mapSubjects = props.subjects.map((sub, index) => {
+    const onChooseSubject = (e) => {
+        var value = e.target.value;
+        apiTokenInterceptors("GET", `${constants.CLASSES}/${value}`)
+            .then(res => {
+                let data = res.data.map((e, i) => {
+                    return ({
+                        ...e, details: e.details.map((d, j) => {
+                            let weeks = d.weeks.map(w => Number(w.name));
+                            weeks.sort((a, b) => a - b)
+                            return ({ ...d, weeks: weeks })
+                        })
+                    })
+                })
+                props.onShowChosenSubject(data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    const mapSubjects = props.subjects.map((sub, index) => {
+        return (
+            <option key={index} value={sub.id}>
+                {`${sub.code} - ${sub.name} ( ${sub.credit} TC )`}
+            </option>
+        );
+    });
+
     return (
-      <option key={index} value={sub.code}>
-        {`${sub.code} - ${sub.name} ( ${sub.crt} TC )`}
-      </option>
+        <div className="regis-control mb-3 mt-3">
+            <select onChange={onChooseSubject} defaultValue="subject">
+                <option value="subject" disabled>Subject</option>
+                {mapSubjects}
+            </select>
+        </div>
     );
-  });
-
-  return (
-    <div className="regis-control mb-3 mt-3">
-      <select onChange={onShowSubjectList} defaultValue="subject">
-        <option value="subject" disabled>Subject</option>
-        {mapSubjects}
-      </select>
-    </div>
-  );
 }
 
-export default RegisControl;
+const mapState = state => {
+    return {
+        subjects: state.subjects,
+        chosenSubject: state.chosenSubject
+    }
+}
+
+const mapDispatch = dispatch => {
+    return {
+        onGetSubjects: () => {
+            dispatch(actions.getSubjectRequest())
+        },
+        onShowChosenSubject: (data) => {
+            dispatch(actions.showChosenSubject(data))
+        },
+    }
+}
+
+export default connect(mapState, mapDispatch)(RegisControl);

@@ -24,7 +24,7 @@ function Login() {
       [name]: value,
     });
   };
-s
+
   const onLogin = (e) => {
     e.preventDefault();
 
