@@ -17,6 +17,7 @@ public class MyUserDetails extends User {
     }
 
     public UserDto getUser() {
+        this.user.setPassword(null);
         return user;
     }
 

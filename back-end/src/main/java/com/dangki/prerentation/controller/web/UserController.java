@@ -62,9 +62,6 @@ public class UserController {
     @PutMapping
     public ResponseEntity<?> update(@RequestBody UserDto userDto)
     {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String password = userDto.getPassword();
-        userDto.setPassword(passwordEncoder.encode(password));
         return ResponseEntity.ok(userService.update(userDto));
     }
 }

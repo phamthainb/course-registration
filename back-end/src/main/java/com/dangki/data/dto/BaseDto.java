@@ -21,31 +21,19 @@ public class BaseDto {
         return creator;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
-    }
 
     public Date getCreatedTime() {
         return createdTime;
     }
 
-    public void setCreatedTime(Date createdTime) {
-        this.createdTime = createdTime;
-    }
 
     public String getModifier() {
         return modifier;
     }
 
-    public void setModifier(String modifier) {
-        this.modifier = modifier;
-    }
 
     public Date getModifiedTime() {
         return modifiedTime;
     }
 
-    public void setModifiedTime(Date modifiedTime) {
-        this.modifiedTime = modifiedTime;
-    }
 }

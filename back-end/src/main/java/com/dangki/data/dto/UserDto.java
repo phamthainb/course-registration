@@ -1,14 +1,18 @@
 package com.dangki.data.dto;
 
-import com.dangki.data.entities.ClassRoom;
 import com.dangki.data.entities.Professor;
 import com.dangki.data.entities.Role;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@Setter
+@Getter
 public class UserDto extends BaseDto {
     private String username;
     private String password;
+    private String oldPassword = null;
     private String name;
     private String code;
     private String email;
@@ -21,84 +25,52 @@ public class UserDto extends BaseDto {
     private List<Role> roles;
     private List<ClassRoomDto> classRooms;
 
-    public String getName() {
-        return name;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getOldPassword() {
+        return oldPassword;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getCode() {
         return code;
     }
 
-    public void setCode(String code) {
-        this.code = code;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getLop() {
         return lop;
     }
 
-    public void setLop(String lop) {
-        this.lop = lop;
-    }
-
     public String getPhone() {
         return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public Boolean getActive() {
         return active;
     }
 
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
     public String getBirthday() {
         return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
     }
 
     public String getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
     public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
     public List<ClassRoomDto> getClassRooms() {
         return classRooms;
-    }
-
-    public void setClassRooms(List<ClassRoomDto> classRooms) {
-        this.classRooms = classRooms;
     }
 
     public Professor getProfessor() {
@@ -109,20 +81,12 @@ public class UserDto extends BaseDto {
         this.professor = professor;
     }
 
-
     public String getUsername() {
         return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 }

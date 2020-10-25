@@ -1,5 +1,7 @@
 package com.dangki.service.impl;
 
+import com.dangki.common.MessageConstants;
+import com.dangki.common.exception.ApiException;
 import com.dangki.common.utils.Converter;
 import com.dangki.common.utils.SecurityUtil;
 import com.dangki.data.dto.ClassRoomDto;
@@ -11,6 +13,8 @@ import com.dangki.data.repository.RoleRepository;
 import com.dangki.data.repository.UserRepository;
 import com.dangki.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,22 +54,31 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public UserDto update(UserDto userDto) {
+    public UserDto update(UserDto userDto){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         User user = userRepository.findById(userDto.getId()).get();
-        User result = converter.toEntity(userDto);
-        result.setUsername(user.getUsername());
-        result.setRoles(user.getRoles());
-//        result.setClasses(user.getClasses());
-        result.setProfessor(user.getProfessor());
-        return converter.toDto(userRepository.save(result));
+        user.setPhone(userDto.getPhone());
+        user.setEmail(userDto.getEmail());
+        if (userDto.getPassword() != null){
+            if (!passwordEncoder.matches(userDto.getOldPassword(),user.getPassword()))
+                throw ApiException.from(HttpStatus.INTERNAL_SERVER_ERROR).message(MessageConstants.OLD_PASSWORD_WRONG);
+            user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        }
+        return converter.toDto(userRepository.save(user));
     }
 
     @Override
     public UserDto updateClass(List<ClassRoomDto> classRooms) {
-        User user = converter.toEntity(securityUtil.getUserDetails().getUser());
+        User user = userRepository.findById(securityUtil.getUserDetails().getUser().getId()).get();
         List<ClassRoom> list = new ArrayList<>();
+        List<ClassRoom> old = user.getClassRooms();
+        old.forEach(classRoom -> {
+            classRoom.setSlot(classRoom.getSlot()+1);
+        });
         classRooms.forEach(classRoomDto -> {
-            list.add(classRoomRepository.findById(classRoomDto.getId()).get());
+            ClassRoom classRoom = classRoomRepository.findById(classRoomDto.getId()).get();
+            classRoom.setSlot(classRoom.getSlot()-1);
+            list.add(classRoom);
         });
         user.setClassRooms(list);
         user = userRepository.save(user);
@@ -81,7 +94,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void removeClasses(List<ClassRoom> classRooms) {
-        User user = converter.toEntity(securityUtil.getUserDetails().getUser());
+        User user = userRepository.findById(securityUtil.getUserDetails().getUser().getId()).get();
         boolean list = user.getClassRooms().removeAll(classRooms);
         userRepository.save(user);
     }
