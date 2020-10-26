@@ -46,6 +46,7 @@ public class ClassRoom extends BaseEntity implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "details_id", referencedColumnName = "id"))
     private Set<Details> details = new HashSet<>();
 
+
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;

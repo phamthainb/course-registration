@@ -12,5 +12,4 @@ public interface UserService {
     UserDto updateClass(List<ClassRoomDto> classRooms);
     void delete(List<UserDto> users);
     List<UserDto> findAll();
-    List<UserDto> findAllUsersOfClassRoom(Long id);
 }

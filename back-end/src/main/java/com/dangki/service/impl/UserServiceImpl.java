@@ -103,8 +103,4 @@ public class UserServiceImpl implements UserService {
         return converter.toDto(userRepository.findAll());
     }
 
-    @Override
-    public List<UserDto> findAllUsersOfClassRoom(Long id) {
-        return converter.toDto(userRepository.findAllByClassRoomId(id));
-    }
 }

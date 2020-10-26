@@ -26,12 +26,20 @@ public class ClassRoomResource {
         this.userService = userService;
     }
 
+    @GetMapping
+    public ResponseEntity<ClassRoomDto> getById(@RequestParam("id") Long id) {
+        log.debug("REST request to get a page of ClassRooms");
+        ClassRoomDto classRoomDto = classRoomService.findById(id);
+        return ResponseEntity.ok().body(classRoomDto);
+    }
+
     /**
      * {@code GET  /class-rooms/subjectId} : get all the classRooms of subject
      *
      * @param subjectId
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of classRooms in body.
      */
+
     @GetMapping("/{subjectId}")
     public ResponseEntity<List<ClassRoomDto>> getAllClassRooms(@PathVariable Long subjectId) {
         log.debug("REST request to get a page of ClassRooms");

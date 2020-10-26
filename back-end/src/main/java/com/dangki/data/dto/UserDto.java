@@ -89,4 +89,7 @@ public class UserDto extends BaseDto {
         return password;
     }
 
+    public void setClassRooms(List<ClassRoomDto> classRooms) {
+        this.classRooms = classRooms;
+    }
 }

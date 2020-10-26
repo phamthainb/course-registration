@@ -29,6 +29,9 @@ public interface ClassRoomService {
      * @return the persisted entity.
      */
     ClassRoom update(ClassRoom classRoom);
+
+    ClassRoomDto findById(Long id);
+
     /**
      * Get all the classRooms.
      *

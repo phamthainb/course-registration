@@ -42,10 +42,6 @@ public class UserController {
         return ResponseEntity.ok(securityUtil.getUserDetails().getUser());
     }
 
-    @GetMapping("/{classId}")
-    public ResponseEntity<?> hello(@PathVariable Long classId) {
-        return ResponseEntity.ok(userService.findAllUsersOfClassRoom(classId));
-    }
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authentication(@RequestBody UserDto userDto) throws Exception {
