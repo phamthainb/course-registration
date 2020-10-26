@@ -81,6 +81,7 @@ public class UserDto extends BaseDto {
         this.professor = professor;
     }
 
+
     public String getUsername() {
         return username;
     }
