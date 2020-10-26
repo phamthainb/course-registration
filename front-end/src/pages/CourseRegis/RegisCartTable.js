@@ -10,17 +10,17 @@ function RegisCartTable(props) {
     const { cart } = props;
 
     useEffect(() => (
-        props.userCart?.forEach(item => {
+        props.userCart?.forEach(userCart => {
             if (cart.findIndex(cartItem => {
-                return cartItem.id === item.id
+                return parseInt(cartItem.id) === parseInt(userCart.id)
             }) === -1) {
                 props.onUpdateCart(
-                    item.id,
-                    item.subject.code,
-                    item.nmh,
-                    item.subject.name,
-                    item.subject.credit,
-                    item.tth);
+                    userCart.id,
+                    userCart.subject.code,
+                    userCart.nmh,
+                    userCart.subject.name,
+                    userCart.subject.credit,
+                    userCart.tth);
             }
         })
     ), []);

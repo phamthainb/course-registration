@@ -9,11 +9,11 @@ import './style.css';
 function EditInfoForm(props) {
 
     const {user} = props;
+
     useEffect(()=>{
         setPhone(user?.phone);
         setEmail(user?.email);
     } , [user])
-
 
     const [phone, setPhone] = useState(user?.phone);
     const [email, setEmail] = useState(user?.email);
@@ -100,7 +100,6 @@ function EditInfoForm(props) {
                         <td>
                             <input
                             value={phone ? phone : ''}
-                            autoComplete={false}
                             onChange={onEditInfo}
                             type="number"
                             name="phone"/>
@@ -111,7 +110,6 @@ function EditInfoForm(props) {
                         <td>
                             <input
                             value={email ? email : ''}
-                            autoComplete={false}
                             onChange={onEditInfo}
                             name="email"/>
                         </td>
@@ -145,7 +143,7 @@ const convertCohort = (s)=>{
 
 const convertMajor = (s)=>{
     var major = s.substring(5, 7);
-    return major;
+    return constants.majors[major];
 }
 
 export default connect(mapState, null)(EditInfoForm);

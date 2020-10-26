@@ -12,8 +12,9 @@ function RegisControl(props) {
 
     const onChooseSubject = (e) => {
         var value = e.target.value;
-        apiTokenInterceptors("GET", `${constants.CLASSES}/${value}`)
+        apiTokenInterceptors("GET", `${constants.CLASSES}/${value}`, null)
             .then(res => {
+                console.log(res);
                 let data = res.data.map((e, i) => {
                     return ({
                         ...e, details: e.details.map((d, j) => {

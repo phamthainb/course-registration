@@ -20,9 +20,10 @@ function Timetable(props) {
 		var subjects = props.inCartSubjects?.map(item => {
 			return (
 				{
+					id: item.id,
 					code: item.subject.code,
 					name: item.subject.name,
-					id: item.nmh,
+					nmh: item.nmh,
 					crt: item.subject.credit,
 					pg: item.tth,
 					time: item.details.map(detail => {
