@@ -1,14 +1,18 @@
 package com.dangki.service.impl;
 
+import com.dangki.common.MessageConstants;
+import com.dangki.common.exception.ApiException;
 import com.dangki.common.utils.Converter;
 import com.dangki.data.dto.ClassRoomDto;
 import com.dangki.data.dto.DetailsDto;
+import com.dangki.data.dto.UserDto;
 import com.dangki.data.entities.*;
 import com.dangki.data.repository.*;
 import com.dangki.service.ClassRoomService;
 import com.dangki.service.DetailsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +29,8 @@ public class ClassRoomServiceImpl implements ClassRoomService {
 
     private final ClassRoomRepository classRoomRepository;
 
+    private final UserRepository userRepository;
+
     private final SubjectRepository subjectRepository;
 
     private final DetailsRepository detailsRepository;
@@ -39,10 +45,12 @@ public class ClassRoomServiceImpl implements ClassRoomService {
 
     private final RoomRepository roomRepository;
     private final Converter<ClassRoomDto , ClassRoom> converter = new Converter<>(ClassRoomDto.class,ClassRoom.class);
+    private final Converter<UserDto, User> userConverter = new Converter<>(UserDto.class,User.class);
     private final Converter<DetailsDto, Details> detailsConverter = new Converter<>(DetailsDto.class,Details.class);
 
-    public ClassRoomServiceImpl(ClassRoomRepository classRoomRepository, SubjectRepository subjectRepository, DetailsRepository detailsRepository, DetailsService detailsService, TimeRepository timeRepository, ProfessorRepository professorRepository, WeekRepository weekRepository, RoomRepository roomRepository) {
+    public ClassRoomServiceImpl(ClassRoomRepository classRoomRepository, UserRepository userRepository, SubjectRepository subjectRepository, DetailsRepository detailsRepository, DetailsService detailsService, TimeRepository timeRepository, ProfessorRepository professorRepository, WeekRepository weekRepository, RoomRepository roomRepository) {
         this.classRoomRepository = classRoomRepository;
+        this.userRepository = userRepository;
         this.subjectRepository = subjectRepository;
         this.detailsRepository = detailsRepository;
         this.detailsService = detailsService;
@@ -88,6 +96,21 @@ public class ClassRoomServiceImpl implements ClassRoomService {
     public ClassRoom update(ClassRoom classRoom) {
         log.debug("Request to save ClassRoom : {}", classRoom);
         return classRoomRepository.save(classRoom);
+    }
+
+    @Override
+    public ClassRoomDto findById(Long id) {
+        ClassRoom classRoom = classRoomRepository.findById(id).orElse(null);
+        if (classRoom == null)
+            throw ApiException.from(HttpStatus.NOT_FOUND).message(MessageConstants.NOT_FOUND);
+        List<User> users = userRepository.findAllByClassRoomId(id);
+        ClassRoomDto result = converter.toDto(classRoom);
+        List<UserDto> userDtos = userConverter.toDto(users);
+        userDtos.forEach(userDto -> {
+            userDto.setClassRooms(null);
+        });
+        result.setUsers(userDtos);
+        return result;
     }
 
     @Override

@@ -42,9 +42,10 @@ public class UserController {
         return ResponseEntity.ok(securityUtil.getUserDetails().getUser());
     }
 
-    @GetMapping("/{classId}")
-    public ResponseEntity<?> hello(@PathVariable Long classId) {
-        return ResponseEntity.ok(userService.findAllUsersOfClassRoom(classId));
+    @GetMapping("/list")
+    public ResponseEntity<List<UserDto>> getUsersOfClass(@RequestParam("classId") Long classId)
+    {
+        return ResponseEntity.ok(userService.getAllByClassId(classId));
     }
 
     @PostMapping("/authenticate")

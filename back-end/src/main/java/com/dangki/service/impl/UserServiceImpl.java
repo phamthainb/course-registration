@@ -70,6 +70,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<UserDto> getAllByClassId(Long classId) {
+        List<UserDto> list = converter.toDto(userRepository.findAllByClassRoomId(classId));
+        list.forEach(userDto -> {
+            userDto.setPassword(null);
+            userDto.setClassRooms(null);
+        });
+        return list;
+    }
+
+    @Override
     public UserDto updateClass(List<ClassRoomDto> classRooms) {
         User user = userRepository.findById(securityUtil.getUserDetails().getUser().getId()).get();
         List<ClassRoom> list = new ArrayList<>();
@@ -103,8 +113,4 @@ public class UserServiceImpl implements UserService {
         return converter.toDto(userRepository.findAll());
     }
 
-    @Override
-    public List<UserDto> findAllUsersOfClassRoom(Long id) {
-        return converter.toDto(userRepository.findAllByClassRoomId(id));
-    }
 }

@@ -1,5 +1,8 @@
 package com.dangki.data.dto;
 
+
+import com.dangki.data.entities.User;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
