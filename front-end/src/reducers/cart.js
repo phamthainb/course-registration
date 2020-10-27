@@ -35,7 +35,7 @@ var cartReducer = (state = initState, action) => {
             return [...state];
 
         case constants.DELETE_ALL_FROM_CART:
-            toast.errNotify("All deleted");
+            // toast.errNotify("All deleted");
             return [];
 
         default:

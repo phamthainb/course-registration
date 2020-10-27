@@ -9,7 +9,7 @@ function PersonalTimetable(props) {
 
     const onShowListStudents = (e)=>{
         const id = e.target.getAttribute("data-id");
-        apiTokenInterceptors("GET", `${constants.CLASSES}/${id}`, null)
+        apiTokenInterceptors("GET", `${constants.GET_USER}/list?classId=${id}`,null)
         .then(res =>{
             console.log(res);
         })

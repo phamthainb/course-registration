@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/ptit-icon.png";
+import * as actions from '../pages/categories/actions';
 
 function Menu(props) {
   const onLogout = () => {
     localStorage.removeItem("jwt");
     sessionStorage.removeItem("jwt");
+    props.onDeleteAllFromCart();
   };
 
   const [showMenu, setShowMenu] = useState(false);
@@ -106,4 +108,12 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState, null)(Menu);
+const mapDispatch = dispatch => {
+  return {
+    onDeleteAllFromCart: () => {
+      dispatch(actions.deleteAllFromCart())
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(Menu);
