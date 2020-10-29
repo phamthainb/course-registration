@@ -1,22 +1,12 @@
-import { apiTokenInterceptors } from 'common/axiosService';
 import RegisNote from 'pages/CourseRegis/RegisNote';
 import React from 'react';
-import * as constants from '../categories/constants';
+import { NavLink, useLocation } from 'react-router-dom';
 
 function PersonalTimetable(props) {
 
     const {subjects} = props;
 
-    const onShowListStudents = (e)=>{
-        const id = e.target.getAttribute("data-id");
-        apiTokenInterceptors("GET", `${constants.GET_USER}/list?classId=${id}`,null)
-        .then(res =>{
-            console.log(res);
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
+    const location = useLocation();
 
     const mapListToTable = ()=>{
         let table = [];
@@ -35,15 +25,15 @@ function PersonalTimetable(props) {
                         <td>{mapRoom(sub.time)}</td>
                         <td>{mapWeek(sub.time)}</td>
                         <td>
-                            <button
-                            className="btn btn-dark"
-                            data-toggle="tooltip"
-                            title="Show list of students"
-                            onClick={onShowListStudents}
-                            data-id={sub.id}
-                            >
-                                <i className="fa fa-list-ul" aria-hidden="true"></i>
-                            </button>
+                            <NavLink to={`${location.pathname}/list/${sub.id}`}>
+                                <button
+                                className="btn btn-dark"
+                                data-toggle="tooltip"
+                                title="Show list of students"
+                                >
+                                    <i className="fa fa-list-ul" aria-hidden="true"></i>
+                                </button>
+                            </NavLink>
                         </td>
                     </tr>
                 )

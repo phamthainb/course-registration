@@ -20,7 +20,7 @@ function RegisTable(props) {
     if (sub.status === true) {
       return "table-success";
     } else if (sub.slot === 0) {
-      return "table-danger";
+      return "table-active";
     }
     return "";
   };
@@ -119,7 +119,9 @@ function RegisTable(props) {
         className="table-responsive"
         style={{ maxHeight: 400, overflow: "auto" }}
       >
-        <table className="table regis-table table-bordered">
+        {
+          chosenSubject.length > 0 && 
+          <table className="table regis-table table-bordered">
           <thead className="thead-dark">
             <tr>
               <th>Act</th>
@@ -140,6 +142,7 @@ function RegisTable(props) {
           </thead>
           <tbody>{chosenSubject.length > 0 && mapListToTable}</tbody>
         </table>
+        }
       </div>
     </div>
   );

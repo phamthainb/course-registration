@@ -4,6 +4,7 @@ import About from "./pages/About";
 import CourseRegis from "./pages/CourseRegis";
 import Timetable from "./pages/Timetable";
 import EditInfoForm from "./pages/EditInfoForm";
+import StudentList from "pages/StudentList";
 
 const routes = [
   {
@@ -27,7 +28,7 @@ const routes = [
   {
     path: "/timetable",
     private: true,
-    exact: false,
+    exact: true,
     main: () => <Timetable />,
   },
   {
@@ -36,6 +37,12 @@ const routes = [
     exact: false,
     main: () => <EditInfoForm />,
   },
+  {
+    path: "/timetable/list/:id",
+    private: true,
+    exact: true,
+    main: () => <StudentList />
+  }
 ];
 
 export default routes;

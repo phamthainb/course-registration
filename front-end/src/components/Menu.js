@@ -85,8 +85,8 @@ function Menu(props) {
               style={{ left: -120 }}
             >
               <p
-              style={{ textAlign: "center", padding: "10px 0", borderBottom: "1px solid rgba(0,0,0,.15)", color: "gray", fontWeight: 300 }}>
-                {props.user ? props.user : ""}
+              style={{ textAlign: "center", padding: "10px", borderBottom: "1px solid rgba(0,0,0,.15)", color: "gray", fontWeight: 300 }}>
+                {props.user ? props.user : "User"}
               </p>
               <NavLink className="dropdown-item" to="/edit-info" onClick={onCloseMenu}>
                 Information
