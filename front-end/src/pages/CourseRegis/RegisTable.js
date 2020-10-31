@@ -13,7 +13,7 @@ function RegisTable(props) {
     var name = e.target.getAttribute("data-name");
     var crt = e.target.getAttribute("data-crt");
     var pg = e.target.getAttribute("data-pg");
-    props.onUpdateCart(id, code, nmh, name, crt, pg);
+    props.onUpdateCart(id, code, nmh, name, crt, pg, false);
   };
 
   const changeTrColor = (sub) => {
@@ -157,8 +157,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return{
-    onUpdateCart: (id, code, nmh, name, crt, pg)=>{
-      dispatch(actions.updateCart(id, code, nmh, name, crt, pg))
+    onUpdateCart: (id, code, nmh, name, crt, pg, stt)=>{
+      dispatch(actions.updateCart(id, code, nmh, name, crt, pg, stt))
     }
   }
 }

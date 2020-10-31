@@ -20,13 +20,14 @@ function RegisCartTable(props) {
                     userCart.nmh,
                     userCart.subject.name,
                     userCart.subject.credit,
-                    userCart.tth);
+                    userCart.tth,
+                    true);
             }
         })
     ), []);
 
-    const onUpdateCart = (id, code, nmh, name, crt, pg) => {
-        props.onUpdateCart(id, code, nmh, name, crt, pg);
+    const onUpdateCart = (id, code, nmh, name, crt, pg, stt) => {
+        props.onUpdateCart(id, code, nmh, name, crt, pg, stt);
     }
 
     const onDeleteAllFromCart = () => {
@@ -59,11 +60,14 @@ function RegisCartTable(props) {
                 <td>{item.pg === 0 ? "null" : item.pg}</td>
                 <td>{item.crt}</td>
                 <td>{480000 * item.crt}</td>
-                <td>{constants.ADD_TO_CART_SUCCESSFUL}</td>
+                <td>
+                    {item.stt ?
+                        constants.SAVE_SUCCESSFUL : constants.ADD_TO_CART_SUCCESSFUL}
+                </td>
                 <td>
                     <button
                         className="btn btn-outline-dark"
-                        onClick={() => onUpdateCart(item.id, item.code, item.nmh, item.name, item.crt, item.pg)}>
+                        onClick={() => onUpdateCart(item.id, item.code, item.nmh, item.name, item.crt, item.pg, false)}>
                         Delete
                     </button>
                 </td>
@@ -81,12 +85,13 @@ function RegisCartTable(props) {
                 toast.successNotify("Saved to database");
             })
             .catch(err => {
-                console.log(err);
+                //console.log(err);
+                toast.errNotify(err.message);
             })
     }
 
     return (
-        <div style={{margin: "30px 20px 0"}}>
+        <div style={{ margin: "30px 20px 0" }}>
             <div className="table-responsive" style={{
                 maxHeight: 400,
                 overflow: "auto",
@@ -142,8 +147,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
     return {
-        onUpdateCart: (id, code, nmh, name, crt, pg) => {
-            dispatch(actions.updateCart(id, code, nmh, name, crt, pg))
+        onUpdateCart: (id, code, nmh, name, crt, pg, stt) => {
+            dispatch(actions.updateCart(id, code, nmh, name, crt, pg, stt))
         },
         onDeleteAllFromCart: () => {
             dispatch(actions.deleteAllFromCart());

@@ -8,7 +8,7 @@ var cartReducer = (state = initState, action) => {
     switch (action.type) {
 
         case constants.UPDATE_CART:
-            var { id, code, nmh, name, crt, pg } = action.payload;
+            var { id, code, nmh, name, crt, pg, stt } = action.payload;
             var check = false;
             if (state.length > 0) {
                 state.forEach((item, index) => {
@@ -28,7 +28,7 @@ var cartReducer = (state = initState, action) => {
                 })
             }
             if (check === false) {
-                state.push({ id, code, nmh, name, crt, pg });
+                state.push({ id, code, nmh, name, crt, pg, stt });
                 //toast
                 // toast.successNotify('Subject added');
             }
