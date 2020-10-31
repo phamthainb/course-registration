@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/ptit-icon.png";
+import * as actions from '../pages/categories/actions';
 
 function Menu(props) {
   const onLogout = () => {
     localStorage.removeItem("jwt");
     sessionStorage.removeItem("jwt");
+    props.onDeleteAllFromCart();
   };
 
   const [showMenu, setShowMenu] = useState(false);
@@ -83,8 +85,8 @@ function Menu(props) {
               style={{ left: -120 }}
             >
               <p
-              style={{ textAlign: "center", padding: "10px 0", borderBottom: "1px solid rgba(0,0,0,.15)", color: "gray", fontWeight: 300 }}>
-                {props.user ? props.user : ""}
+              style={{ textAlign: "center", padding: "10px", borderBottom: "1px solid rgba(0,0,0,.15)", color: "gray", fontWeight: 300 }}>
+                {props.user ? props.user : "User"}
               </p>
               <NavLink className="dropdown-item" to="/edit-info" onClick={onCloseMenu}>
                 Information
@@ -106,4 +108,12 @@ const mapState = state => {
   }
 }
 
-export default connect(mapState, null)(Menu);
+const mapDispatch = dispatch => {
+  return {
+    onDeleteAllFromCart: () => {
+      dispatch(actions.deleteAllFromCart())
+    }
+  }
+}
+
+export default connect(mapState, mapDispatch)(Menu);

@@ -1,9 +1,47 @@
+import { apiTokenInterceptors } from 'common/axiosService';
 import React from 'react'
+import { connect } from 'react-redux';
+import * as toast from '../../common/toast'
+import * as constants from '../categories/constants'
 
-function ChangePassForm(){
+function ChangePassForm(props){
 
-    const onSavePassChange = (e)=>{
-        
+    const {user} = props;
+
+    const pwdRegex = "^[0-9a-zA-Z]{4,}$";
+
+    const onSavePassChange = ()=>{
+        let oldPwd = document.getElementById('old-pwd').value;
+        let newPwd = document.getElementById('new-pwd').value;
+        let confirmPwd = document.getElementById('confirm-pwd').value;
+        if(newPwd !== confirmPwd){
+            toast.errNotify(constants.MATCH_PASSWORD_FAILED);
+        }
+        else if(newPwd === oldPwd){
+            toast.errNotify(constants.SAME_PASSWORD)
+        }
+        else if(!newPwd.match(pwdRegex)){
+            toast.errNotify(constants.VALIDATE_PASSWORD)
+        }
+        else{
+            apiTokenInterceptors("PUT", constants.GET_USER, {
+                ...user,
+                oldPassword: oldPwd,
+                password: newPwd
+            })
+            .then(res => {
+                let stt = res.data.httpStatus;
+                if(stt === 500){
+                    toast.errNotify(constants.WRONG_PASSWORD)
+                }
+                else{
+                    toast.successNotify(constants.UPDATED_SUCCESSFUL)
+                }
+            })
+            .catch(err => {
+                console.log(err);
+            })
+        }
     }
 
     return (
@@ -11,7 +49,12 @@ function ChangePassForm(){
             <p
             data-toggle="modal"
             data-target="#modelId"
-            style={{color: "#1976d2", fontWeight: 800, cursor: "pointer"}}
+            style={{
+                color: "#1976d2", 
+                fontWeight: 800, 
+                cursor: "pointer",
+                zIndex: 1
+            }}
             >Change password
             </p>
             
@@ -28,17 +71,20 @@ function ChangePassForm(){
                             <div className="form-group">
                                 <input
                                 placeholder="Old password"
-                                type="password"/>
+                                type="password"
+                                id="old-pwd"/>
                             </div>
                             <div className="form-group">
                                 <input
                                 placeholder="New password"
-                                type="password"/>
+                                type="password"
+                                id="new-pwd"/>
                             </div>
                             <div className="form-group">
                                 <input
                                 placeholder="Confirm password"
-                                type="password"/>
+                                type="password"
+                                id="confirm-pwd"/>
                             </div>
                         </div>
                         <div className="modal-footer">
@@ -65,4 +111,10 @@ function ChangePassForm(){
     )
 }
 
-export default ChangePassForm;
+const mapState = state => {
+    return{
+        user: state.app.user
+    }
+}
+
+export default connect(mapState, null)(ChangePassForm);

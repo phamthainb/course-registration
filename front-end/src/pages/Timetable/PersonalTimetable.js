@@ -1,19 +1,22 @@
 import RegisNote from 'pages/CourseRegis/RegisNote';
 import React from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 function PersonalTimetable(props) {
 
     const {subjects} = props;
+
+    const location = useLocation();
 
     const mapListToTable = ()=>{
         let table = [];
         if(subjects){
             table = subjects.map((sub, index)=>{
                 return(
-                    <tr key={index}>
+                    <tr key={sub.id}>
                         <td>{sub.code}</td>
                         <td>{sub.name}</td>
-                        <td>{sub.id}</td>
+                        <td>{sub.nmh}</td>
                         <td>{sub.pg}</td>
                         <td>{sub.crt}</td>
                         <td>{mapDay(sub.time)}</td>
@@ -22,12 +25,15 @@ function PersonalTimetable(props) {
                         <td>{mapRoom(sub.time)}</td>
                         <td>{mapWeek(sub.time)}</td>
                         <td>
-                            <button
-                            className="btn btn-dark"
-                            data-toggle="tooltip"
-                            title="Show list of students">
-                                <i className="fa fa-list-ul" aria-hidden="true"></i>
-                            </button>
+                            <NavLink to={`${location.pathname}/list/${sub.id}`}>
+                                <button
+                                className="btn btn-dark"
+                                data-toggle="tooltip"
+                                title="Show list of students"
+                                >
+                                    <i className="fa fa-list-ul" aria-hidden="true"></i>
+                                </button>
+                            </NavLink>
                         </td>
                     </tr>
                 )
@@ -86,7 +92,7 @@ function PersonalTimetable(props) {
     }
 
     return(
-        <div className="table-responsive mt-4" >
+        <div className="table-responsive mt-4" style={{minHeight: "70vh"}}>
             <table className="table table-striped table-bordered">
                 <thead className="thead-dark">
                     <tr>

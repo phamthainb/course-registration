@@ -13,7 +13,7 @@ input, button, select{
     border: none;
     outline: none!important;
 }
-input, select{
+input, select, option{
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     padding: 10px;
     background-color: inherit;

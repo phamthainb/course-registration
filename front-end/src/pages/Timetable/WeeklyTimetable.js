@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import BottomButton from './BottomButton.js';
 
 function WeeklyTimetable(props){
@@ -64,7 +64,7 @@ function WeeklyTimetable(props){
     }
 
     return(
-        <div className="table-responsive text-center mb-4">
+        <div className="table-responsive text-center mb-4" style={{minHeight: "74vh"}}>
             <table className="table table-striped timetable-show table-bordered">
                 <thead className="thead-dark">
                     <tr>
