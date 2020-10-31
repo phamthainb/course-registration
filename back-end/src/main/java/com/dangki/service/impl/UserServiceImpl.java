@@ -90,10 +90,10 @@ public class UserServiceImpl implements UserService {
         classRooms.forEach(classRoomDto -> {
             ClassRoom classRoom = classRoomRepository.findById(classRoomDto.getId()).get();
             if (classRoom.getSlot() == 0)
-                throw ApiException.from(HttpStatus.INTERNAL_SERVER_ERROR).message(MessageConstants.CLASS_FULL);
+                throw ApiException.from(HttpStatus.INTERNAL_SERVER_ERROR).message(MessageConstants.CLASS_FULL+": " +classRoom.getSubject().getName()+" "+classRoom.getNmh());
             classRoom.setSlot(classRoom.getSlot()-1);
             list.add(classRoom);
-        });
+        }            );
         user.setClassRooms(list);
         user = userRepository.save(user);
         return converter.toDto(user);

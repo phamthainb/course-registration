@@ -11,7 +11,6 @@ public class SecurityUtil {
     public MyUserDetails getUserDetails()
     {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        MyUserDetails userDetails = (MyUserDetails) authentication.getPrincipal();
-        return userDetails;
+        return (MyUserDetails) authentication.getPrincipal();
     }
 }
