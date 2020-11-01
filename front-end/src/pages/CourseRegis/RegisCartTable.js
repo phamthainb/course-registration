@@ -15,7 +15,15 @@ function RegisCartTable(props) {
                 return parseInt(cartItem.id) === parseInt(userCart.id)
             }) === -1) {
                 userCart.isAdded = true;
-                props.onUpdateCart({...userCart});
+                let data = {
+                    ...userCart,
+                        details: userCart.details.map(d => {
+                            let weeks = d.weeks.map(w => Number(w.name))
+                            weeks.sort((a, b) => a - b)
+                            return ({...d , weeks})
+                        })
+                }
+                props.onUpdateCart({...data});
             }
         })
     ), []);

@@ -24,7 +24,6 @@ var cartReducer = (state = initState, action) => {
                             toast.errNotify('Subject deleted');
                         }
                         else {
-                            console.log(state[index]);
                             state[index] = { ...state[index], id, nmh, tth }
                             //toast
                             // toast.warningNotify('Subject updated');
