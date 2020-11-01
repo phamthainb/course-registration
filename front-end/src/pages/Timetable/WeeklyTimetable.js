@@ -64,7 +64,9 @@ function WeeklyTimetable(props){
     }
 
     return(
-        <div className="table-responsive text-center mb-4" style={{minHeight: "74vh"}}>
+        <div className="table-responsive text-center mb-4" style={
+            {minHeight: "calc(100vh - 170px)"}
+            }>
             <table className="table table-striped timetable-show table-bordered">
                 <thead className="thead-dark">
                     <tr>

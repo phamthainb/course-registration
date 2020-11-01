@@ -4,15 +4,15 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 function PersonalTimetable(props) {
 
-    const {subjects} = props;
+    const { subjects } = props;
 
     const location = useLocation();
 
-    const mapListToTable = ()=>{
+    const mapListToTable = () => {
         let table = [];
-        if(subjects){
-            table = subjects.map((sub, index)=>{
-                return(
+        if (subjects) {
+            table = subjects.map((sub, index) => {
+                return (
                     <tr key={sub.id}>
                         <td>{sub.code}</td>
                         <td>{sub.name}</td>
@@ -27,9 +27,9 @@ function PersonalTimetable(props) {
                         <td>
                             <NavLink to={`${location.pathname}/list/${sub.id}`}>
                                 <button
-                                className="btn btn-dark"
-                                data-toggle="tooltip"
-                                title="Show list of students"
+                                    className="btn btn-dark"
+                                    data-toggle="tooltip"
+                                    title="Show list of students"
                                 >
                                     <i className="fa fa-list-ul" aria-hidden="true"></i>
                                 </button>
@@ -42,7 +42,7 @@ function PersonalTimetable(props) {
         return table;
     }
 
-    const mapDay = (time)=>{
+    const mapDay = (time) => {
         var td = [];
         time.forEach(item => {
             td.push(
@@ -52,7 +52,7 @@ function PersonalTimetable(props) {
         return td;
     }
 
-    const mapStart = (time)=>{
+    const mapStart = (time) => {
         var td = [];
         time.forEach(item => {
             td.push(
@@ -62,7 +62,7 @@ function PersonalTimetable(props) {
         return td;
     }
 
-    const mapLess = (time)=>{
+    const mapLess = (time) => {
         var td = [];
         time.forEach(item => {
             td.push(
@@ -72,7 +72,7 @@ function PersonalTimetable(props) {
         return td;
     }
 
-    const mapRoom = (time)=>{
+    const mapRoom = (time) => {
         var td = [];
         time.forEach(item => {
             td.push(
@@ -81,7 +81,7 @@ function PersonalTimetable(props) {
         })
         return td;
     }
-    const mapWeek = (time)=>{
+    const mapWeek = (time) => {
         var td = [];
         time.forEach(item => {
             td.push(
@@ -91,29 +91,35 @@ function PersonalTimetable(props) {
         return td;
     }
 
-    return(
-        <div className="table-responsive mt-4" style={{minHeight: "70vh"}}>
-            <table className="table table-striped table-bordered">
-                <thead className="thead-dark">
-                    <tr>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>ID</th>
-                        <th>PG</th>
-                        <th>Crt</th>
-                        <th>Day</th>
-                        <th>Start</th>
-                        <th>Les</th>
-                        <th>Room</th>
-                        <th>Week</th>
-                        <th>List</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {mapListToTable()}
-                </tbody>
-            </table>
-            <RegisNote></RegisNote>
+    return (
+        <div className="table-responsive mt-4 mb-4" style={
+            { minHeight: "calc(100vh - 170px)" }
+        }>
+            {
+                subjects.length > 0 &&
+                <>
+                    <table className="table table-striped table-bordered">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th>Code</th>
+                                <th>Name</th>
+                                <th>ID</th>
+                                <th>PG</th>
+                                <th>Crt</th>
+                                <th>Day</th>
+                                <th>Start</th>
+                                <th>Les</th>
+                                <th>Room</th>
+                                <th>Week</th>
+                                <th>List</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {mapListToTable()}
+                        </tbody>
+                    </table>
+                    <RegisNote></RegisNote></>
+            }
         </div>
     )
 }

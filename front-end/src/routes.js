@@ -5,6 +5,7 @@ import CourseRegis from "./pages/CourseRegis";
 import Timetable from "./pages/Timetable";
 import EditInfoForm from "./pages/EditInfoForm";
 import StudentList from "pages/StudentList";
+import Post from "pages/Post";
 
 const routes = [
   {
@@ -42,6 +43,12 @@ const routes = [
     private: true,
     exact: true,
     main: () => <StudentList />
+  },
+  {
+    path: "/post",
+    private: false,
+    exact: true,
+    main: ()=> <Post />
   }
 ];
 

@@ -41,7 +41,9 @@ export default function StudentList() {
     })
 
     return (
-        <div className="table-responsive mt-4" style={{ minHeight: "74vh" }}>
+        <div className="table-responsive mt-4" style={
+            { minHeight: "calc(100vh - 170px)" }
+            }>
             <table className="table table-striped table-bordered">
                 <thead className="thead-dark">
                     <tr>

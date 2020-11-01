@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 
 function NewsItem(props){
     const {newsItem} = props;
@@ -6,9 +7,9 @@ function NewsItem(props){
         <div className="news-item">
             <a href="#" className="news-title mb-3">{newsItem.title}</a>
             <p>{newsItem.content}</p>
-            <a href="#" className="read-more">
+            <NavLink to="/post" className="read-more">
                 READ MORE <i className="fa fa-arrow-right" aria-hidden="true"></i>
-            </a>
+            </NavLink>
         </div>
     )
 }

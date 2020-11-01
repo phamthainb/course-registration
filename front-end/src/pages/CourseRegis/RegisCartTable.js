@@ -63,7 +63,7 @@ function RegisCartTable(props) {
                 <td>{item.subject.credit}</td>
                 <td>{480000 * item.subject.credit}</td>
                 <td>
-                    {item.stt ?
+                    {item.isAdded ?
                         constants.SAVE_SUCCESSFUL : constants.ADD_TO_CART_SUCCESSFUL}
                 </td>
                 <td>
