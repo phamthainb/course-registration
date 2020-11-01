@@ -28,13 +28,11 @@ export const getSubjectRequest = () => {
 	};
 };
 
-export const updateCart = (id, code, nmh, name, crt, pg, stt) => {
+export const updateCart = (sub) => {
 	//id, code, nmh, name, crt, pg
 	return {
 		type: constants.UPDATE_CART,
-		payload: {
-			id, code, nmh, name, crt, pg, stt
-		}
+		sub
 	}
 }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import * as actions from '../categories/actions';
 
@@ -6,18 +6,34 @@ function RegisTable(props) {
 
   const { chosenSubject, cart } = props;
 
-  const onUpdateCart = (e) => {
-    var code = e.target.getAttribute("data-code");
-    var id = e.target.getAttribute("data-id");
-    var nmh = e.target.getAttribute("data-nmh");
-    var name = e.target.getAttribute("data-name");
-    var crt = e.target.getAttribute("data-crt");
-    var pg = e.target.getAttribute("data-pg");
-    props.onUpdateCart(id, code, nmh, name, crt, pg, false);
-  };
+  // const weekArray = useMemo(()=>{
+  //   cart.map(item => {
+  //     return (
+  //       {
+  //         code: item.
+  //       }
+  //     )
+  //   })
+  // })
+
+  // const onUpdateCart = (e) => {
+  //   var code = e.target.getAttribute("data-code");
+  //   var id = e.target.getAttribute("data-id");
+  //   var nmh = e.target.getAttribute("data-nmh");
+  //   var name = e.target.getAttribute("data-name");
+  //   var crt = e.target.getAttribute("data-crt");
+  //   var pg = e.target.getAttribute("data-pg");
+  //   var time = e.target.getAttribute("data-time");
+  //   console.log(typeof(time));
+  //   props.onUpdateCart(id, code, nmh, name, crt, pg, false);
+  // };
+  const onUpdateCart = (sub)=>{
+    sub.isAdded = false;
+    props.onUpdateCart({...sub});
+  }
 
   const changeTrColor = (sub) => {
-    if (sub.status === true) {
+    if (sub.isAdded === true) {
       return "table-success";
     } else if (sub.slot === 0) {
       return "table-active";
@@ -27,11 +43,11 @@ function RegisTable(props) {
 
   const checkChosenSubject = () => {
     chosenSubject.forEach((sub) => {
-      sub.status = false;
+      sub.isAdded = false;
       if (cart) {
         cart.forEach((item) => {
           if (parseInt(item.id) === parseInt(sub.id)) {
-            sub.status = true;
+            sub.isAdded = true;
           }
         });
       }
@@ -77,6 +93,7 @@ function RegisTable(props) {
   };
 
   const mapListToTable = chosenSubject.map((sub, index) => {
+    console.log(sub);
     return (
       <tr
       key={Date.now().toString() + index}
@@ -84,16 +101,10 @@ function RegisTable(props) {
         <td>
           <button
             className="btn btn-outline-dark"
-            onClick={onUpdateCart}
-            data-code={sub.subject.code}
-            data-id={sub.id}
-            data-nmh={sub.nmh}
-            data-name={sub.subject.name}
-            data-crt={sub.subject.credit}
-            data-pg={sub.tth}
+            onClick={()=>onUpdateCart(sub)}
             disabled={sub.slot ? false : true}
           >
-            {sub.status === true ? "Delete" : "Add"}
+            {sub.isAdded === true ? "Delete" : "Add"}
           </button>
         </td>
         <td>{sub.subject.code}</td>
@@ -157,8 +168,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
   return{
-    onUpdateCart: (id, code, nmh, name, crt, pg, stt)=>{
-      dispatch(actions.updateCart(id, code, nmh, name, crt, pg, stt))
+    onUpdateCart: (sub)=>{
+      dispatch(actions.updateCart(sub))
     }
   }
 }

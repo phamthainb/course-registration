@@ -8,19 +8,24 @@ var cartReducer = (state = initState, action) => {
     switch (action.type) {
 
         case constants.UPDATE_CART:
-            var { id, code, nmh, name, crt, pg, stt } = action.payload;
+            const {sub} = action;
+            var id = sub.id;
+            var nmh = sub.nmh;
+            var tth = sub.tth;
+            var code = sub.subject.code;
             var check = false;
             if (state.length > 0) {
                 state.forEach((item, index) => {
-                    if (item.code === code) {
+                    if (item.subject.code === code) {
                         check = true;
-                        if (item.nmh === nmh && parseInt(item.pg) === parseInt(pg)) {
+                        if (item.nmh === nmh && parseInt(item.tth) === parseInt(tth)) {
                             state.splice(index, 1);
                             //toast
                             toast.errNotify('Subject deleted');
                         }
                         else {
-                            state[index] = { ...state[index], id, nmh, pg }
+                            console.log(state[index]);
+                            state[index] = { ...state[index], id, nmh, tth }
                             //toast
                             // toast.warningNotify('Subject updated');
                         }
@@ -28,7 +33,7 @@ var cartReducer = (state = initState, action) => {
                 })
             }
             if (check === false) {
-                state.push({ id, code, nmh, name, crt, pg, stt });
+                state.push(sub);
                 //toast
                 // toast.successNotify('Subject added');
             }

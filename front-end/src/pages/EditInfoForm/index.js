@@ -129,12 +129,6 @@ function EditInfoForm(props) {
     )
 }
 
-const mapState = state => {
-    return{
-        user:  state.app.user
-    }
-}
-
 const convertCohort = (s)=>{
     var startYear = parseInt(s.substring(1, 3)) + 2000;
     var endYear = startYear + 5;
@@ -144,6 +138,12 @@ const convertCohort = (s)=>{
 const convertMajor = (s)=>{
     var major = s.substring(5, 7);
     return constants.majors[major];
+}
+
+const mapState = state => {
+    return{
+        user:  state.user
+    }
 }
 
 export default connect(mapState, null)(EditInfoForm);
