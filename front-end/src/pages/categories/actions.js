@@ -1,6 +1,7 @@
 import { apiInterceptors } from "../../common/axiosService";
 import * as constants from "./constants";
 
+//action
 const getSubjectsSuccess = (data) => {
 	return {
 		type: constants.FETCH_SUBJECTS_SUCCESS,
@@ -27,13 +28,11 @@ export const getSubjectRequest = () => {
 	};
 };
 
-export const updateCart = (id, code, nmh, name, crt, pg) => {
+export const updateCart = (sub) => {
 	//id, code, nmh, name, crt, pg
 	return {
 		type: constants.UPDATE_CART,
-		payload: {
-			id, code, nmh, name, crt, pg
-		}
+		sub
 	}
 }
 

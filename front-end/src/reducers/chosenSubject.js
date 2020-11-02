@@ -6,8 +6,7 @@ var reducer = (state = initState, action)=>{
     switch(action.type){
 
         case constants.SHOW_CHOSEN_SUBJECT:
-            var data = action.data;
-            return data
+            return action.data;
         default:
             return [...state];
     }

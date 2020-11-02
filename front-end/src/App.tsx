@@ -20,7 +20,9 @@ import store from "./redux";
 import { getUser } from "reducers/app";
 
 function App() {
-  
+
+  const jwt = localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
+
   useEffect(()=>{
     
     apiToken("GET", constants.GET_USER, null)

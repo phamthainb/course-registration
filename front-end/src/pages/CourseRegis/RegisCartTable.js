@@ -14,19 +14,22 @@ function RegisCartTable(props) {
             if (cart.findIndex(cartItem => {
                 return parseInt(cartItem.id) === parseInt(userCart.id)
             }) === -1) {
-                props.onUpdateCart(
-                    userCart.id,
-                    userCart.subject.code,
-                    userCart.nmh,
-                    userCart.subject.name,
-                    userCart.subject.credit,
-                    userCart.tth);
+                userCart.isAdded = true;
+                let data = {
+                    ...userCart,
+                        details: userCart.details.map(d => {
+                            let weeks = d.weeks.map(w => Number(w.name))
+                            weeks.sort((a, b) => a - b)
+                            return ({...d , weeks})
+                        })
+                }
+                props.onUpdateCart({...data});
             }
         })
     ), []);
 
-    const onUpdateCart = (id, code, nmh, name, crt, pg) => {
-        props.onUpdateCart(id, code, nmh, name, crt, pg);
+    const onUpdateCart = (sub) => {
+        props.onUpdateCart(sub);
     }
 
     const onDeleteAllFromCart = () => {
@@ -36,7 +39,7 @@ function RegisCartTable(props) {
     const totalCredits = () => {
         var total = 0;
         cart.forEach(item => {
-            total += parseInt(item.crt);
+            total += parseInt(item.subject.credit);
         })
         return total;
     }
@@ -44,7 +47,7 @@ function RegisCartTable(props) {
     const totalFee = () => {
         var total = 0;
         cart.forEach(item => {
-            total += parseInt(item.crt) * 480000;
+            total += parseInt(item.subject.credit) * 480000;
         })
         return total;
     }
@@ -53,17 +56,20 @@ function RegisCartTable(props) {
         return (
             <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{item.code}</td>
-                <td>{item.name}</td>
+                <td>{item.subject.code}</td>
+                <td>{item.subject.name}</td>
                 <td>{item.nmh}</td>
-                <td>{item.pg === 0 ? "null" : item.pg}</td>
-                <td>{item.crt}</td>
-                <td>{480000 * item.crt}</td>
-                <td>{constants.ADD_TO_CART_SUCCESSFUL}</td>
+                <td>{item.tth === 0 ? "null" : item.tth}</td>
+                <td>{item.subject.credit}</td>
+                <td>{480000 * item.subject.credit}</td>
+                <td>
+                    {item.isAdded ?
+                        constants.SAVE_SUCCESSFUL : constants.ADD_TO_CART_SUCCESSFUL}
+                </td>
                 <td>
                     <button
                         className="btn btn-outline-dark"
-                        onClick={() => onUpdateCart(item.id, item.code, item.nmh, item.name, item.crt, item.pg)}>
+                        onClick={() => onUpdateCart(item)}>
                         Delete
                     </button>
                 </td>
@@ -81,12 +87,13 @@ function RegisCartTable(props) {
                 toast.successNotify("Saved to database");
             })
             .catch(err => {
-                console.log(err);
+                //console.log(err);
+                toast.errNotify(err.message);
             })
     }
 
     return (
-        <div style={{margin: "30px 20px 0"}}>
+        <div style={{ margin: "30px 20px 0" }}>
             <div className="table-responsive" style={{
                 maxHeight: 400,
                 overflow: "auto",
@@ -142,8 +149,8 @@ const mapState = state => {
 
 const mapDispatch = dispatch => {
     return {
-        onUpdateCart: (id, code, nmh, name, crt, pg) => {
-            dispatch(actions.updateCart(id, code, nmh, name, crt, pg))
+        onUpdateCart: (sub) => {
+            dispatch(actions.updateCart(sub))
         },
         onDeleteAllFromCart: () => {
             dispatch(actions.deleteAllFromCart());

@@ -16,7 +16,8 @@ function RegisControl(props) {
             .then(res => {
                 let data = res.data.map((e, i) => {
                     return ({
-                        ...e, details: e.details.map((d, j) => {
+                        ...e,
+                        details: e.details.map((d, j) => {
                             let weeks = d.weeks.map(w => Number(w.name));
                             weeks.sort((a, b) => a - b)
                             return ({ ...d, weeks: weeks })

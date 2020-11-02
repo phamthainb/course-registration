@@ -1,44 +1,89 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import * as actions from '../categories/actions';
+import * as toast from '../../common/toast';
 
 function RegisTable(props) {
 
   const { chosenSubject, cart } = props;
 
-  const onUpdateCart = (e) => {
-    var code = e.target.getAttribute("data-code");
-    var id = e.target.getAttribute("data-id");
-    var nmh = e.target.getAttribute("data-nmh");
-    var name = e.target.getAttribute("data-name");
-    var crt = e.target.getAttribute("data-crt");
-    var pg = e.target.getAttribute("data-pg");
-    props.onUpdateCart(id, code, nmh, name, crt, pg);
-  };
+  const weekArray = useMemo(() => {
+    let arr = []
+    cart.forEach(item => {
+      item.details.forEach(d => {
+        let elm = {
+          name: item.subject.name,
+          timeName: d.time.name,
+          lesson: d.time.lesson,
+          weeks: d.weeks
+        }
+        arr.push(elm)
+      })
+    })
+    return arr;
+  }, [cart])
+
+  const onUpdateCart = (sub) => {
+    if (sub.isSame === "") {
+      sub.isAdded = false;
+      props.onUpdateCart({ ...sub });
+    }
+    else {
+      toast.errNotify(`Trùng lịch với ${sub.isSame}`);
+    }
+  }
 
   const changeTrColor = (sub) => {
-    if (sub.status === true) {
+    if (sub.isAdded === true) {
       return "table-success";
     } else if (sub.slot === 0) {
       return "table-active";
+    }
+    else if (sub.isSame !== "") {
+      return "table-danger"
     }
     return "";
   };
 
   const checkChosenSubject = () => {
     chosenSubject.forEach((sub) => {
-      sub.status = false;
+      sub.isAdded = false;
       if (cart) {
         cart.forEach((item) => {
           if (parseInt(item.id) === parseInt(sub.id)) {
-            sub.status = true;
+            sub.isAdded = true;
           }
         });
       }
     });
   };
 
+  const checkSameDaySubject = () => {
+    chosenSubject.forEach((sub) => {
+      sub.isSame = "";
+      if (weekArray.length > 0) {
+        sub.details.forEach(d => {
+          weekArray.forEach((item) => {
+            //check trung time va lesson
+            if (item.timeName === d.time.name && item.lesson === parseInt(d.time.lesson)) {
+              //check trung ten mon hoc
+              if (item.name !== sub.subject.name) {
+                //check trung weeks
+                d.weeks.forEach(w => {
+                  if(item.weeks.includes(w)){
+                    sub.isSame = item.name;
+                  }
+                })
+              }
+            }
+          })
+        })
+      }
+    })
+  }
+
   checkChosenSubject();
+  checkSameDaySubject();
 
   const mapStartDay = (sub) => {
     return sub.map((item) => {
@@ -79,21 +124,17 @@ function RegisTable(props) {
   const mapListToTable = chosenSubject.map((sub, index) => {
     return (
       <tr
-      key={Date.now().toString() + index}
-      className={changeTrColor(sub)}>
+        key={Date.now().toString() + index}
+        className={changeTrColor(sub)}>
         <td>
           <button
             className="btn btn-outline-dark"
-            onClick={onUpdateCart}
-            data-code={sub.subject.code}
-            data-id={sub.id}
-            data-nmh={sub.nmh}
-            data-name={sub.subject.name}
-            data-crt={sub.subject.credit}
-            data-pg={sub.tth}
+            onClick={() => onUpdateCart(sub)}
+            data-toggle="tooltip"
+            title={`Trùng lịch với ${sub.isSame}`}
             disabled={sub.slot ? false : true}
           >
-            {sub.status === true ? "Delete" : "Add"}
+            {sub.isAdded === true ? "Delete" : "Add"}
           </button>
         </td>
         <td>{sub.subject.code}</td>
@@ -114,34 +155,34 @@ function RegisTable(props) {
   });
 
   return (
-    <div style={{margin: "0 20px"}}>
+    <div style={{ margin: "0 20px" }}>
       <div
         className="table-responsive"
         style={{ maxHeight: 400, overflow: "auto" }}
       >
         {
-          chosenSubject.length > 0 && 
+          chosenSubject.length > 0 &&
           <table className="table regis-table table-bordered">
-          <thead className="thead-dark">
-            <tr>
-              <th>Act</th>
-              <th>Code</th>
-              <th>Name</th>
-              <th>ID</th>
-              <th>PG</th>
-              <th>Crt</th>
-              <th>Qtt</th>
-              <th>Slot</th>
-              <th>Day</th>
-              <th>Start</th>
-              <th>Les</th>
-              <th>Room</th>
-              <th>Professor</th>
-              <th>Week</th>
-            </tr>
-          </thead>
-          <tbody>{chosenSubject.length > 0 && mapListToTable}</tbody>
-        </table>
+            <thead className="thead-dark">
+              <tr>
+                <th>Act</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>ID</th>
+                <th>PG</th>
+                <th>Crt</th>
+                <th>Qtt</th>
+                <th>Slot</th>
+                <th>Day</th>
+                <th>Start</th>
+                <th>Les</th>
+                <th>Room</th>
+                <th>Professor</th>
+                <th>Week</th>
+              </tr>
+            </thead>
+            <tbody>{chosenSubject.length > 0 && mapListToTable}</tbody>
+          </table>
         }
       </div>
     </div>
@@ -149,16 +190,16 @@ function RegisTable(props) {
 }
 
 const mapState = state => {
-  return{
+  return {
     cart: state.cart,
     chosenSubject: state.chosenSubject
   }
 }
 
 const mapDispatch = dispatch => {
-  return{
-    onUpdateCart: (id, code, nmh, name, crt, pg)=>{
-      dispatch(actions.updateCart(id, code, nmh, name, crt, pg))
+  return {
+    onUpdateCart: (sub) => {
+      dispatch(actions.updateCart(sub))
     }
   }
 }

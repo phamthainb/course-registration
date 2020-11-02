@@ -29,6 +29,7 @@ function Menu(props) {
         fontSize: 14,
         fontWeight: 600,
         backgroundColor: "#eee",
+        minHeight: 100
       }}
     >
       <NavLink to="/">
