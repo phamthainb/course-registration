@@ -3,12 +3,15 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/ptit-icon.png";
 import * as actions from '../pages/categories/actions';
+import { checkLogin } from '../reducers/app';
 
 function Menu(props) {
+  
   const onLogout = () => {
     localStorage.removeItem("jwt");
     sessionStorage.removeItem("jwt");
     props.onDeleteAllFromCart();
+    props.onCheckLogin(false);
   };
 
   const [showMenu, setShowMenu] = useState(false);
@@ -113,6 +116,9 @@ const mapDispatch = dispatch => {
   return {
     onDeleteAllFromCart: () => {
       dispatch(actions.deleteAllFromCart())
+    },
+    onCheckLogin: (status) => {
+      dispatch(checkLogin(status))
     }
   }
 }

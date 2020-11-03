@@ -158,7 +158,7 @@ function RegisTable(props) {
     <div style={{ margin: "0 20px" }}>
       <div
         className="table-responsive"
-        style={{ maxHeight: 400, overflow: "auto" }}
+        style={{ maxHeight: 400, overflow: "auto", minHeight: 200}}
       >
         {
           chosenSubject.length > 0 &&
@@ -167,7 +167,7 @@ function RegisTable(props) {
               <tr>
                 <th>Act</th>
                 <th>Code</th>
-                <th>Name</th>
+                <th style={{minWidth: 200}}>Name</th>
                 <th>ID</th>
                 <th>PG</th>
                 <th>Crt</th>

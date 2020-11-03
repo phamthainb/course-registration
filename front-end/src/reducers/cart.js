@@ -36,6 +36,7 @@ var cartReducer = (state = initState, action) => {
                 //toast
                 // toast.successNotify('Subject added');
             }
+            
             return [...state];
 
         case constants.DELETE_ALL_FROM_CART:

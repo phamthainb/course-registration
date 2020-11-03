@@ -11,7 +11,7 @@ export default function Post() {
             alignItems: "center",
             padding: "0 20px",
             display: "flex" }}>
-            This page is made by SonPho, ChuongVanVo, ThaiYangHo, KhiemQuetBoiz and KhaiAT with love 
+            Team 24 <i className="fa fa-heart" aria-hidden="true"></i>
         </h2>
     )
 }

@@ -26,7 +26,7 @@ function RegisCartTable(props) {
                 props.onUpdateCart({...data});
             }
         })
-    ), []);
+    ), [props.userCart]);
 
     const onUpdateCart = (sub) => {
         props.onUpdateCart(sub);
@@ -78,22 +78,27 @@ function RegisCartTable(props) {
     })
 
     const onSaveSubjects = () => {
-        var idList = cart.map(item => {
-            var itemObj = { id: parseInt(item.id) }
-            return itemObj;
-        })
-        apiTokenInterceptors("PUT", constants.CLASSES, idList)
-            .then(res => {
-                toast.successNotify("Saved to database");
+        if(totalCredits() >= 14 && totalCredits() <= 26){
+            var idList = cart.map(item => {
+                var itemObj = { id: parseInt(item.id) }
+                return itemObj;
             })
-            .catch(err => {
-                //console.log(err);
-                toast.errNotify(err.message);
-            })
+            apiTokenInterceptors("PUT", constants.CLASSES, idList)
+                .then(function(){
+                    toast.successNotify("Saved to database");
+                })
+                .catch(err => {
+                    //console.log(err);
+                    toast.errNotify(err.message);
+                })
+        }
+        else{
+            toast.errNotify("14 <= credits <= 26");
+        }
     }
 
     return (
-        <div style={{ margin: "30px 20px 0" }}>
+        <div style={{ margin: "30px 20px 0"}}>
             <div className="table-responsive" style={{
                 maxHeight: 400,
                 overflow: "auto",
@@ -106,7 +111,7 @@ function RegisCartTable(props) {
                         <tr>
                             <th>No.</th>
                             <th>Code</th>
-                            <th>Name</th>
+                            <th style={{minWidth: 200}}>Name</th>
                             <th>ID</th>
                             <th>PG</th>
                             <th>Crt</th>

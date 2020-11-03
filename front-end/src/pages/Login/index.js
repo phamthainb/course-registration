@@ -5,97 +5,108 @@ import Logo from "../../assets/images/ptit-logo.jpg";
 import "./style.css";
 import * as constants from "../../pages/categories/constants";
 import { errNotify, successNotify } from "common/toast";
+import { connect } from "react-redux";
+import { checkLogin } from "../../reducers/app";
 
-function Login() {
-  const history = useHistory();
+function Login(props) {
+    const history = useHistory();
 
-  const [account, setAccount] = useState({
-    username: "",
-    password: "",
-  });
-
-  const [isSaveUser, setIsSaveUser] = useState(false);
-  const onChange = (e) => {
-    const target = e.target;
-    const name = target.name;
-    const value = target.value;
-    setAccount({
-      ...account,
-      [name]: value,
+    const [account, setAccount] = useState({
+        username: "",
+        password: "",
     });
-  };
 
-  const onLogin = (e) => {
-    e.preventDefault();
+    const [isSaveUser, setIsSaveUser] = useState(false);
+    const onChange = (e) => {
+        const target = e.target;
+        const name = target.name;
+        const value = target.value;
+        setAccount({
+            ...account,
+            [name]: value,
+        });
+    };
 
-    apiInterceptors("POST", constants.AUTHENTICATE, {
-      username: account.username,
-      password: account.password,
-    })
-      .then((res) => {
-        if (res) {
-          if (res.data) {
-            let jwt = res.data.jwt;
-            isSaveUser
-              ? localStorage.setItem("jwt", jwt)
-              : sessionStorage.setItem("jwt", jwt);
-            history.push("/");
-            successNotify(constants.LOGIN_SUCCESSFUL);
-          }
-        }
-      })
-      .catch(err => {
-        errNotify(constants.LOGIN_FAILED)
-      });
-  };
+    const onLogin = (e) => {
+        e.preventDefault();
 
-  const onSaveUser = () => {
-    setIsSaveUser(true);
-  };
+        apiInterceptors("POST", constants.AUTHENTICATE, {
+            username: account.username,
+            password: account.password,
+        })
+            .then((res) => {
+                if (res) {
+                    if (res.data) {
+                        let jwt = res.data.jwt;
+                        isSaveUser
+                            ? localStorage.setItem("jwt", jwt)
+                            : sessionStorage.setItem("jwt", jwt);
+                        props.onCheckLogin(true);
+                        history.push("/");
+                        successNotify(constants.LOGIN_SUCCESSFUL);
+                    }
+                }
+            })
+            .catch(err => {
+                errNotify(constants.LOGIN_FAILED)
+            });
+    };
 
-  return (
-    <div className="login-page">
-      <form className="login-form">
-        <div className="logo mb-3">
-          <img src={Logo} alt="" />
-        </div>
+    const onSaveUser = () => {
+        setIsSaveUser(true);
+    };
 
-        <div className="form-group">
-          <input
-            onChange={onChange}
-            placeholder="Username"
-            name="username"
-            type="text"
-          />
-        </div>
+    return (
+        <div className="login-page">
+            <form className="login-form">
+                <div className="logo mb-3">
+                    <img src={Logo} alt="" />
+                </div>
 
-        <div className="form-group">
-          <input
-            onChange={onChange}
-            placeholder="Password"
-            name="password"
-            type="password"
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="checkbox"
-            className="mr-3"
-            id="remember"
-            onChange={onSaveUser}
-          />
-          <label htmlFor="remember">Remember me</label>
-        </div>
-        <button
-          type="submit"
-          className="login-button form-control btn btn-danger"
-          onClick={onLogin}
-        >
-          Login
+                <div className="form-group">
+                    <input
+                        onChange={onChange}
+                        placeholder="Username"
+                        name="username"
+                        type="text"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <input
+                        onChange={onChange}
+                        placeholder="Password"
+                        name="password"
+                        type="password"
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="checkbox"
+                        className="mr-3"
+                        id="remember"
+                        onChange={onSaveUser}
+                    />
+                    <label htmlFor="remember">Remember me</label>
+                </div>
+                <button
+                    type="submit"
+                    className="login-button form-control btn btn-danger"
+                    onClick={onLogin}
+                >
+                    Login
         </button>
-      </form>
-    </div>
-  );
+            </form>
+        </div>
+    );
 }
 
-export default Login;
+const mapDispatch = dispatch => {
+    return{
+        onCheckLogin: (status)=>{
+            dispatch(checkLogin(status));
+        }
+    }
+}
+
+export default connect(null, mapDispatch)(Login);

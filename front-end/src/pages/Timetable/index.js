@@ -63,7 +63,11 @@ function Timetable(props) {
 			</TimetableControl>
 			{
 				timetable === "weekly" &&
-				<WeeklyTimetable subjects={subjects} currentWeek={currentWeek}></WeeklyTimetable>
+				<WeeklyTimetable
+				subjects={subjects}
+				currentWeek={currentWeek}
+				onSetWeek={onSetWeek}>
+				</WeeklyTimetable>
 			}
 			{
 				timetable === "personal" &&

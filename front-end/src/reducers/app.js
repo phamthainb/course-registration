@@ -1,6 +1,7 @@
 var initState = {
   loading: false,
-  user: {}
+  user: {},
+  isLogin: false
 };
 
 var appReducer = (state = initState, action) => {
@@ -9,8 +10,10 @@ var appReducer = (state = initState, action) => {
       return { ...state, loading: action.payload };
     case "GET_USER":
       return {...state, user: action.payload};
+    case "CHECK_LOGIN": 
+      return {...state, isLogin: action.payload}
     default:
-      return [];
+      return {...state};
   }
 };
 
@@ -24,5 +27,10 @@ export const changeLoading = (payload) => ({
 
 export const getUser = (payload) => ({
   type: "GET_USER",
+  payload
+})
+
+export const checkLogin = (payload) => ({
+  type: "CHECK_LOGIN",
   payload
 })
