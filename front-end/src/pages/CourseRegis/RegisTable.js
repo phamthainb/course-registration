@@ -137,17 +137,17 @@ function RegisTable(props) {
             {sub.isAdded === true ? "Delete" : "Add"}
           </button>
         </td>
-        <td>{sub.subject.code}</td>
-        <td>{sub.subject.name}</td>
+        <td className="unimportant">{sub.subject.code}</td>
+        <td className="unimportant">{sub.subject.name}</td>
         <td>{sub.nmh}</td>
         <td>{sub.tth === 0 ? "null" : sub.tth}</td>
-        <td>{sub.subject.credit}</td>
-        <td>{sub.quantity}</td>
+        <td className="unimportant">{sub.subject.credit}</td>
+        <td className="unimportant">{sub.quantity}</td>
         <td>{sub.slot}</td>
         <td>{sub.details && mapStartDay(sub.details)}</td>
         <td>{sub.details && mapStartLession(sub.details)}</td>
-        <td>{sub.details && mapLessionQuantity(sub.details)}</td>
-        <td>{sub.details && mapRoom(sub.details)}</td>
+        <td className="unimportant">{sub.details && mapLessionQuantity(sub.details)}</td>
+        <td className="unimportant">{sub.details && mapRoom(sub.details)}</td>
         <td>{sub.details && mapProfessor(sub.details)}</td>
         <td>{sub.details && mapWeek(sub.details)}</td>
       </tr>
@@ -166,17 +166,17 @@ function RegisTable(props) {
             <thead className="thead-dark">
               <tr>
                 <th>Act</th>
-                <th>Code</th>
-                <th style={{minWidth: 200}}>Name</th>
+                <th className="unimportant">Code</th>
+                <th style={{minWidth: 200}} className="unimportant">Name</th>
                 <th>ID</th>
                 <th>PG</th>
-                <th>Crt</th>
-                <th>Qtt</th>
+                <th className="unimportant">Crt</th>
+                <th className="unimportant">Qtt</th>
                 <th>Slot</th>
                 <th>Day</th>
                 <th>Start</th>
-                <th>Les</th>
-                <th>Room</th>
+                <th className="unimportant">Les</th>
+                <th className="unimportant">Room</th>
                 <th>Professor</th>
                 <th>Week</th>
               </tr>

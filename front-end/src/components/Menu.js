@@ -14,14 +14,9 @@ function Menu(props) {
     props.onCheckLogin(false);
   };
 
-  const [showMenu, setShowMenu] = useState(false);
-
-  const onCloseMenu = ()=>{
-    setShowMenu(false);
-  }
-
-  const onOpenMenu = ()=>{
-    setShowMenu(true);
+  const onCloseMenu = (e)=>{
+    var target = document.getElementById("collapsibleNavId");
+    target.classList.remove('show');
   }
 
   return (
@@ -45,7 +40,6 @@ function Menu(props) {
         data-target="#collapsibleNavId"
         aria-controls="collapsibleNavId"
         aria-expanded="false"
-        onClick={onOpenMenu}
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>

@@ -8,7 +8,6 @@ function TimetableControl(props) {
     const { currentWeek } = props;
 
     const mapWeeks = (weeks) => {
-        console.log('callback');
         var xhtml = [];
         for (let i = 0; i < weeks; i++) {
             let date1 = new Date(convertDayToMilliseconds(i));

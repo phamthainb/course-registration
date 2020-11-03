@@ -1,5 +1,5 @@
 import { apiTokenInterceptors } from 'common/axiosService';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as constants from '../categories/constants';
 import * as toast from '../../common/toast';
 import { connect } from 'react-redux';
@@ -8,6 +8,7 @@ import * as actions from '../categories/actions';
 function RegisCartTable(props) {
 
     const { cart } = props;
+    const [isShown, setIsShown] = useState(false);
 
     useEffect(() => (
         props.userCart?.forEach(userCart => {
@@ -17,13 +18,13 @@ function RegisCartTable(props) {
                 userCart.isAdded = true;
                 let data = {
                     ...userCart,
-                        details: userCart.details.map(d => {
-                            let weeks = d.weeks.map(w => Number(w.name))
-                            weeks.sort((a, b) => a - b)
-                            return ({...d , weeks})
-                        })
+                    details: userCart.details.map(d => {
+                        let weeks = d.weeks.map(w => Number(w.name))
+                        weeks.sort((a, b) => a - b)
+                        return ({ ...d, weeks })
+                    })
                 }
-                props.onUpdateCart({...data});
+                props.onUpdateCart({ ...data });
             }
         })
     ), [props.userCart]);
@@ -34,6 +35,10 @@ function RegisCartTable(props) {
 
     const onDeleteAllFromCart = () => {
         props.onDeleteAllFromCart();
+    }
+
+    const onToggleCart = () => {
+        setIsShown(!isShown);
     }
 
     const totalCredits = () => {
@@ -78,13 +83,13 @@ function RegisCartTable(props) {
     })
 
     const onSaveSubjects = () => {
-        if(totalCredits() >= 14 && totalCredits() <= 26){
+        if (totalCredits() >= 14 && totalCredits() <= 26) {
             var idList = cart.map(item => {
                 var itemObj = { id: parseInt(item.id) }
                 return itemObj;
             })
             apiTokenInterceptors("PUT", constants.CLASSES, idList)
-                .then(function(){
+                .then(function () {
                     toast.successNotify("Saved to database");
                 })
                 .catch(err => {
@@ -92,54 +97,62 @@ function RegisCartTable(props) {
                     toast.errNotify(err.message);
                 })
         }
-        else{
+        else {
             toast.errNotify("14 <= credits <= 26");
         }
     }
 
     return (
-        <div style={{ margin: "30px 20px 0"}}>
-            <div className="table-responsive" style={{
-                maxHeight: 400,
-                overflow: "auto",
-            }}>
-                <table className="table regis-submit-table table-bordered">
-                    <thead className="thead-dark">
-                        <tr>
-                            <th colSpan={9}>Chosen Subjects</th>
-                        </tr>
-                        <tr>
-                            <th>No.</th>
-                            <th>Code</th>
-                            <th style={{minWidth: 200}}>Name</th>
-                            <th>ID</th>
-                            <th>PG</th>
-                            <th>Crt</th>
-                            <th>Fee</th>
-                            <th>Status</th>
-                            <th>Act</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {mapToCart}
-                        <tr className="table-active" style={{ fontWeight: 800 }}>
-                            <td colSpan={5} className="text-center">Total</td>
-                            <td>{totalCredits()}</td>
-                            <td>{totalFee()}</td>
-                            <td style={{ display: "flex", justifyContent: "space-between" }}>
-                                <button className="btn btn-info" onClick={onSaveSubjects}>
-                                    <i className="fa fa-check" aria-hidden="true"></i> Save
-                            </button>
-                                <button
-                                    className="btn btn-dark float-right"
-                                    onClick={onDeleteAllFromCart}>
-                                    Delete All
-                            </button>
-                            </td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div style={{ margin: "30px 20px 0" }}>
+            <div className="bg-dark text-white p-3 d-flex justify-content-between align-items-center border-bottom border-bottom-1 border-light">
+                <span>{cart.length} subjects</span>
+                <button
+                    className="btn btn-light p-2"
+                    onClick={onToggleCart}
+                >
+                    {isShown ? "Hide subjects" : "Show subjects"}
+                </button>
+            </div>
+
+            {isShown &&
+                <div className="table-responsive">
+                    <table className="table regis-submit-table table-bordered">
+                        <thead className="thead-dark">
+                            <tr>
+                                <th>No.</th>
+                                <th>Code</th>
+                                <th style={{ minWidth: 200 }}>Name</th>
+                                <th>ID</th>
+                                <th>PG</th>
+                                <th>Crt</th>
+                                <th>Fee</th>
+                                <th>Status</th>
+                                <th>Act</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {mapToCart}
+                        </tbody>
+                    </table>
+                </div>}
+
+            <div className="bg-dark text-white d-flex flex-wrap p-3 container-fluid">
+                <div className="d-flex justify-content-around col-md-8 col-12 align-items-center">
+                    <p className="mr-auto">Credits: {totalCredits()}</p>
+                    <p className="mr-md-auto">Fee: {totalFee()}</p>
+                </div>
+                <div className="col-md-4 col-12 justify-content-around">
+                    <button
+                        className="btn btn-info"
+                        onClick={onSaveSubjects}>
+                        <i className="fa fa-check" aria-hidden="true"></i> Save
+                    </button>
+                    <button
+                        className="btn btn-light float-right"
+                        onClick={onDeleteAllFromCart}>
+                        Delete All
+                    </button>
+                </div>
             </div>
         </div>
     )
