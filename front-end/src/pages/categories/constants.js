@@ -28,6 +28,7 @@ const currentMonth = new Date().getUTCMonth();
 const currentDate = new Date().getUTCDate();
 export const START_DAY = new Date(2020, 8, 7).getTime();
 export const CURRENT_DAY = new Date(currentYear, currentMonth, currentDate).getTime();
+export const totalWeeks = 20;
 
 //url
 export const AUTHENTICATE = "api/user/authenticate";

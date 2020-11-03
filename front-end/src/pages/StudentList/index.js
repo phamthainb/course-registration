@@ -27,7 +27,7 @@ export default function StudentList() {
             .catch(err => {
                 console.log(err);
             })
-    }, [])
+    }, [param.id])
 
     const mapListToTable = list.map((item, index) => {
         return(
@@ -49,7 +49,7 @@ export default function StudentList() {
                     <tr>
                         <th>No.</th>
                         <th>Id</th>
-                        <th>Name</th>
+                        <th style={{minWidth: 200}}>Name</th>
                         <th>Class</th>
                     </tr>
                 </thead>

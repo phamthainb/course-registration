@@ -92,17 +92,17 @@ function PersonalTimetable(props) {
     }
 
     return (
+        <>
         <div className="table-responsive mt-4 mb-4" style={
             { minHeight: "calc(100vh - 170px)" }
         }>
             {
                 subjects.length > 0 &&
-                <>
                     <table className="table table-striped table-bordered">
                         <thead className="thead-dark">
                             <tr>
                                 <th>Code</th>
-                                <th>Name</th>
+                                <th style={{minWidth: 200}}>Name</th>
                                 <th>ID</th>
                                 <th>PG</th>
                                 <th>Crt</th>
@@ -118,9 +118,9 @@ function PersonalTimetable(props) {
                             {mapListToTable()}
                         </tbody>
                     </table>
-                    <RegisNote></RegisNote></>
             }
         </div>
+        <RegisNote></RegisNote></>
     )
 }
 

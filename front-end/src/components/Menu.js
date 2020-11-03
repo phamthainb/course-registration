@@ -3,22 +3,20 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/ptit-icon.png";
 import * as actions from '../pages/categories/actions';
+import { checkLogin } from '../reducers/app';
 
 function Menu(props) {
+  
   const onLogout = () => {
     localStorage.removeItem("jwt");
     sessionStorage.removeItem("jwt");
     props.onDeleteAllFromCart();
+    props.onCheckLogin(false);
   };
 
-  const [showMenu, setShowMenu] = useState(false);
-
-  const onCloseMenu = ()=>{
-    setShowMenu(false);
-  }
-
-  const onOpenMenu = ()=>{
-    setShowMenu(true);
+  const onCloseMenu = (e)=>{
+    var target = document.getElementById("collapsibleNavId");
+    target.classList.remove('show');
   }
 
   return (
@@ -42,7 +40,6 @@ function Menu(props) {
         data-target="#collapsibleNavId"
         aria-controls="collapsibleNavId"
         aria-expanded="false"
-        onClick={onOpenMenu}
         aria-label="Toggle navigation"
       >
         <span className="navbar-toggler-icon"></span>
@@ -113,6 +110,9 @@ const mapDispatch = dispatch => {
   return {
     onDeleteAllFromCart: () => {
       dispatch(actions.deleteAllFromCart())
+    },
+    onCheckLogin: (status) => {
+      dispatch(checkLogin(status))
     }
   }
 }

@@ -142,7 +142,7 @@ const convertMajor = (s)=>{
 
 const mapState = state => {
     return{
-        user:  state.user
+        user: state.app.user
     }
 }
 
