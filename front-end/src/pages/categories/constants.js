@@ -19,7 +19,7 @@ export const UPDATED_SUCCESSFUL = "Updated successfully";
 export const LOGIN_FAILED = "Invalid user !";
 export const MATCH_PASSWORD_FAILED = "New password not matched !";
 export const WRONG_PASSWORD = "Wrong password !";
-export const SAME_PASSWORD = "Try another password !";
+export const SAME_PASSWORD = "New password cannot be the same as old password !";
 export const VALIDATE_PASSWORD = "At least 4 char (a-z A-Z 0-9) !"
 
 //day

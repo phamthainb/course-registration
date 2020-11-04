@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { apiToken } from "common/axiosService";
 import * as constants from './pages/categories/constants';
 import { getUser } from "reducers/app";
+import * as toast from './common/toast';
 
 function App() {
 
@@ -23,14 +24,17 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    apiToken("GET", constants.GET_USER, null)
+    let jwt = localStorage.getItem("jwt") || sessionStorage.getItem("jwt");
+    if(jwt !== null){
+      apiToken("GET", constants.GET_USER, null)
       .then(res => {
         dispatch(getUser(res.data));
       })
       .catch(err => {
-        console.log(err);
+        toast.errNotify(err.message)
       })
-  }, [app.isLogin])
+    }
+  }, [app.isLogin, app.isSavedSubjects])
 
   const list = useMemo(() => routes.map((route) => route.path), []);
 

@@ -39,7 +39,7 @@ function ChangePassForm(props){
                 }
             })
             .catch(err => {
-                console.log(err);
+                toast.errNotify(err.message);
             })
         }
     }

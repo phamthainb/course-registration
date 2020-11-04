@@ -43,7 +43,7 @@ function Timetable(props) {
 			)
 		})
 		setSubjects(subjects);
-	}, [props.inCartSubjects])
+	}, [props.cart])
 
 	const onChangeTimetable = (value) => {
 		setTimetable(value);
@@ -79,7 +79,8 @@ function Timetable(props) {
 
 const mapState = state => {
 	return {
-		inCartSubjects: state.app.user?.classRooms
+		cart: state.cart,
+		inCartSubjects: state.app.user.classRooms
 	}
 }
 

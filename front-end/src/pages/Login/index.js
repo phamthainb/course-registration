@@ -47,7 +47,7 @@ function Login(props) {
                     }
                 }
             })
-            .catch(err => {
+            .catch(function(){
                 errNotify(constants.LOGIN_FAILED)
             });
     };

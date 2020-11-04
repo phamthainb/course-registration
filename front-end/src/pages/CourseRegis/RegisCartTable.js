@@ -2,13 +2,16 @@ import { apiTokenInterceptors } from 'common/axiosService';
 import React, { useEffect, useState } from 'react';
 import * as constants from '../categories/constants';
 import * as toast from '../../common/toast';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import * as actions from '../categories/actions';
+import {saveSubjects} from '../../reducers/app';
 
 function RegisCartTable(props) {
 
     const { cart } = props;
     const [isShown, setIsShown] = useState(false);
+
+    const dispatch = useDispatch();
 
     useEffect(() => (
         props.userCart?.forEach(userCart => {
@@ -91,11 +94,12 @@ function RegisCartTable(props) {
             apiTokenInterceptors("PUT", constants.CLASSES, idList)
                 .then(function () {
                     toast.successNotify("Saved to database");
+                    dispatch(saveSubjects(true));
+                    dispatch(saveSubjects(false));
                 })
                 .catch(err => {
-                    //console.log(err);
                     toast.errNotify(err.message);
-                })
+                });
         }
         else {
             toast.errNotify("14 <= credits <= 26");
@@ -137,11 +141,11 @@ function RegisCartTable(props) {
                 </div>}
 
             <div className="bg-dark text-white d-flex flex-wrap p-3 container-fluid">
-                <div className="d-flex justify-content-around col-md-8 col-12 align-items-center">
+                <div className="d-flex justify-content-around col-md-4 col-12 align-items-center p-0">
                     <p className="mr-auto">Credits: {totalCredits()}</p>
                     <p className="mr-md-auto">Fee: {totalFee()}</p>
                 </div>
-                <div className="col-md-4 col-12 justify-content-around">
+                <div className="col-md-4 offset-md-4 offset-0 col-12 justify-content-around p-0">
                     <button
                         className="btn btn-info"
                         onClick={onSaveSubjects}>

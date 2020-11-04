@@ -35,11 +35,11 @@ function EditInfoForm(props) {
             apiTokenInterceptors("PUT", constants.GET_USER, {
                 ...user, phone: phone, email: email
             })
-            .then(res => {
+            .then(function(){
                 toast.successNotify("Updated successfully");
             })
             .catch(err => {
-                console.log(err);
+                toast.errNotify(err.message);
             })
         }
         else{

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import * as actions from '../categories/actions';
 import * as constants from '../categories/constants';
+import * as toast from '../../common/toast';
 
 function RegisControl(props) {
 
@@ -27,7 +28,7 @@ function RegisControl(props) {
                 props.onShowChosenSubject(data);
             })
             .catch(err => {
-                console.log(err);
+                toast.errNotify(err.message);
             })
     }
 
