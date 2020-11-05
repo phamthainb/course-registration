@@ -1,6 +1,6 @@
 .timetable-show td{
-    min-width: 90px;
-    max-width: 90px;
+    min-width: 120px;
+    max-width: 120px;
 }
 
 .timetable-show tbody tr td h6{

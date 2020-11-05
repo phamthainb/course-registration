@@ -1,4 +1,5 @@
-import React from 'react';
+import ClassDetail from 'pages/ClassDetail/index.js';
+import React, { useState } from 'react';
 import BottomButton from './BottomButton.js';
 
 function WeeklyTimetable(props) {
@@ -7,6 +8,21 @@ function WeeklyTimetable(props) {
 
     const onChangeWeek = (value) => {
         onSetWeek(value);
+    }
+
+    const [classDetail, setClassDetail] = useState();
+
+    const onShowClass = (e)=>{
+        var target = e.target;
+        var name = target.innerHTML;
+        var day = target.getAttribute("data-day");
+        var sub = subjects.filter(item => {
+            return item.name === name;
+        })[0];
+        var detail = sub.time.filter(item => {
+            return day === item.day;
+        });
+        setClassDetail({...sub, time: detail});
     }
 
     const mapToTimetable = () => {
@@ -28,7 +44,9 @@ function WeeklyTimetable(props) {
                 })
                 let tr = (
                     <tr key={Date.now().toString() + i}>
-                        <td className="table-dark" width="5%" height={100}>{i} + {i + 1}</td>
+                        <td className="table-dark" width="5%" height={100}>
+                            {i} + {i + 1}
+                        </td>
                         <td>{mapToTr(subElementArr, "Hai")}</td>
                         <td>{mapToTr(subElementArr, "Ba")}</td>
                         <td>{mapToTr(subElementArr, "Tư")}</td>
@@ -59,7 +77,16 @@ function WeeklyTimetable(props) {
         subElementArr.forEach(sub => {
             if (sub.detail.week.includes(parseInt(currentWeek))) {
                 if (sub.detail.day.toLowerCase() === value.toLowerCase()) {
-                    xhtml.push(<h6>{sub.name}</h6>)
+                    xhtml.push(
+                    <h6
+                    onClick={onShowClass}
+                    data-toggle="modal"
+                    data-target="#classDetail"
+                    data-day={value}
+                    style={{cursor: 'pointer'}}>
+                        {sub.name}
+                    </h6>
+                    )
                     xhtml.push(<span>{sub.detail.room}</span>)
                 }
             }
@@ -90,6 +117,7 @@ function WeeklyTimetable(props) {
                     </tbody>
                 </table>
             </div>
+            <ClassDetail classDetail={classDetail} />
             <BottomButton
                 currentWeek={currentWeek}
                 onChangeWeek={onChangeWeek}>

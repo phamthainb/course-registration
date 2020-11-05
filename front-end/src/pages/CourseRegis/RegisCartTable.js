@@ -152,7 +152,7 @@ function RegisCartTable(props) {
                         <i className="fa fa-check" aria-hidden="true"></i> Save
                     </button>
                     <button
-                        className="btn btn-light float-right"
+                        className="btn btn-danger float-right"
                         onClick={onDeleteAllFromCart}>
                         Delete All
                     </button>

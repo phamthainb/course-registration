@@ -33,6 +33,7 @@ function Timetable(props) {
 								start: detail.time.lesson,
 								less: 2,
 								room: detail.room.name,
+								pro: detail.professor.name,
 								week: detail.weeks.map(week => {
 									return Number(week.name);
 								}).sort((a, b) => a - b),
