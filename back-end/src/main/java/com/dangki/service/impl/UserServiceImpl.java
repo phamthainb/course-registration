@@ -18,7 +18,12 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +72,17 @@ public class UserServiceImpl implements UserService {
             user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         }
         return converter.toDto(userRepository.save(user));
+    }
+
+    @Override
+    public void updateAvatar(MultipartFile multipartFile) throws IOException {
+        User user = userRepository.findById(securityUtil.getUserDetails().getUser().getId()).get();
+        File file = new File("src/main/resources/static/images/"+multipartFile.getOriginalFilename());
+        user.setUrl("images/"+multipartFile.getOriginalFilename());
+        FileOutputStream fos = new FileOutputStream(file);
+        fos.write(multipartFile.getBytes());
+        fos.close();
+        userRepository.save(user);
     }
 
     @Override

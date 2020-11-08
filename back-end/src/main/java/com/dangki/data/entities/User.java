@@ -1,10 +1,7 @@
 package com.dangki.data.entities;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 import javax.persistence.*;
 import java.util.List;
-import org.hibernate.annotations.Cache;
 
 
 @Entity
@@ -49,6 +46,28 @@ public class User extends BaseEntity {
     @JoinTable(name = "user_role" , joinColumns = @JoinColumn(name = "user_id")
                 , inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
+
+    @OneToOne
+    private User honey;
+
+    @Column(name = "avatar_url")
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public User getHoney() {
+        return honey;
+    }
+
+    public void setHoney(User honey) {
+        this.honey = honey;
+    }
 
     public Long getId() {
         return id;

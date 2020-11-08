@@ -2,11 +2,10 @@ package com.dangki.prerentation.controller.web;
 
 import com.dangki.common.utils.SecurityConstants;
 import com.dangki.common.utils.SecurityUtil;
-import com.dangki.data.MyUserDetails;
 import com.dangki.data.dto.AuthenticationResponse;
-import com.dangki.data.dto.ClassRoomDto;
 import com.dangki.data.dto.UserDto;
-import com.dangki.data.entities.ClassRoom;
+import com.dangki.data.entities.User;
+import com.dangki.data.repository.UserRepository;
 import com.dangki.service.JwtUtil;
 import com.dangki.service.MyUserDetailsService;
 import com.dangki.service.UserService;
@@ -15,13 +14,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.Normalizer;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/api/user")
@@ -46,6 +48,12 @@ public class UserController {
     public ResponseEntity<List<UserDto>> getUsersOfClass(@RequestParam("classId") Long classId)
     {
         return ResponseEntity.ok(userService.getAllByClassId(classId));
+    }
+
+    @PostMapping("/avatar")
+    public ResponseEntity<?> updateAvatar(@RequestBody MultipartFile multipartFile) throws IOException {
+        userService.updateAvatar(multipartFile);
+        return ResponseEntity.ok("ok");
     }
 
     @PostMapping("/authenticate")
