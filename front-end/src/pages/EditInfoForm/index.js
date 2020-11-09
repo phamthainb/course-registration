@@ -5,69 +5,73 @@ import ChangePassForm from './ChangePassForm';
 import * as constants from '../categories/constants';
 import * as toast from '../../common/toast';
 import './style.css';
+import genAvatar from 'components/Avatar';
 
 function EditInfoForm(props) {
 
-    const {user} = props;
+    const { user } = props;
 
-    useEffect(()=>{
+    useEffect(() => {
         setPhone(user?.phone);
         setEmail(user?.email);
-    } , [user])
+    }, [user])
 
     const [phone, setPhone] = useState(user?.phone);
     const [email, setEmail] = useState(user?.email);
 
-    const onEditInfo = (e)=>{
+    const onEditInfo = (e) => {
         var target = e.target;
         var name = target.name;
         var value = target.value;
-        if(name === 'phone'){
+        if (name === 'phone') {
             setPhone(value);
         }
-        else{
+        else {
             setEmail(value);
         }
     }
 
-    const onUpdate =()=>{
-        if(validate(phone, email)){
+    const onUpdate = () => {
+        if (validate(phone, email)) {
             apiTokenInterceptors("PUT", constants.GET_USER, {
                 ...user, phone: phone, email: email
             })
-            .then(function(){
-                toast.successNotify("Updated successfully");
-            })
-            .catch(err => {
-                toast.errNotify(err.message);
-            })
+                .then(function () {
+                    toast.successNotify("Updated successfully");
+                })
+                .catch(err => {
+                    toast.errNotify(err.message);
+                })
         }
-        else{
+        else {
             toast.errNotify("Wrong validate !")
             console.log(phone, email);
         }
     }
 
-    const validate = (phone, email)=>{
+    const validate = (phone, email) => {
         const phoneRegex = "^[0-9]{10}$";
         const emailRegex = "^[a-zA-Z]+[a-zA-Z0-9]*@(gmail.com|ptit.edu.vn)$";
-        if(phone && email){
-            if(phone.match(phoneRegex) && email.match(emailRegex)){
+        if (phone && email) {
+            if (phone.match(phoneRegex) && email.match(emailRegex)) {
                 return true;
             }
         }
         return false;
     }
 
-    const onCancel =()=>{
+    const onCancel = () => {
         setPhone(user?.phone);
         setEmail(user?.email);
     }
 
-    return(
+    return (
         <div className="edit-form container d-flex justify-content-center align-items-center">
             <div className="edit-form-header mb-4">
-                <span>About you</span>
+                <div className="d-flex flex-column justify-content-center align-items-center">
+                    <p>About you</p>
+                    {genAvatar(user.name, 50)}
+                </div>
             </div>
             <table>
                 <tbody>
@@ -84,10 +88,6 @@ function EditInfoForm(props) {
                         <td>{user?.lop}</td>
                     </tr>
                     <tr>
-                        <td className="label">Birthday : </td>
-                        <td>{user?.birthday}</td>
-                    </tr>
-                    <tr>
                         <td className="label">Cohort : </td>
                         <td>{user?.code && convertCohort(user.code)}</td>
                     </tr>
@@ -99,19 +99,19 @@ function EditInfoForm(props) {
                         <td className="label">Phone number : </td>
                         <td>
                             <input
-                            value={phone ? phone : ''}
-                            onChange={onEditInfo}
-                            type="number"
-                            name="phone"/>
+                                value={phone ? phone : ''}
+                                onChange={onEditInfo}
+                                type="number"
+                                name="phone" />
                         </td>
                     </tr>
                     <tr>
                         <td className="label">Email : </td>
                         <td>
                             <input
-                            value={email ? email : ''}
-                            onChange={onEditInfo}
-                            name="email"/>
+                                value={email ? email : ''}
+                                onChange={onEditInfo}
+                                name="email" />
                         </td>
                     </tr>
                 </tbody>
@@ -124,24 +124,24 @@ function EditInfoForm(props) {
                     <i className="fa fa-ban" aria-hidden="true"></i> Cancel
                 </button>
             </div>
-            <ChangePassForm/>
+            <ChangePassForm />
         </div>
     )
 }
 
-const convertCohort = (s)=>{
+const convertCohort = (s) => {
     var startYear = parseInt(s.substring(1, 3)) + 2000;
     var endYear = startYear + 5;
     return startYear + " -- " + endYear;
 }
 
-const convertMajor = (s)=>{
+const convertMajor = (s) => {
     var major = s.substring(5, 7);
     return constants.majors[major];
 }
 
 const mapState = state => {
-    return{
+    return {
         user: state.app.user
     }
 }
