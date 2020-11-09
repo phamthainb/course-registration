@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateAvatar(MultipartFile multipartFile) throws IOException {
         User user = userRepository.findById(securityUtil.getUserDetails().getUser().getId()).get();
-        File file = new File("/ptit/course-registration/back-end/src/main/resources/static/images/"+multipartFile.getOriginalFilename());
+        File file = new File("images/"+multipartFile.getOriginalFilename());
         user.setUrl("images/"+multipartFile.getOriginalFilename());
         FileOutputStream fos = new FileOutputStream(file);
         fos.write(multipartFile.getBytes());

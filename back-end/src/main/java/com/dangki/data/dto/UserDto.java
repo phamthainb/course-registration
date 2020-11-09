@@ -22,8 +22,17 @@ public class UserDto extends BaseDto {
     private String birthday;
     private String major;
     private Professor professor;
+    private String url;
     private List<Role> roles;
     private List<ClassRoomDto> classRooms;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public void setPassword(String password) {
         this.password = password;
