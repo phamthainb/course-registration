@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import Logo from "../assets/images/ptit-icon.png";
 import * as actions from '../pages/categories/actions';
 import { checkLogin } from '../reducers/app';
+import genAvatar from '../components/Avatar';
 
 function Menu(props) {
   
@@ -68,14 +69,14 @@ function Menu(props) {
           </li>
           <li className="dropdown ml-2">
             <NavLink
-              className="nav-link dropdown-toggle"
+              className="nav-link dropdown-toggle d-flex align-items-center"
               to=""
               id="dropdownId"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              <i className="fa fa-user-circle-o" aria-hidden="true"></i>
+              {genAvatar(props.username, 20)}
             </NavLink>
             <div
               className="dropdown-menu"
@@ -84,7 +85,7 @@ function Menu(props) {
             >
               <p
               style={{ textAlign: "center", padding: "10px", borderBottom: "1px solid rgba(0,0,0,.15)", color: "gray", fontWeight: 300 }}>
-                {props.user ? props.user : "User"}
+                {props.username ? props.username : "User"}
               </p>
               <NavLink className="dropdown-item" to="/edit-info" onClick={onCloseMenu}>
                 Information
@@ -102,7 +103,7 @@ function Menu(props) {
 
 const mapState = state => {
   return {
-    user: state.app.user?.name
+    username: state.app.user?.name
   }
 }
 
