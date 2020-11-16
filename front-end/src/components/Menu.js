@@ -69,14 +69,14 @@ function Menu(props) {
           </li>
           <li className="dropdown ml-2">
             <NavLink
-              className="nav-link dropdown-toggle d-flex align-items-center"
+              className="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
               to=""
               id="dropdownId"
               data-toggle="dropdown"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              {genAvatar(props.username, 20)}
+              {genAvatar(props.code, 20)}
             </NavLink>
             <div
               className="dropdown-menu"
@@ -103,7 +103,8 @@ function Menu(props) {
 
 const mapState = state => {
   return {
-    username: state.app.user?.name
+    username: state.app.user?.name,
+    code: state.app.user?.code
   }
 }
 
