@@ -18,12 +18,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.Normalizer;
 import java.util.List;
-import java.util.Random;
 
 @RestController
 @RequestMapping("/api/user")
@@ -58,6 +54,7 @@ public class UserController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authentication(@RequestBody UserDto userDto) throws Exception {
+        System.out.println("aa");
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                     userDto.getUsername(), userDto.getPassword()));

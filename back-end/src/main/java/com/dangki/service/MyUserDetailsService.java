@@ -34,7 +34,8 @@ public class MyUserDetailsService implements UserDetailsService {
         user.getRoles().forEach(role -> {
             authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
         });
+        UserDto userDto = converter.toDto(user);
         return new MyUserDetails(user.getUsername(), user.getPassword(), true, true,
-                true, true, authorities, converter.toDto(user));
+                true, true, authorities,userDto);
     }
 }
