@@ -3,10 +3,10 @@ const fs = require("fs");
 const _ = require("lodash");
 //import end
 
-let listMH = fs.readdirSync("./json");
+let listMH = fs.readdirSync("./node-crawler/json");
 //loop all mh => all data
 let allData = listMH.map((mh) => {
-  let dataFile = fs.readFileSync(`./json/${mh}`);
+  let dataFile = fs.readFileSync(`./node-crawler/json/${mh}`);
   return JSON.parse(dataFile);
 });
 // console.log(allData.flat(3));
@@ -59,7 +59,7 @@ for (let i = 0; i < allData.length; i++) {
           if (we[k] !== "-") {
             let element = k+1;
             // if (k >= 9) element +=1;
-            console.log("element", element);
+            // console.log("element", element);
             ww.push({ name: element });
           }
         }
@@ -79,8 +79,8 @@ for (let i = 0; i < allData.length; i++) {
 // let r = classs.filter((k) => {
 //   if (k) return k;
 // });
-console.log(JSON.stringify(classs[0]));
-// fs.writeFile(`data/classs.json`, JSON.stringify(classs), (err) => {
+console.log(JSON.stringify(classs[0].details));
+// fs.writeFile(`./node-crawler/data/classs.json`, JSON.stringify(classs), (err) => {
 //   if (err) console.log(err);
 //   console.log("Data written to file");
 // });

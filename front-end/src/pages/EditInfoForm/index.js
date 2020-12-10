@@ -70,7 +70,11 @@ function EditInfoForm(props) {
             <div className="edit-form-header mb-4">
                 <div className="d-flex flex-column justify-content-center align-items-center">
                     <p>About you</p>
-                    {genAvatar(user.name, 50)}
+                    {/* <div style={}>
+                        {genAvatar(user.code, 50)}
+                    </div> */}
+                    {genAvatar(user.code, 50, {width: 85, height: 85, backgroundColor: "white", display: "flex", justifyContent: "center", alignItems: "center",
+                borderRadius: "50%", border: "2px solid rgba(144, 144, 144)"})}
                 </div>
             </div>
             <table>
