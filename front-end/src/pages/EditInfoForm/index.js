@@ -26,13 +26,13 @@ function EditInfoForm(props) {
         if (name === 'phone') {
             setPhone(value);
         }
-        else {
+        else{
             setEmail(value);
         }
     }
 
     const onUpdate = () => {
-        if (validate(phone, email)) {
+        if (validate(phone, email) === "") {
             apiTokenInterceptors("PUT", constants.GET_USER, {
                 ...user, phone: phone, email: email
             })
@@ -44,20 +44,20 @@ function EditInfoForm(props) {
                 })
         }
         else {
-            toast.errNotify("Wrong validate !")
-            console.log(phone, email);
+            toast.errNotify(validate(phone, email))
         }
     }
 
     const validate = (phone, email) => {
         const phoneRegex = "^[0-9]{10}$";
         const emailRegex = "^[a-zA-Z]+[a-zA-Z0-9]*@(gmail.com|ptit.edu.vn)$";
-        if (phone && email) {
-            if (phone.match(phoneRegex) && email.match(emailRegex)) {
-                return true;
-            }
+        if (!phone.match(phoneRegex)) {
+            return "Số điện thoại sai định dạng !";
         }
-        return false;
+        else if (!email.match(emailRegex)) {
+            return "Email sai định dạng"
+        }
+        return "";
     }
 
     const onCancel = () => {
@@ -70,11 +70,10 @@ function EditInfoForm(props) {
             <div className="edit-form-header mb-4">
                 <div className="d-flex flex-column justify-content-center align-items-center">
                     <p>About you</p>
-                    {/* <div style={}>
-                        {genAvatar(user.code, 50)}
-                    </div> */}
-                    {genAvatar(user.code, 50, {width: 85, height: 85, backgroundColor: "white", display: "flex", justifyContent: "center", alignItems: "center",
-                borderRadius: "50%", border: "2px solid rgba(144, 144, 144)"})}
+                    {genAvatar(user.code, 50, {
+                        width: 85, height: 85, backgroundColor: "white", display: "flex", justifyContent: "center", alignItems: "center",
+                        borderRadius: "50%", border: "2px solid rgba(144, 144, 144)"
+                    })}
                 </div>
             </div>
             <table>
@@ -98,6 +97,10 @@ function EditInfoForm(props) {
                     <tr>
                         <td className="label">Major : </td>
                         <td>{user?.code && convertMajor(user.code)}</td>
+                    </tr>
+                    <tr>
+                        <td className="label">Honey : </td>
+                        <td>{user?.nameHoney ? user.nameHoney : "Ế"}</td>
                     </tr>
                     <tr>
                         <td className="label">Phone number : </td>

@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 25px;
+    padding: 20px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     background-color: #fff;
@@ -33,10 +33,12 @@
 .form-group.password{
     position: relative;
 }
-
+.form-group.password input{
+    max-width: calc(100% - 10px);
+}
 .fa.fa-eye-slash, .fa.fa-eye{
     position: absolute;
-    right: -10px;
+    right: 0px;
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;

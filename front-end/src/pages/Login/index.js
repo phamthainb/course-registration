@@ -42,7 +42,6 @@ function Login(props) {
 
         hidePassIcon.style.opacity = 1 - parseInt(hideOp);
         hidePassIcon.setAttribute('data-op', 1 - parseInt(hideOp));
-        console.log(hidePassIcon);
     }
 
     const onLogin = (e) => {
