@@ -27,6 +27,24 @@ function Login(props) {
         });
     };
 
+    const onTogglePass = ()=>{
+        var inputForm = document.querySelector('.form-group.password');
+        var passInput = inputForm.querySelector('input[name="password"]');
+        var showPassIcon = document.querySelector('.fa.fa-eye');
+        var hidePassIcon = document.querySelector('.fa.fa-eye-slash');
+        var showOp = showPassIcon.getAttribute('data-op');
+        var hideOp = hidePassIcon.getAttribute('data-op');
+
+        passInput.setAttribute('type', passInput.getAttribute('type') === 'password' ? 'text' : 'password');
+
+        showPassIcon.style.opacity = 1 - parseInt(showOp);
+        showPassIcon.setAttribute('data-op', 1 - parseInt(showOp));
+
+        hidePassIcon.style.opacity = 1 - parseInt(hideOp);
+        hidePassIcon.setAttribute('data-op', 1 - parseInt(hideOp));
+        console.log(hidePassIcon);
+    }
+
     const onLogin = (e) => {
         e.preventDefault();
 
@@ -72,13 +90,15 @@ function Login(props) {
                     />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group password">
                     <input
                         onChange={onChange}
                         placeholder="Password"
                         name="password"
                         type="password"
                     />
+                    <i className="fa fa-eye-slash" onClick={onTogglePass} data-op={0} />
+                    <i className="fa fa-eye" onClick={onTogglePass} data-op={1} />
                 </div>
                 <div className="form-group">
                     <input

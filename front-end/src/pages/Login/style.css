@@ -16,7 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 25px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.4);
     border-radius: 10px;
     background-color: #fff;
@@ -28,4 +28,22 @@
 
 .logo{
     max-width: 150px;
+}
+
+.form-group.password{
+    position: relative;
+}
+
+.fa.fa-eye-slash, .fa.fa-eye{
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.fa.fa-eye-slash{
+    opacity: 0;
+}
+.fa.fa-eye{
+    opacity: 1;
 }

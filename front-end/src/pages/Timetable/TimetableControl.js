@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { START_DAY, totalWeeks } from '../categories/constants';
 
 function TimetableControl(props) {
