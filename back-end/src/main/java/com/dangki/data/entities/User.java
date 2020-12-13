@@ -1,5 +1,7 @@
 package com.dangki.data.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -47,12 +49,20 @@ public class User extends BaseEntity {
                 , inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roles;
 
-    @OneToOne
-    private User honey;
-
     @Column(name = "avatar_url")
     private String url;
 
+    @Column(name = "name_honey")
+    private String nameHoney;
+
+    public String getNameHoney() {
+        return nameHoney;
+    }
+
+    public void setNameHoney(String nameHoney) {
+        this.nameHoney = nameHoney;
+    }
+    
     public String getUrl() {
         return url;
     }
@@ -61,13 +71,6 @@ public class User extends BaseEntity {
         this.url = url;
     }
 
-    public User getHoney() {
-        return honey;
-    }
-
-    public void setHoney(User honey) {
-        this.honey = honey;
-    }
 
     public Long getId() {
         return id;

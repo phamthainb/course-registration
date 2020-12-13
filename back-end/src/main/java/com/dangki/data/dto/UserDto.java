@@ -2,7 +2,10 @@ package com.dangki.data.dto;
 
 import com.dangki.data.entities.Professor;
 import com.dangki.data.entities.Role;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -26,5 +29,5 @@ public class UserDto extends BaseDto {
     private String url;
     private List<Role> roles;
     private List<ClassRoomDto> classRooms;
-    private UserDto honey;
+    private String nameHoney;
 }
