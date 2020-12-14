@@ -24,12 +24,17 @@ function RegisTable(props) {
   }, [cart])
 
   const onUpdateCart = (sub) => {
-    if (sub.isSame === "") {
-      sub.isAdded = false;
-      props.onUpdateCart({ ...sub });
+    if(sub.slot === 0){
+      toast.errNotify("Môn học đã hết !");
     }
-    else {
-      toast.errNotify(`Trùng lịch với ${sub.isSame}`);
+    else{
+      if (sub.isSame === "") {
+        sub.isAdded = false;
+        props.onUpdateCart({ ...sub });
+      }
+      else {
+        toast.errNotify(`Trùng lịch với ${sub.isSame}`);
+      }
     }
   }
 
